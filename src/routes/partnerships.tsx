@@ -5,7 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Network, HandshakeIcon, Building2, ShieldCheck, Users, HeartHandshake, Stethoscope, LifeBuoy } from "lucide-react";
+import { Network, Handshake, Building2, ShieldCheck, Users, HeartHandshake, Stethoscope, LifeBuoy } from "lucide-react";
 
 export const Route = createFileRoute("/partnerships")({
   component: PartnershipsPage,
@@ -35,7 +35,7 @@ function PartnershipsPage() {
         <section className="py-24 bg-cream relative z-10">
           <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              [HandshakeIcon, "Nonprofit Collaboration", "Free and subsidized programs delivered through your existing community channels."],
+              [Handshake, "Nonprofit Collaboration", "Free and subsidized programs delivered through your existing community channels."],
               [Network, "Referral Partnerships", "Send clients our way — we handle scheduling, intake, and clinical care end-to-end."],
               [Building2, "Corporate Wellness", "Employee behavioral health programs with transparent reporting and clinical depth."],
             ].map(([Icon, t, d]) => (
