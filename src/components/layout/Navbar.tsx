@@ -81,6 +81,9 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
                 Services <ChevronDown className="w-3 h-3" />
               </button>
 
+              {/* Invisible bridge — covers the mt-3 gap so onMouseLeave doesn't fire mid-traversal */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 h-3 w-56" />
+
               {/* Dropdown panel */}
               <div
                 className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-xl border border-black/5 shadow-[0_8px_32px_-8px_rgba(12,11,9,0.18)] overflow-hidden transition-all duration-200 ${
