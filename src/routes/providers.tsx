@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Star } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -13,7 +13,7 @@ export const Route = createFileRoute("/providers")({
   component: ProvidersPage,
   head: () => ({
     meta: [
-      { title: "Meet Our Providers — Mindova Holdings" },
+      { title: "Meet Our Providers   Mindova Holdings" },
       { name: "description", content: "Licensed therapists, psychiatrists, counselors, and wellness coaches." },
     ],
   }),
@@ -26,6 +26,14 @@ function ProvidersPage() {
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
   const list = filter === "All" ? providers : providers.filter((p) => p.type === filter);
 
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      document.querySelectorAll<HTMLElement>(".reveal:not(.is-visible)").forEach((el) => {
+        el.classList.add("is-visible");
+      });
+    });
+  }, [list]);
+
   return (
     <div className="min-h-screen">
       <Navbar onDark />
@@ -34,7 +42,7 @@ function ProvidersPage() {
           eyebrow="Our Network"
           title="Meet Our"
           emphasis="Providers"
-          subtitle="A curated collective of board-certified specialists — selected for clinical excellence and genuine care."
+          subtitle="A curated collective of board-certified specialists   selected for clinical excellence and genuine care."
         />
 
         <section className="py-12 bg-cream relative z-10">
@@ -43,8 +51,10 @@ function ProvidersPage() {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-5 py-2 rounded-full text-sm transition-all ${
-                  filter === f ? "bg-dark text-cream" : "bg-white border border-black/5 hover:border-dark/20 text-dark"
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  filter === f
+                    ? "bg-dark text-cream shadow-[0_4px_16px_-8px_rgba(12,11,9,0.4)]"
+                    : "bg-white border border-black/5 hover:border-dark/20 text-dark"
                 }`}
               >
                 {f}
@@ -55,30 +65,59 @@ function ProvidersPage() {
 
         <section className="pb-24 md:pb-32 bg-cream relative z-10">
           <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {list.map((p) => (
-              <article key={p.id} className="bg-white rounded-[20px] p-6 border border-black/5 hover:border-gold2/60 transition-all hover:-translate-y-1 reveal">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-cream2 grid place-items-center font-serif text-gold text-lg">{p.initials}</div>
-                  <div>
-                    <p className="font-serif text-lg">{p.name}</p>
-                    <p className="text-xs text-muted">{p.credentials}</p>
+            {list.map((p, i) => {
+              const avatarStyles: Record<string, string> = {
+                Therapists:    "bg-blue-100 text-blue-600 border border-blue-200",
+                Psychiatrists: "bg-violet-100 text-violet-600 border border-violet-200",
+                Counselors:    "bg-rose-100 text-rose-600 border border-rose-200",
+                Wellness:      "bg-emerald-100 text-emerald-600 border border-emerald-200",
+              };
+              const tagStyles: Record<string, string> = {
+                Therapists:    "bg-blue-50 text-blue-600 border-blue-100",
+                Psychiatrists: "bg-violet-50 text-violet-600 border-violet-100",
+                Counselors:    "bg-rose-50 text-rose-600 border-rose-100",
+                Wellness:      "bg-emerald-50 text-emerald-600 border-emerald-100",
+              };
+              const avatar = avatarStyles[p.type] ?? "bg-cream2 text-gold border-black/5";
+              const tag    = tagStyles[p.type]    ?? "bg-cream2 text-dark/70 border-black/5";
+              return (
+                <article
+                  key={p.id}
+                  data-reveal-delay={String((i % 3) * 80)}
+                  className="bg-white rounded-[20px] p-6 border border-black/5 hover:border-gold2/40 hover:-translate-y-1.5 hover:shadow-[0_16px_40px_-16px_rgba(12,11,9,0.12)] transition-all duration-300 reveal"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl grid place-items-center font-serif text-lg flex-shrink-0 ${avatar}`}>
+                      {p.initials}
+                    </div>
+                    <div>
+                      <p className="font-serif text-lg leading-tight">{p.name}</p>
+                      <p className="text-xs text-muted mt-0.5">{p.credentials}</p>
+                    </div>
                   </div>
-                </div>
-                <p className="mt-4 text-sm text-muted">{p.specialty}</p>
-                <div className="flex flex-wrap gap-1.5 mt-4">
-                  {p.tags.map((t) => (
-                    <span key={t} className="text-[11px] tracking-wider px-2.5 py-1 rounded-full bg-cream2 text-dark/70">{t}</span>
-                  ))}
-                </div>
-                <div className="flex items-center gap-1 mt-4 text-gold2 text-xs">
-                  {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-current" />)}
-                  <span className="ml-1 text-muted">{p.rating}</span>
-                </div>
-                <a href="/booking" className="mt-5 inline-flex w-full justify-center items-center text-sm border border-dark/10 rounded-full py-2.5 hover:bg-dark hover:text-gold3 transition-colors">
-                  Book with {p.name.split(" ")[1] || p.name}
-                </a>
-              </article>
-            ))}
+                  <p className="mt-4 text-sm text-muted leading-relaxed">{p.specialty}</p>
+                  <div className="flex flex-wrap gap-1.5 mt-4">
+                    {p.tags.map((t) => (
+                      <span key={t} className={`text-[11px] tracking-wider px-2.5 py-1 rounded-full border font-medium ${tag}`}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                  <div className="flex items-center gap-1 mt-4 text-gold2">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                    ))}
+                    <span className="ml-1.5 text-xs text-muted">{p.rating}</span>
+                  </div>
+                  <a
+                    href="/booking"
+                    className="mt-5 inline-flex w-full justify-center items-center text-sm border border-dark/10 rounded-full py-2.5 font-medium hover:bg-dark hover:text-gold3 hover:border-transparent transition-all duration-200"
+                  >
+                    Book with {p.name.split(" ")[1] || p.name}
+                  </a>
+                </article>
+              );
+            })}
           </div>
         </section>
 
@@ -102,14 +141,14 @@ function ProvidersPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {[
-                ["01", "Resume Upload"],
-                ["02", "License Verification"],
-                ["03", "Availability Intake"],
-                ["04", "Community Impact"],
-              ].map(([n, t]) => (
-                <div key={n} className="bg-white rounded-[20px] p-6 border border-black/5 reveal">
-                  <span className="font-serif text-gold2 text-lg">{n}</span>
-                  <h3 className="font-serif text-lg mt-3">{t}</h3>
+                { n: "01", title: "Resume Upload", color: "bg-blue-50 border-blue-100", badge: "bg-blue-500 text-white" },
+                { n: "02", title: "License Verification", color: "bg-violet-50 border-violet-100", badge: "bg-violet-500 text-white" },
+                { n: "03", title: "Availability Intake", color: "bg-emerald-50 border-emerald-100", badge: "bg-emerald-500 text-white" },
+                { n: "04", title: "Community Impact", color: "bg-amber-50 border-amber-100", badge: "bg-amber-500 text-white" },
+              ].map(({ n, title, color, badge }) => (
+                <div key={n} className={`rounded-[20px] p-6 border reveal card-lift ${color}`}>
+                  <div className={`w-10 h-10 rounded-full grid place-items-center font-serif text-base shadow-sm ${badge}`}>{n}</div>
+                  <h3 className="font-serif text-lg mt-4">{title}</h3>
                 </div>
               ))}
             </div>

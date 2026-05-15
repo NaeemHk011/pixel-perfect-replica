@@ -11,7 +11,7 @@ export const Route = createFileRoute("/partnerships")({
   component: PartnershipsPage,
   head: () => ({
     meta: [
-      { title: "Partnerships — Mindova Holdings" },
+      { title: "Partnerships   Mindova Holdings" },
       { name: "description", content: "Partner with Mindova: nonprofit collaboration, referral networks, and corporate wellness." },
     ],
   }),
@@ -29,14 +29,14 @@ function PartnershipsPage() {
           eyebrow="Collaborate"
           title="Partner With"
           emphasis="Mindova"
-          subtitle="Build with us. From nonprofits to enterprise wellness — we extend our clinical platform to the organizations that need it."
+          subtitle="Build with us. From nonprofits to enterprise wellness   we extend our clinical platform to the organizations that need it."
         />
 
         <section className="py-24 bg-cream relative z-10">
           <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               [Handshake, "Nonprofit Collaboration", "Free and subsidized programs delivered through your existing community channels."],
-              [Network, "Referral Partnerships", "Send clients our way — we handle scheduling, intake, and clinical care end-to-end."],
+              [Network, "Referral Partnerships", "Send clients our way   we handle scheduling, intake, and clinical care end-to-end."],
               [Building2, "Corporate Wellness", "Employee behavioral health programs with transparent reporting and clinical depth."],
             ].map(([Icon, t, d]) => (
               <div key={t as string} className="bg-white rounded-[20px] p-7 border border-black/5 hover:bg-dark hover:text-cream group transition-colors reveal">

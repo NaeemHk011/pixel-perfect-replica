@@ -16,6 +16,9 @@ import { Route as PartnershipsRouteImport } from './routes/partnerships'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesTherapyRouteImport } from './routes/services_.therapy'
+import { Route as ServicesMedicationManagementRouteImport } from './routes/services_.medication-management'
+import { Route as ServicesIopRouteImport } from './routes/services_.iop'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -52,6 +55,22 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesTherapyRoute = ServicesTherapyRouteImport.update({
+  id: '/services_/therapy',
+  path: '/services/therapy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesMedicationManagementRoute =
+  ServicesMedicationManagementRouteImport.update({
+    id: '/services_/medication-management',
+    path: '/services/medication-management',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesIopRoute = ServicesIopRouteImport.update({
+  id: '/services_/iop',
+  path: '/services/iop',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -61,6 +80,9 @@ export interface FileRoutesByFullPath {
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/iop': typeof ServicesIopRoute
+  '/services/medication-management': typeof ServicesMedicationManagementRoute
+  '/services/therapy': typeof ServicesTherapyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -70,6 +92,9 @@ export interface FileRoutesByTo {
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/iop': typeof ServicesIopRoute
+  '/services/medication-management': typeof ServicesMedicationManagementRoute
+  '/services/therapy': typeof ServicesTherapyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -80,6 +105,9 @@ export interface FileRoutesById {
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services_/iop': typeof ServicesIopRoute
+  '/services_/medication-management': typeof ServicesMedicationManagementRoute
+  '/services_/therapy': typeof ServicesTherapyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -91,6 +119,9 @@ export interface FileRouteTypes {
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/services/iop'
+    | '/services/medication-management'
+    | '/services/therapy'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -100,6 +131,9 @@ export interface FileRouteTypes {
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/services/iop'
+    | '/services/medication-management'
+    | '/services/therapy'
   id:
     | '__root__'
     | '/'
@@ -109,6 +143,9 @@ export interface FileRouteTypes {
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/services_/iop'
+    | '/services_/medication-management'
+    | '/services_/therapy'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -119,6 +156,9 @@ export interface RootRouteChildren {
   ProvidersRoute: typeof ProvidersRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ServicesIopRoute: typeof ServicesIopRoute
+  ServicesMedicationManagementRoute: typeof ServicesMedicationManagementRoute
+  ServicesTherapyRoute: typeof ServicesTherapyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -172,6 +212,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services_/therapy': {
+      id: '/services_/therapy'
+      path: '/services/therapy'
+      fullPath: '/services/therapy'
+      preLoaderRoute: typeof ServicesTherapyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/medication-management': {
+      id: '/services_/medication-management'
+      path: '/services/medication-management'
+      fullPath: '/services/medication-management'
+      preLoaderRoute: typeof ServicesMedicationManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/iop': {
+      id: '/services_/iop'
+      path: '/services/iop'
+      fullPath: '/services/iop'
+      preLoaderRoute: typeof ServicesIopRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -183,17 +244,10 @@ const rootRouteChildren: RootRouteChildren = {
   ProvidersRoute: ProvidersRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ServicesIopRoute: ServicesIopRoute,
+  ServicesMedicationManagementRoute: ServicesMedicationManagementRoute,
+  ServicesTherapyRoute: ServicesTherapyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

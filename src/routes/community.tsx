@@ -11,7 +11,7 @@ export const Route = createFileRoute("/community")({
   component: CommunityPage,
   head: () => ({
     meta: [
-      { title: "Community — Mindova Holdings" },
+      { title: "Community   Mindova Holdings" },
       { name: "description", content: "Healing Is a Movement. Free programs, nonprofit partnerships, and community-rooted behavioral health." },
     ],
   }),
@@ -27,13 +27,13 @@ function CommunityPage() {
           eyebrow="The Movement"
           title="Healing Is"
           emphasis="a Movement"
-          subtitle="Behavioral health rooted in community — free programs, nonprofit partnerships, and care that reaches the people who need it most."
+          subtitle="Behavioral health rooted in community   free programs, nonprofit partnerships, and care that reaches the people who need it most."
         />
         <section className="py-24 md:py-32 bg-cream relative z-10">
           <div className="max-w-4xl mx-auto px-5 md:px-8 text-center reveal">
             <Quote className="w-7 h-7 text-gold2 mx-auto" />
             <p className="mt-6 font-serif text-3xl md:text-4xl italic text-dark leading-snug">
-              "Healthcare isn't just a service — it's infrastructure for the communities we serve."
+              "Healthcare isn't just a service   it's infrastructure for the communities we serve."
             </p>
           </div>
         </section>

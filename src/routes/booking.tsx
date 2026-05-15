@@ -12,7 +12,7 @@ export const Route = createFileRoute("/booking")({
   component: BookingPage,
   head: () => ({
     meta: [
-      { title: "Book Your Appointment — Mindova Holdings" },
+      { title: "Book Your Appointment   Mindova Holdings" },
       { name: "description", content: "Book a telehealth appointment with a licensed Mindova provider." },
     ],
   }),
@@ -130,7 +130,7 @@ function BookingPage() {
                 <div className="md:col-span-2 flex justify-between items-center">
                   <button type="button" onClick={() => setStep(2)} className="text-sm text-muted underline">← Back</button>
                   <button type="submit" className="bg-gold2 hover:bg-gold3 text-dark font-medium px-8 py-3.5 rounded-full text-sm transition-colors shadow-[0_12px_30px_-12px_rgba(207,168,78,0.6)]">
-                    {submitted ? "Submitted ✓ — We'll be in touch" : "Book Appointment"}
+                    {submitted ? "Submitted ✓   We'll be in touch" : "Book Appointment"}
                   </button>
                 </div>
               </form>
