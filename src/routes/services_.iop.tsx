@@ -8,7 +8,7 @@ export const Route = createFileRoute("/services_/iop")({
   component: IOPPage,
   head: () => ({
     meta: [
-      { title: "Intensive Outpatient Program (IOP) — Mindova Holdings" },
+      { title: "Intensive Outpatient Program (IOP)    Mindova Holdings" },
       { name: "description", content: "Structured, high-support behavioral health care for those who need more than weekly therapy." },
     ],
   }),
@@ -19,10 +19,10 @@ const iopData: ServicePageProps = {
   title: "Intensive",
   titleEmphasis: "Outpatient Program",
   subtitle:
-    "Structured, high-support behavioral health care for those who need more than weekly therapy — without inpatient admission.",
+    "Structured, high-support behavioral health care for those who need more than weekly therapy    without inpatient admission.",
   heroIcon: "🏥",
   whatIsIt:
-    "Our Intensive Outpatient Program (IOP) is a structured treatment program designed for individuals who need a higher level of care than standard weekly therapy but do not require 24-hour inpatient treatment. IOP typically involves multiple sessions per week, combining group therapy, individual therapy, and psychiatric support — all delivered via telehealth.",
+    "Our Intensive Outpatient Program (IOP) is a structured treatment program designed for individuals who need a higher level of care than standard weekly therapy but do not require 24-hour inpatient treatment. IOP typically involves multiple sessions per week, combining group therapy, individual therapy, and psychiatric support    all delivered via telehealth.",
   whoIsItFor: [
     "Individuals stepping down from inpatient or residential care",
     "Those in crisis who need structured daily support",

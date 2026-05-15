@@ -8,8 +8,8 @@ export const Route = createFileRoute("/services_/therapy")({
   component: TherapyPage,
   head: () => ({
     meta: [
-      { title: "Same-Day Therapy — Mindova Holdings" },
-      { name: "description", content: "Connect with a licensed therapist today — secure, private, and from wherever you are." },
+      { title: "Same-Day Therapy    Mindova Holdings" },
+      { name: "description", content: "Connect with a licensed therapist today    secure, private, and from wherever you are." },
     ],
   }),
 });
@@ -18,10 +18,10 @@ const therapyData: ServicePageProps = {
   eyebrow: "TELEHEALTH THERAPY",
   title: "Same-Day",
   titleEmphasis: "Therapy",
-  subtitle: "Connect with a licensed therapist today — secure, private, and from wherever you are.",
+  subtitle: "Connect with a licensed therapist today    secure, private, and from wherever you are.",
   heroIcon: "🧠",
   whatIsIt:
-    "Our telehealth therapy service connects you with licensed therapists (LPCs, LCSWs, LMFTs) via secure HIPAA-compliant video sessions. Whether you're dealing with anxiety, depression, trauma, relationship challenges, or simply need someone to talk to — we match you with the right provider, often the same day you reach out.",
+    "Our telehealth therapy service connects you with licensed therapists (LPCs, LCSWs, LMFTs) via secure HIPAA-compliant video sessions. Whether you're dealing with anxiety, depression, trauma, relationship challenges, or simply need someone to talk to    we match you with the right provider, often the same day you reach out.",
   whoIsItFor: [
     "Adults dealing with anxiety or depression",
     "Individuals processing trauma or grief",
@@ -38,12 +38,12 @@ const therapyData: ServicePageProps = {
     {
       step: "02",
       title: "Complete Intake",
-      description: "Fill out your secure digital intake form — takes about 10 minutes.",
+      description: "Fill out your secure digital intake form    takes about 10 minutes.",
     },
     {
       step: "03",
       title: "Join Your Session",
-      description: "Connect via secure video link at your scheduled time — no downloads needed.",
+      description: "Connect via secure video link at your scheduled time    no downloads needed.",
     },
     {
       step: "04",
@@ -64,7 +64,7 @@ const therapyData: ServicePageProps = {
   pricing: {
     label: "Per Session",
     amount: "$150",
-    note: "Cash-pay rate. Most insurance plans accepted — verify before booking.",
+    note: "Cash-pay rate. Most insurance plans accepted    verify before booking.",
   },
   faqs: [
     {
@@ -80,7 +80,7 @@ const therapyData: ServicePageProps = {
     {
       question: "What platform do you use for video sessions?",
       answer:
-        "We use a HIPAA-compliant secure video platform integrated into SimplePractice. No downloads required — just click your link.",
+        "We use a HIPAA-compliant secure video platform integrated into SimplePractice. No downloads required    just click your link.",
     },
     {
       question: "Can I switch therapists if it's not a good fit?",

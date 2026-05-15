@@ -53,7 +53,7 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
           <img src={mark} alt="Mindova" className="h-9 w-9 object-contain" />
-          <div className="hidden sm:flex flex-col leading-none">
+          <div className="hidden min-[850px]:flex flex-col leading-none">
             <span className={`font-serif text-lg tracking-[0.2em] transition-colors ${transparent ? "text-cream" : "text-dark"}`}>
               MINDOVA
             </span>

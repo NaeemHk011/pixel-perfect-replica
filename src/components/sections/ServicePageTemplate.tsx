@@ -80,7 +80,7 @@ export function ServicePageTemplate({
           <div className="reveal">
             <SectionLabel>Overview</SectionLabel>
             <h2 className="font-serif text-4xl md:text-5xl mt-5 tracking-tight">
-              What Is <em className="text-gold italic">{titleEmphasis}?</em>
+              What Is Medication <em className="text-gold italic">{titleEmphasis}?</em>
             </h2>
             <p className="mt-6 text-muted text-sm leading-relaxed">{whatIsIt}</p>
           </div>

@@ -1,4 +1,4 @@
-# Claude Code — Mindova Holdings: Missing Pages & Sections
+# Claude Code    Mindova Holdings: Missing Pages & Sections
 
 ## CONTEXT
 We have an existing Mindova Holdings telehealth website built in React + TypeScript + Vite + Tailwind CSS + React Router v6. The design system is already established. DO NOT change any existing design, colors, components, or file structure. Only ADD the missing pieces listed below.
@@ -28,7 +28,7 @@ Section label→ small uppercase gold text + horizontal line before it
 
 ---
 
-## TASK 1 — ADD "HOW IT WORKS" SECTION ON HOME PAGE
+## TASK 1    ADD "HOW IT WORKS" SECTION ON HOME PAGE
 
 **File:** `src/components/sections/HowItWorks.tsx`
 
@@ -36,7 +36,7 @@ Section label→ small uppercase gold text + horizontal line before it
 - Background: `#F3EEE6` (cream2)
 - Section label: "THE PROCESS"
 - H2: `How It` **`Works`** (Works = italic gold, Playfair Display)
-- Subtitle: "From your first click to your first session — we make it effortless."
+- Subtitle: "From your first click to your first session    we make it effortless."
 - 4 steps in a horizontal row, connected by a thin gold dashed line between them
 
 **4 Steps:**
@@ -51,7 +51,7 @@ Section label→ small uppercase gold text + horizontal line before it
 
 03  Book Your Session
     Select a date and time that works
-    for you — same-week availability.
+    for you    same-week availability.
 
 04  Start Your Care
     Join your secure telehealth session
@@ -78,9 +78,9 @@ Add `<HowItWorks />` AFTER the `<ServicesGrid />` section and BEFORE the `<Provi
 
 ---
 
-## TASK 2 — ADD INDIVIDUAL SERVICE PAGES
+## TASK 2    ADD INDIVIDUAL SERVICE PAGES
 
-Create 3 separate pages. Each shares the same layout template — create a reusable component first.
+Create 3 separate pages. Each shares the same layout template    create a reusable component first.
 
 ---
 
@@ -127,15 +127,15 @@ interface ServicePageProps {
 **B. What Is It Section**
 - Cream background, 2-column
 - Left: Section label + H2 "What Is `[Service Name]`?" + paragraph from `whatIsIt` prop
-- Right: Dark card with gold border — bullet list from `whoIsItFor` array
+- Right: Dark card with gold border    bullet list from `whoIsItFor` array
   - Title of dark card: "Who Is This For?"
   - Each bullet: gold dot + text
 
-**C. What To Expect — Step by Step**
+**C. What To Expect    Step by Step**
 - White background
 - Section label: "THE PROCESS"
 - H2: "What to `Expect`"
-- Vertical stepper — left side has gold numbered circles connected by vertical line
+- Vertical stepper    left side has gold numbered circles connected by vertical line
 - Right side: step title + description
 - Each step: number in gold circle, title bold, description muted
 
@@ -175,9 +175,9 @@ const therapyData: ServicePageProps = {
   eyebrow: "TELEHEALTH THERAPY",
   title: "Same-Day",
   titleEmphasis: "Therapy",
-  subtitle: "Connect with a licensed therapist today — secure, private, and from wherever you are.",
+  subtitle: "Connect with a licensed therapist today    secure, private, and from wherever you are.",
   heroIcon: "🧠",
-  whatIsIt: "Our telehealth therapy service connects you with licensed therapists (LPCs, LCSWs, LMFTs) via secure HIPAA-compliant video sessions. Whether you're dealing with anxiety, depression, trauma, relationship challenges, or simply need someone to talk to — we match you with the right provider, often the same day you reach out.",
+  whatIsIt: "Our telehealth therapy service connects you with licensed therapists (LPCs, LCSWs, LMFTs) via secure HIPAA-compliant video sessions. Whether you're dealing with anxiety, depression, trauma, relationship challenges, or simply need someone to talk to    we match you with the right provider, often the same day you reach out.",
   whoIsItFor: [
     "Adults dealing with anxiety or depression",
     "Individuals processing trauma or grief",
@@ -194,12 +194,12 @@ const therapyData: ServicePageProps = {
     {
       step: "02",
       title: "Complete Intake",
-      description: "Fill out your secure digital intake form — takes about 10 minutes."
+      description: "Fill out your secure digital intake form    takes about 10 minutes."
     },
     {
       step: "03",
       title: "Join Your Session",
-      description: "Connect via secure video link at your scheduled time — no downloads needed."
+      description: "Connect via secure video link at your scheduled time    no downloads needed."
     },
     {
       step: "04",
@@ -220,7 +220,7 @@ const therapyData: ServicePageProps = {
   pricing: {
     label: "Per Session",
     amount: "$150",
-    note: "Cash-pay rate. Most insurance plans accepted — verify before booking."
+    note: "Cash-pay rate. Most insurance plans accepted    verify before booking."
   },
   faqs: [
     {
@@ -233,7 +233,7 @@ const therapyData: ServicePageProps = {
     },
     {
       question: "What platform do you use for video sessions?",
-      answer: "We use a HIPAA-compliant secure video platform integrated into SimplePractice. No downloads required — just click your link."
+      answer: "We use a HIPAA-compliant secure video platform integrated into SimplePractice. No downloads required    just click your link."
     },
     {
       question: "Can I switch therapists if it's not a good fit?",
@@ -256,7 +256,7 @@ const medicationData: ServicePageProps = {
   titleEmphasis: "Management",
   subtitle: "Board-certified psychiatrists and PMHNPs providing evaluation, diagnosis, and ongoing medication support.",
   heroIcon: "💊",
-  whatIsIt: "Our medication management service connects you with board-certified psychiatrists and Psychiatric-Mental Health Nurse Practitioners (PMHNPs) who specialize in evaluating, diagnosing, and managing psychiatric conditions. From initial evaluation to ongoing medication adjustments — we provide consistent, evidence-based psychiatric care via telehealth.",
+  whatIsIt: "Our medication management service connects you with board-certified psychiatrists and Psychiatric-Mental Health Nurse Practitioners (PMHNPs) who specialize in evaluating, diagnosing, and managing psychiatric conditions. From initial evaluation to ongoing medication adjustments    we provide consistent, evidence-based psychiatric care via telehealth.",
   whoIsItFor: [
     "Individuals seeking psychiatric evaluation for the first time",
     "Those already on medication who need ongoing management",
@@ -333,9 +333,9 @@ const iopData: ServicePageProps = {
   eyebrow: "INTENSIVE OUTPATIENT PROGRAM",
   title: "Intensive",
   titleEmphasis: "Outpatient Program",
-  subtitle: "Structured, high-support behavioral health care for those who need more than weekly therapy — without inpatient admission.",
+  subtitle: "Structured, high-support behavioral health care for those who need more than weekly therapy    without inpatient admission.",
   heroIcon: "🏥",
-  whatIsIt: "Our Intensive Outpatient Program (IOP) is a structured treatment program designed for individuals who need a higher level of care than standard weekly therapy but do not require 24-hour inpatient treatment. IOP typically involves multiple sessions per week, combining group therapy, individual therapy, and psychiatric support — all delivered via telehealth.",
+  whatIsIt: "Our Intensive Outpatient Program (IOP) is a structured treatment program designed for individuals who need a higher level of care than standard weekly therapy but do not require 24-hour inpatient treatment. IOP typically involves multiple sessions per week, combining group therapy, individual therapy, and psychiatric support    all delivered via telehealth.",
   whoIsItFor: [
     "Individuals stepping down from inpatient or residential care",
     "Those in crisis who need structured daily support",
@@ -403,9 +403,9 @@ const iopData: ServicePageProps = {
 
 ---
 
-## TASK 3 — UPDATE SERVICES SECTION CARDS (HomePage + ServicesPage)
+## TASK 3    UPDATE SERVICES SECTION CARDS (HomePage + ServicesPage)
 
-In `src/components/sections/ServicesGrid.tsx` — update each service card to have a "Learn More →" link:
+In `src/components/sections/ServicesGrid.tsx`    update each service card to have a "Learn More →" link:
 
 ```
 Same-Day Therapy        → /services/therapy
@@ -421,7 +421,7 @@ Each card bottom: add a small gold text link "Learn More →" using React Router
 
 ---
 
-## TASK 4 — UPDATE NAVBAR
+## TASK 4    UPDATE NAVBAR
 
 In `src/components/layout/Navbar.tsx`:
 
@@ -442,7 +442,7 @@ Services ▾
 
 ---
 
-## TASK 5 — ADD ROUTES IN App.tsx
+## TASK 5    ADD ROUTES IN App.tsx
 
 Add these new routes:
 
@@ -459,9 +459,9 @@ import IOPPage from './pages/IOPPage'
 
 ---
 
-## TASK 6 — ADD IOP TO SERVICES DATA FILE
+## TASK 6    ADD IOP TO SERVICES DATA FILE
 
-In `src/data/services.ts` — add IOP as 7th service:
+In `src/data/services.ts`    add IOP as 7th service:
 
 ```typescript
 {
@@ -489,9 +489,9 @@ In `src/data/services.ts` — add IOP as 7th service:
 2. **DO NOT** modify Navbar, Footer, or any existing page that is already working
 3. **Only ADD** new files and new routes
 4. All new components must **match existing design system exactly**
-5. All internal links must use React Router `<Link>` — never `<a href>`
+5. All internal links must use React Router `<Link>`    never `<a href>`
 6. All new pages must include `<Navbar />` and `<Footer />` via the existing layout
-7. TypeScript — fully typed, no `any`
-8. Tailwind only — no inline styles
-9. Scroll animation on all new sections (fade up on viewport entry — same as existing site)
+7. TypeScript    fully typed, no `any`
+8. Tailwind only    no inline styles
+9. Scroll animation on all new sections (fade up on viewport entry    same as existing site)
 10. All new pages must be **fully mobile responsive**

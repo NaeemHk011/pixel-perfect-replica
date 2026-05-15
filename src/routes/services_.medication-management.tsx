@@ -8,7 +8,7 @@ export const Route = createFileRoute("/services_/medication-management")({
   component: MedicationPage,
   head: () => ({
     meta: [
-      { title: "Medication Management — Mindova Holdings" },
+      { title: "Medication Management    Mindova Holdings" },
       { name: "description", content: "Board-certified psychiatrists and PMHNPs providing evaluation, diagnosis, and ongoing medication support." },
     ],
   }),
@@ -22,7 +22,7 @@ const medicationData: ServicePageProps = {
     "Board-certified psychiatrists and PMHNPs providing evaluation, diagnosis, and ongoing medication support.",
   heroIcon: "💊",
   whatIsIt:
-    "Our medication management service connects you with board-certified psychiatrists and Psychiatric-Mental Health Nurse Practitioners (PMHNPs) who specialize in evaluating, diagnosing, and managing psychiatric conditions. From initial evaluation to ongoing medication adjustments — we provide consistent, evidence-based psychiatric care via telehealth.",
+    "Our medication management service connects you with board-certified psychiatrists and Psychiatric-Mental Health Nurse Practitioners (PMHNPs) who specialize in evaluating, diagnosing, and managing psychiatric conditions. From initial evaluation to ongoing medication adjustments    we provide consistent, evidence-based psychiatric care via telehealth.",
   whoIsItFor: [
     "Individuals seeking psychiatric evaluation for the first time",
     "Those already on medication who need ongoing management",

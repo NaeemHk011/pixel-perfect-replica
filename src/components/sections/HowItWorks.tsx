@@ -18,7 +18,7 @@ const steps = [
     number: "03",
     icon: CalendarCheck,
     title: "Book Your Session",
-    description: "Select a date and time that works for you — same-week availability.",
+    description: "Select a date and time that works for you same-week availability.",
   },
   {
     number: "04",
@@ -38,12 +38,12 @@ export function HowItWorks() {
             How It <em className="text-gold italic">Works</em>
           </h2>
           <p className="mt-4 text-muted text-sm max-w-md leading-relaxed">
-            From your first click to your first session — we make it effortless.
+            From your first click to your first session we make it effortless.
           </p>
         </div>
 
         <div className="relative grid grid-cols-1 md:grid-cols-4 gap-5">
-          {/* Connector line — desktop only */}
+          {/* Connector line    desktop only */}
           <div
             className="absolute top-[64px] left-[calc(12.5%+1rem)] right-[calc(12.5%+1rem)] hidden md:block pointer-events-none"
             style={{ borderTop: "1px dashed rgba(184,144,64,0.3)" }}
