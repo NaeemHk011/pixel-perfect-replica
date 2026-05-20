@@ -43,9 +43,16 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Lock body scroll while mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   const transparent = onDark && !scrolled;
 
   return (
+    <>
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         transparent
@@ -53,24 +60,25 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
           : "bg-[rgba(249,246,241,0.88)] backdrop-blur-xl shadow-[0_1px_24px_-8px_rgba(12,11,9,0.08)]"
       }`}
     >
-      <div className="relative z-[1] max-w-7xl mx-auto px-5 md:px-8 h-24 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4">
+      <div className="relative z-[1] max-w-7xl mx-auto px-5 md:px-8 h-20 lg:h-24 grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center gap-4">
         {/* Logo */}
         <Link to="/" className="flex items-center group">
-          <img src={logoFull} alt="Mindova Holdings" className="h-16 object-contain" />
+          <img src={logoFull} alt="Mindova Holdings" className="h-12 md:h-14 lg:h-20 object-contain" />
         </Link>
 
-        {/* Desktop nav pill */}
-        <nav className="hidden md:flex justify-center">
+        {/* Desktop nav pill — lg and above only */}
+        <nav className="hidden lg:flex justify-center">
           <div className="flex items-center gap-0.5 bg-dark text-cream rounded-full px-2 py-1.5 border border-white/5 shadow-[0_4px_16px_-8px_rgba(12,11,9,0.4)]">
 
             {/* Services mega-dropdown */}
             <div
               ref={servicesRef}
               className="relative"
-              onMouseEnter={() => setServicesOpen(true)}
-              onMouseLeave={() => setServicesOpen(false)}
+              onPointerEnter={(e) => { if (e.pointerType === "mouse") setServicesOpen(true); }}
+              onPointerLeave={(e) => { if (e.pointerType === "mouse") setServicesOpen(false); }}
             >
               <button
+                onClick={() => setServicesOpen((v) => !v)}
                 className={`px-4 py-2 rounded-full text-sm transition-all duration-200 flex items-center gap-1 ${
                   path.startsWith("/services")
                     ? "bg-gold2/20 text-gold3 font-medium"
@@ -81,11 +89,11 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
               </button>
 
               {/* Invisible bridge to prevent gap-triggered close */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 h-3 w-[480px]" />
+              <div className="absolute top-full left-0 h-3 w-[480px]" />
 
               {/* Mega-dropdown panel */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] bg-white rounded-2xl border border-black/5 shadow-[0_12px_40px_-12px_rgba(12,11,9,0.2)] overflow-hidden transition-all duration-200 ${
+                className={`absolute top-full left-0 mt-3 w-[480px] bg-white rounded-2xl border border-black/5 shadow-[0_12px_40px_-12px_rgba(12,11,9,0.2)] overflow-hidden transition-all duration-200 ${
                   servicesOpen
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 -translate-y-1 pointer-events-none"
@@ -141,8 +149,8 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
           </div>
         </nav>
 
-        {/* CTA */}
-        <div className="hidden md:flex justify-end">
+        {/* CTA — lg and above only */}
+        <div className="hidden lg:flex justify-end">
           <Link
             to="/booking"
             className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-6 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(207,168,78,0.55)]"
@@ -151,10 +159,10 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
           </Link>
         </div>
 
-        {/* Mobile hamburger */}
+        {/* Hamburger — shown below lg (mobile + tablets including iPad mini) */}
         <button
           aria-label="Toggle menu"
-          className={`md:hidden justify-self-end p-2 rounded-full transition-colors ${
+          className={`lg:hidden justify-self-end p-2 rounded-full transition-colors ${
             transparent ? "text-cream" : "text-dark"
           }`}
           onClick={() => setOpen((v) => !v)}
@@ -175,60 +183,62 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
         />
       </div>
 
-      {/* Mobile menu */}
-      {open && (
-        <div className="md:hidden fixed inset-0 top-24 bg-dark text-cream flex flex-col p-8 gap-6 z-50 overflow-y-auto">
-          <div className="absolute inset-0 gold-glow opacity-50 pointer-events-none" />
-
-          {/* Services group */}
-          <div className="relative">
-            <Link
-              to="/services"
-              onClick={() => setOpen(false)}
-              className={`text-2xl font-serif transition-colors block ${path.startsWith("/services") ? "text-gold3" : "text-cream"}`}
-            >
-              Services
-            </Link>
-            <div className="mt-4 ml-4 flex flex-col gap-1 border-l border-gold/20 pl-4">
-              {serviceCategories.map(({ id, icon: Icon, label, color, bg }) => (
-                <Link
-                  key={id}
-                  to={`/services/${id}`}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center gap-2.5 py-1.5 text-sm text-cream/70 hover:text-gold3 transition-colors"
-                >
-                  <div className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 opacity-70 ${bg}`}>
-                    <Icon className={`w-3 h-3 ${color}`} />
-                  </div>
-                  {label}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {links.map((l) => {
-            const active = path === l.to;
-            return (
-              <Link
-                key={l.to}
-                to={l.to}
-                onClick={() => setOpen(false)}
-                className={`text-2xl font-serif transition-colors ${active ? "text-gold3" : "text-cream"}`}
-              >
-                {l.label}
-              </Link>
-            );
-          })}
-
-          <Link
-            to="/booking"
-            onClick={() => setOpen(false)}
-            className="mt-4 bg-gold2 text-dark px-6 py-3 rounded-full text-center font-medium hover:bg-gold3 transition-colors"
-          >
-            Book a Consultation
-          </Link>
-        </div>
-      )}
     </header>
+
+    {/* Mobile/tablet menu — rendered OUTSIDE <header> to avoid backdrop-filter containment */}
+    {open && (
+      <div className="lg:hidden fixed inset-x-0 top-20 md:top-20 bottom-0 bg-dark text-cream flex flex-col p-8 gap-6 z-[60] overflow-y-auto">
+        <div className="absolute inset-0 gold-glow opacity-50 pointer-events-none" />
+
+        {/* Services group */}
+        <div className="relative">
+          <Link
+            to="/services"
+            onClick={() => setOpen(false)}
+            className={`text-2xl font-serif transition-colors block ${path.startsWith("/services") ? "text-gold3" : "text-cream"}`}
+          >
+            Services
+          </Link>
+          <div className="mt-4 ml-4 flex flex-col gap-1 border-l border-gold/20 pl-4">
+            {serviceCategories.map(({ id, icon: Icon, label, color, bg }) => (
+              <Link
+                key={id}
+                to={`/services/${id}`}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-2.5 py-1.5 text-sm text-cream/70 hover:text-gold3 transition-colors"
+              >
+                <div className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 opacity-70 ${bg}`}>
+                  <Icon className={`w-3 h-3 ${color}`} />
+                </div>
+                {label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {links.map((l) => {
+          const active = path === l.to;
+          return (
+            <Link
+              key={l.to}
+              to={l.to}
+              onClick={() => setOpen(false)}
+              className={`text-2xl font-serif transition-colors ${active ? "text-gold3" : "text-cream"}`}
+            >
+              {l.label}
+            </Link>
+          );
+        })}
+
+        <Link
+          to="/booking"
+          onClick={() => setOpen(false)}
+          className="mt-4 bg-gold2 text-dark px-6 py-3 rounded-full text-center font-medium hover:bg-gold3 transition-colors"
+        >
+          Book a Consultation
+        </Link>
+      </div>
+    )}
+    </>
   );
 }
