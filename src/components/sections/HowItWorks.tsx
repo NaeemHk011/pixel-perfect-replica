@@ -56,7 +56,7 @@ export function HowItWorks() {
             >
               <div className="absolute top-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-gold2/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-              <span className="font-serif text-4xl italic text-gold/20 group-hover:text-gold/40 transition-colors duration-300 leading-none">
+              <span className="font-serif text-4xl italic text-dark/60 group-hover:text-gold transition-colors duration-300 leading-none">
                 {number}
               </span>
               <div className="mt-4 w-10 h-10 rounded-xl bg-cream2 border border-black/5 flex items-center justify-center group-hover:bg-gold2/10 group-hover:border-gold2/30 transition-all duration-300">
