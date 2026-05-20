@@ -26,22 +26,22 @@ export function Hero() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
           </span>
-          Telehealth · First Therapists
+          Behavioral Health · Peptide Wellness · Virtual Care
         </span>
 
         <h1 className="mt-8 font-serif text-5xl md:text-7xl lg:text-[5.5rem] leading-[1.05] tracking-tight">
-          Modern Care,
+          Modern Wellness,
           <br />
-          <em className="text-gold3 italic font-serif">Handled with Heart.</em>
+          Built for <em className="text-gold3 italic font-serif">Real Life.</em>
         </h1>
 
         <p className="mt-7 mx-auto max-w-xl text-sm md:text-base text-cream/65 leading-relaxed">
-          A behavioral health ecosystem built for people   combining clinical excellence with genuine human connection.
+          Behavioral health, peptide optimization, virtual care, and leadership-focused solutions     all under one roof, built around your life.
         </p>
 
         <div className="mt-9 flex flex-wrap justify-center gap-3">
-          <GoldButton to="/booking">Book Appointment</GoldButton>
-          <GhostButton to="/services" light>View Services</GhostButton>
+          <GoldButton to="/booking">Book a Consultation</GoldButton>
+          <GhostButton to="/services" light>Start Your Wellness Journey</GhostButton>
         </div>
 
         {/* Stat cards */}
@@ -62,9 +62,22 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Wave divider */}
+      {/* Bottom golden glow fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+        style={{ background: "linear-gradient(to bottom, transparent 0%, rgba(184,144,64,0.18) 60%, rgba(207,168,78,0.32) 100%)" }}
+      />
+
+      {/* Wave divider      golden */}
       <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0,40 C360,80 720,0 1440,40 L1440,80 L0,80 Z" fill="#F9F6F1" />
+        <defs>
+          <linearGradient id="goldWaveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stopColor="#B89040" />
+            <stop offset="40%"  stopColor="#E4C06A" />
+            <stop offset="65%"  stopColor="#CFA84E" />
+            <stop offset="100%" stopColor="#B89040" />
+          </linearGradient>
+        </defs>
+        <path d="M0,40 C360,80 720,0 1440,40 L1440,80 L0,80 Z" fill="url(#goldWaveGrad)" />
       </svg>
     </section>
   );

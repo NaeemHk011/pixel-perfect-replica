@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -32,8 +32,14 @@ function BookingPage() {
         <div className="max-w-5xl mx-auto px-5 md:px-8">
           <div className="text-center reveal">
             <div className="flex justify-center"><SectionLabel>Booking</SectionLabel></div>
-            <h1 className="font-serif text-5xl md:text-6xl mt-5 tracking-tight">Book Your <em className="text-gold italic">Appointment</em></h1>
+            <h1 className="font-serif text-5xl md:text-6xl mt-5 tracking-tight">Book Your <em className="text-gold italic">Consultation</em></h1>
             <p className="mt-4 text-muted text-sm max-w-md mx-auto">Three steps. Five minutes. Care that starts this week.</p>
+            <p className="mt-3 text-muted text-xs">
+              Already have an appointment?{" "}
+              <Link to="/intake" className="text-gold underline underline-offset-2 hover:text-gold3 transition-colors">
+                Complete your Patient Intake Form →
+              </Link>
+            </p>
           </div>
 
           <div className="mt-12 flex items-center justify-center gap-3 md:gap-6 flex-wrap">
@@ -130,7 +136,7 @@ function BookingPage() {
                 <div className="md:col-span-2 flex justify-between items-center">
                   <button type="button" onClick={() => setStep(2)} className="text-sm text-muted underline">← Back</button>
                   <button type="submit" className="bg-gold2 hover:bg-gold3 text-dark font-medium px-8 py-3.5 rounded-full text-sm transition-colors shadow-[0_12px_30px_-12px_rgba(207,168,78,0.6)]">
-                    {submitted ? "Submitted ✓   We'll be in touch" : "Book Appointment"}
+                    {submitted ? "Submitted ✓   We'll be in touch" : "Book a Consultation"}
                   </button>
                 </div>
               </form>

@@ -94,10 +94,34 @@ function CommunityPage() {
           </div>
         </section>
 
-        <section className="py-24 md:py-28 bg-dark text-cream relative z-10">
-          <div className="max-w-4xl mx-auto px-5 md:px-8 text-center">
-            <h2 className="font-serif text-3xl md:text-4xl">Is your organization seeking <em className="text-gold3 italic">behavioral health support?</em></h2>
-            <div className="mt-8 inline-flex"><GoldButton to="/partnerships">Request a Partnership Meeting</GoldButton></div>
+        <section className="py-24 md:py-28 bg-dark text-cream relative z-10 overflow-hidden">
+          <div className="absolute inset-0 gold-glow opacity-60 pointer-events-none" />
+          <div className="max-w-5xl mx-auto px-5 md:px-8">
+            <div className="text-center mb-12">
+              <h2 className="font-serif text-3xl md:text-4xl">Is your organization seeking <em className="text-gold3 italic">behavioral health support?</em></h2>
+              <div className="mt-8 inline-flex"><GoldButton to="/partnerships">Request a Partnership Meeting</GoldButton></div>
+            </div>
+
+            {/* Discovery Call CTA */}
+            <div className="relative overflow-hidden rounded-[24px] border border-white/8 bg-white/[0.04] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-gold2/40 to-transparent" />
+              <div>
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-gradient text-gold3 text-[10px] tracking-[0.22em] uppercase mb-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold3 animate-pulse" />
+                  Accepting New Patients
+                </span>
+                <h3 className="font-serif text-2xl text-cream">Ready to start your personal care journey?</h3>
+                <p className="mt-2 text-cream/60 text-sm leading-relaxed max-w-md">
+                  Book a free 15-minute discovery call and get matched with a licensed provider this week.
+                </p>
+              </div>
+              <a
+                href="/booking"
+                className="flex-shrink-0 inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-7 py-3 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_12px_30px_-12px_rgba(207,168,78,0.6)] whitespace-nowrap"
+              >
+                Schedule a Discovery Call →
+              </a>
+            </div>
           </div>
         </section>
       </main>

@@ -1,18 +1,22 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
-import mark from "@/assets/mindova-mark.png";
+import { Menu, X, ChevronDown, Brain, Zap, Video, Target, Users, Building2 } from "lucide-react";
+import logoFull from "@/assets/mindova-logo-full.png";
 
 const links = [
-  { to: "/community", label: "About" },
-  { to: "/providers", label: "Our Doctors" },
-  { to: "/partnerships", label: "Partnerships" },
+  { to: "/community",    label: "About"        },
+  { to: "/providers",    label: "Our Doctors"   },
+  { to: "/partnerships", label: "Partnerships"  },
+  { to: "/contact",      label: "Contact"       },
 ] as const;
 
-const serviceDropdownLinks = [
-  { to: "/services/therapy", label: "Therapy" },
-  { to: "/services/medication-management", label: "Medication Management" },
-  { to: "/services/iop", label: "IOP" },
+const serviceCategories = [
+  { id: "mental-health",            icon: Brain,      label: "Mental Health Services",          color: "text-blue-500",    bg: "bg-blue-50" },
+  { id: "peptide-wellness",         icon: Zap,        label: "Peptide & Wellness Optimization",  color: "text-emerald-600", bg: "bg-emerald-50" },
+  { id: "virtual-behavioral-health",icon: Video,      label: "Virtual Behavioral Health",        color: "text-violet-600",  bg: "bg-violet-50" },
+  { id: "coaching-development",     icon: Target,     label: "Coaching & Personal Development",  color: "text-orange-500",  bg: "bg-orange-50" },
+  { id: "provider-partnerships",    icon: Users,      label: "Provider Partnerships",            color: "text-rose-500",    bg: "bg-rose-50" },
+  { id: "healthcare-consulting",    icon: Building2,  label: "Healthcare Consulting",            color: "text-amber-700",   bg: "bg-amber-50" },
 ] as const;
 
 export function Navbar({ onDark = false }: { onDark?: boolean }) {
@@ -46,25 +50,20 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         transparent
           ? "bg-transparent"
-          : "bg-[rgba(249,246,241,0.88)] backdrop-blur-xl border-b border-black/5 shadow-[0_1px_24px_-8px_rgba(12,11,9,0.08)]"
+          : "bg-[rgba(249,246,241,0.88)] backdrop-blur-xl shadow-[0_1px_24px_-8px_rgba(12,11,9,0.08)]"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 md:px-8 h-20 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4">
+      <div className="relative z-[1] max-w-7xl mx-auto px-5 md:px-8 h-24 grid grid-cols-[auto_1fr_auto] md:grid-cols-[1fr_auto_1fr] items-center gap-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <img src={mark} alt="Mindova" className="h-9 w-9 object-contain" />
-          <div className="hidden min-[850px]:flex flex-col leading-none">
-            <span className={`font-serif text-lg tracking-[0.2em] transition-colors ${transparent ? "text-cream" : "text-dark"}`}>
-              MINDOVA
-            </span>
-            <span className="text-[10px] tracking-[0.32em] text-gold2 mt-1">HOLDINGS</span>
-          </div>
+        <Link to="/" className="flex items-center group">
+          <img src={logoFull} alt="Mindova Holdings" className="h-16 object-contain" />
         </Link>
 
         {/* Desktop nav pill */}
         <nav className="hidden md:flex justify-center">
           <div className="flex items-center gap-0.5 bg-dark text-cream rounded-full px-2 py-1.5 border border-white/5 shadow-[0_4px_16px_-8px_rgba(12,11,9,0.4)]">
-            {/* Services dropdown */}
+
+            {/* Services mega-dropdown */}
             <div
               ref={servicesRef}
               className="relative"
@@ -78,37 +77,48 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
                     : "text-cream/65 hover:text-cream hover:bg-white/5"
                 }`}
               >
-                Services <ChevronDown className="w-3 h-3" />
+                Services <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {/* Invisible bridge — covers the mt-3 gap so onMouseLeave doesn't fire mid-traversal */}
-              <div className="absolute top-full left-1/2 -translate-x-1/2 h-3 w-56" />
+              {/* Invisible bridge to prevent gap-triggered close */}
+              <div className="absolute top-full left-1/2 -translate-x-1/2 h-3 w-[480px]" />
 
-              {/* Dropdown panel */}
+              {/* Mega-dropdown panel */}
               <div
-                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-xl border border-black/5 shadow-[0_8px_32px_-8px_rgba(12,11,9,0.18)] overflow-hidden transition-all duration-200 ${
+                className={`absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] bg-white rounded-2xl border border-black/5 shadow-[0_12px_40px_-12px_rgba(12,11,9,0.2)] overflow-hidden transition-all duration-200 ${
                   servicesOpen
                     ? "opacity-100 translate-y-0 pointer-events-auto"
                     : "opacity-0 -translate-y-1 pointer-events-none"
                 }`}
               >
+                {/* Header row */}
                 <Link
                   to="/services"
                   onClick={() => setServicesOpen(false)}
-                  className="flex items-center px-5 py-3 text-sm text-dark hover:bg-cream hover:shadow-[inset_3px_0_0_0_#B89040] transition-all duration-150 border-b border-black/5"
+                  className="flex items-center justify-between px-5 py-3.5 bg-dark text-cream hover:bg-dark/90 transition-colors duration-150"
                 >
-                  All Services
+                  <span className="text-sm font-medium">All Services</span>
+                  <span className="text-xs text-gold2 tracking-[0.15em] uppercase">View All →</span>
                 </Link>
-                {serviceDropdownLinks.map(({ to, label }) => (
-                  <Link
-                    key={to}
-                    to={to}
-                    onClick={() => setServicesOpen(false)}
-                    className="flex items-center px-5 py-3 text-sm text-dark hover:bg-cream hover:shadow-[inset_3px_0_0_0_#B89040] transition-all duration-150"
-                  >
-                    {label}
-                  </Link>
-                ))}
+
+                {/* 2-column category grid */}
+                <div className="grid grid-cols-2 gap-px bg-black/5">
+                  {serviceCategories.map(({ id, icon: Icon, label, color, bg }) => (
+                    <Link
+                      key={id}
+                      to={`/services/${id}`}
+                      onClick={() => setServicesOpen(false)}
+                      className={`group flex items-center gap-3 px-4 py-3.5 bg-white hover:${bg} transition-colors duration-150`}
+                    >
+                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${bg}`}>
+                        <Icon className={`w-3.5 h-3.5 ${color}`} />
+                      </div>
+                      <span className={`text-xs font-medium text-dark/80 group-hover:${color} transition-colors duration-150 leading-tight`}>
+                        {label}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -137,7 +147,7 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
             to="/booking"
             className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-6 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(207,168,78,0.55)]"
           >
-            Contact
+            Book a Consultation
           </Link>
         </div>
 
@@ -153,10 +163,23 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
         </button>
       </div>
 
+      {/* Golden shimmer border */}
+      <div className="absolute bottom-0 left-0 right-0 h-[2px] overflow-hidden">
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(90deg, transparent 0%, #CFA84E 30%, #E4C06A 50%, #CFA84E 70%, transparent 100%)" }}
+        />
+        <div
+          className="absolute inset-y-0 w-[30%] animate-nav-shimmer"
+          style={{ background: "linear-gradient(90deg, transparent 0%, rgba(245,228,168,0.95) 50%, transparent 100%)" }}
+        />
+      </div>
+
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden fixed inset-0 top-20 bg-dark text-cream flex flex-col p-8 gap-6 z-50 overflow-y-auto">
+        <div className="md:hidden fixed inset-0 top-24 bg-dark text-cream flex flex-col p-8 gap-6 z-50 overflow-y-auto">
           <div className="absolute inset-0 gold-glow opacity-50 pointer-events-none" />
+
           {/* Services group */}
           <div className="relative">
             <Link
@@ -166,19 +189,23 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
             >
               Services
             </Link>
-            <div className="mt-3 ml-4 flex flex-col gap-2 border-l border-gold/20 pl-4">
-              {serviceDropdownLinks.map(({ to, label }) => (
+            <div className="mt-4 ml-4 flex flex-col gap-1 border-l border-gold/20 pl-4">
+              {serviceCategories.map(({ id, icon: Icon, label, color, bg }) => (
                 <Link
-                  key={to}
-                  to={to}
+                  key={id}
+                  to={`/services/${id}`}
                   onClick={() => setOpen(false)}
-                  className="text-sm text-cream/70 hover:text-gold3 transition-colors"
+                  className="flex items-center gap-2.5 py-1.5 text-sm text-cream/70 hover:text-gold3 transition-colors"
                 >
+                  <div className={`w-5 h-5 rounded-md flex items-center justify-center flex-shrink-0 opacity-70 ${bg}`}>
+                    <Icon className={`w-3 h-3 ${color}`} />
+                  </div>
                   {label}
                 </Link>
               ))}
             </div>
           </div>
+
           {links.map((l) => {
             const active = path === l.to;
             return (
@@ -192,12 +219,13 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
               </Link>
             );
           })}
+
           <Link
             to="/booking"
             onClick={() => setOpen(false)}
             className="mt-4 bg-gold2 text-dark px-6 py-3 rounded-full text-center font-medium hover:bg-gold3 transition-colors"
           >
-            Book Appointment
+            Book a Consultation
           </Link>
         </div>
       )}

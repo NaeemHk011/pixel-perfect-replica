@@ -121,6 +121,37 @@ function ProvidersPage() {
           </div>
         </section>
 
+        {/* Discovery Call CTA */}
+        <section className="py-20 bg-cream relative z-10">
+          <div className="max-w-7xl mx-auto px-5 md:px-8">
+            <div className="relative overflow-hidden rounded-[28px] bg-dark text-cream p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="absolute inset-0 bg-grid-dark opacity-30" />
+              <div className="absolute inset-0 gold-glow pointer-events-none" />
+              <div className="absolute -top-10 -right-10 w-48 h-48 rounded-full bg-gold2/10 blur-3xl pointer-events-none" />
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-gradient text-gold3 text-[10px] tracking-[0.22em] uppercase mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold3 animate-pulse" />
+                  Same-Week Availability
+                </span>
+                <h2 className="font-serif text-3xl md:text-4xl">
+                  Not sure where to start?
+                </h2>
+                <p className="mt-3 text-cream/65 text-sm max-w-lg leading-relaxed">
+                  Book a free 15-minute discovery call. Our care coordinators will match you with the right provider and service.
+                </p>
+              </div>
+              <div className="relative flex-shrink-0">
+                <a
+                  href="/booking"
+                  className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-8 py-3.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_12px_30px_-12px_rgba(207,168,78,0.65)] whitespace-nowrap"
+                >
+                  Schedule a Discovery Call →
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="join" className="py-24 md:py-32 bg-dark text-cream relative z-10 overflow-hidden">
           <div className="absolute inset-0 gold-glow" />
           <div className="relative max-w-5xl mx-auto px-5 md:px-8 text-center">
@@ -129,7 +160,7 @@ function ProvidersPage() {
             <p className="mt-5 max-w-xl mx-auto text-cream/70 text-sm leading-relaxed">
               Mindova is building the next generation of behavioral health infrastructure. Join a vetted network of clinicians shaping modern, accessible care.
             </p>
-            <div className="mt-8 inline-flex"><GoldButton to="/partnerships">Apply to Join</GoldButton></div>
+            <div className="mt-8 inline-flex"><GoldButton to="/provider-apply">Apply as a Provider</GoldButton></div>
           </div>
         </section>
 

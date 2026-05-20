@@ -12,13 +12,22 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProvidersRouteImport } from './routes/providers'
+import { Route as ProviderApplyRouteImport } from './routes/provider-apply'
 import { Route as PartnershipsRouteImport } from './routes/partnerships'
+import { Route as IntakeRouteImport } from './routes/intake'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
 import { Route as BookingRouteImport } from './routes/booking'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesVirtualBehavioralHealthRouteImport } from './routes/services_.virtual-behavioral-health'
 import { Route as ServicesTherapyRouteImport } from './routes/services_.therapy'
+import { Route as ServicesProviderPartnershipsRouteImport } from './routes/services_.provider-partnerships'
+import { Route as ServicesPeptideWellnessRouteImport } from './routes/services_.peptide-wellness'
+import { Route as ServicesMentalHealthRouteImport } from './routes/services_.mental-health'
 import { Route as ServicesMedicationManagementRouteImport } from './routes/services_.medication-management'
 import { Route as ServicesIopRouteImport } from './routes/services_.iop'
+import { Route as ServicesHealthcareConsultingRouteImport } from './routes/services_.healthcare-consulting'
+import { Route as ServicesCoachingDevelopmentRouteImport } from './routes/services_.coaching-development'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -35,9 +44,24 @@ const ProvidersRoute = ProvidersRouteImport.update({
   path: '/providers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProviderApplyRoute = ProviderApplyRouteImport.update({
+  id: '/provider-apply',
+  path: '/provider-apply',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnershipsRoute = PartnershipsRouteImport.update({
   id: '/partnerships',
   path: '/partnerships',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntakeRoute = IntakeRouteImport.update({
+  id: '/intake',
+  path: '/intake',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CommunityRoute = CommunityRouteImport.update({
@@ -55,9 +79,31 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesVirtualBehavioralHealthRoute =
+  ServicesVirtualBehavioralHealthRouteImport.update({
+    id: '/services_/virtual-behavioral-health',
+    path: '/services/virtual-behavioral-health',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesTherapyRoute = ServicesTherapyRouteImport.update({
   id: '/services_/therapy',
   path: '/services/therapy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesProviderPartnershipsRoute =
+  ServicesProviderPartnershipsRouteImport.update({
+    id: '/services_/provider-partnerships',
+    path: '/services/provider-partnerships',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesPeptideWellnessRoute = ServicesPeptideWellnessRouteImport.update({
+  id: '/services_/peptide-wellness',
+  path: '/services/peptide-wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesMentalHealthRoute = ServicesMentalHealthRouteImport.update({
+  id: '/services_/mental-health',
+  path: '/services/mental-health',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesMedicationManagementRoute =
@@ -71,43 +117,82 @@ const ServicesIopRoute = ServicesIopRouteImport.update({
   path: '/services/iop',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesHealthcareConsultingRoute =
+  ServicesHealthcareConsultingRouteImport.update({
+    id: '/services_/healthcare-consulting',
+    path: '/services/healthcare-consulting',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesCoachingDevelopmentRoute =
+  ServicesCoachingDevelopmentRouteImport.update({
+    id: '/services_/coaching-development',
+    path: '/services/coaching-development',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
   '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/intake': typeof IntakeRoute
   '/partnerships': typeof PartnershipsRoute
+  '/provider-apply': typeof ProviderApplyRoute
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/coaching-development': typeof ServicesCoachingDevelopmentRoute
+  '/services/healthcare-consulting': typeof ServicesHealthcareConsultingRoute
   '/services/iop': typeof ServicesIopRoute
   '/services/medication-management': typeof ServicesMedicationManagementRoute
+  '/services/mental-health': typeof ServicesMentalHealthRoute
+  '/services/peptide-wellness': typeof ServicesPeptideWellnessRoute
+  '/services/provider-partnerships': typeof ServicesProviderPartnershipsRoute
   '/services/therapy': typeof ServicesTherapyRoute
+  '/services/virtual-behavioral-health': typeof ServicesVirtualBehavioralHealthRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
   '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/intake': typeof IntakeRoute
   '/partnerships': typeof PartnershipsRoute
+  '/provider-apply': typeof ProviderApplyRoute
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services/coaching-development': typeof ServicesCoachingDevelopmentRoute
+  '/services/healthcare-consulting': typeof ServicesHealthcareConsultingRoute
   '/services/iop': typeof ServicesIopRoute
   '/services/medication-management': typeof ServicesMedicationManagementRoute
+  '/services/mental-health': typeof ServicesMentalHealthRoute
+  '/services/peptide-wellness': typeof ServicesPeptideWellnessRoute
+  '/services/provider-partnerships': typeof ServicesProviderPartnershipsRoute
   '/services/therapy': typeof ServicesTherapyRoute
+  '/services/virtual-behavioral-health': typeof ServicesVirtualBehavioralHealthRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/booking': typeof BookingRoute
   '/community': typeof CommunityRoute
+  '/contact': typeof ContactRoute
+  '/intake': typeof IntakeRoute
   '/partnerships': typeof PartnershipsRoute
+  '/provider-apply': typeof ProviderApplyRoute
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/services_/coaching-development': typeof ServicesCoachingDevelopmentRoute
+  '/services_/healthcare-consulting': typeof ServicesHealthcareConsultingRoute
   '/services_/iop': typeof ServicesIopRoute
   '/services_/medication-management': typeof ServicesMedicationManagementRoute
+  '/services_/mental-health': typeof ServicesMentalHealthRoute
+  '/services_/peptide-wellness': typeof ServicesPeptideWellnessRoute
+  '/services_/provider-partnerships': typeof ServicesProviderPartnershipsRoute
   '/services_/therapy': typeof ServicesTherapyRoute
+  '/services_/virtual-behavioral-health': typeof ServicesVirtualBehavioralHealthRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,50 +200,86 @@ export interface FileRouteTypes {
     | '/'
     | '/booking'
     | '/community'
+    | '/contact'
+    | '/intake'
     | '/partnerships'
+    | '/provider-apply'
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/services/coaching-development'
+    | '/services/healthcare-consulting'
     | '/services/iop'
     | '/services/medication-management'
+    | '/services/mental-health'
+    | '/services/peptide-wellness'
+    | '/services/provider-partnerships'
     | '/services/therapy'
+    | '/services/virtual-behavioral-health'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/booking'
     | '/community'
+    | '/contact'
+    | '/intake'
     | '/partnerships'
+    | '/provider-apply'
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/services/coaching-development'
+    | '/services/healthcare-consulting'
     | '/services/iop'
     | '/services/medication-management'
+    | '/services/mental-health'
+    | '/services/peptide-wellness'
+    | '/services/provider-partnerships'
     | '/services/therapy'
+    | '/services/virtual-behavioral-health'
   id:
     | '__root__'
     | '/'
     | '/booking'
     | '/community'
+    | '/contact'
+    | '/intake'
     | '/partnerships'
+    | '/provider-apply'
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/services_/coaching-development'
+    | '/services_/healthcare-consulting'
     | '/services_/iop'
     | '/services_/medication-management'
+    | '/services_/mental-health'
+    | '/services_/peptide-wellness'
+    | '/services_/provider-partnerships'
     | '/services_/therapy'
+    | '/services_/virtual-behavioral-health'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BookingRoute: typeof BookingRoute
   CommunityRoute: typeof CommunityRoute
+  ContactRoute: typeof ContactRoute
+  IntakeRoute: typeof IntakeRoute
   PartnershipsRoute: typeof PartnershipsRoute
+  ProviderApplyRoute: typeof ProviderApplyRoute
   ProvidersRoute: typeof ProvidersRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ServicesCoachingDevelopmentRoute: typeof ServicesCoachingDevelopmentRoute
+  ServicesHealthcareConsultingRoute: typeof ServicesHealthcareConsultingRoute
   ServicesIopRoute: typeof ServicesIopRoute
   ServicesMedicationManagementRoute: typeof ServicesMedicationManagementRoute
+  ServicesMentalHealthRoute: typeof ServicesMentalHealthRoute
+  ServicesPeptideWellnessRoute: typeof ServicesPeptideWellnessRoute
+  ServicesProviderPartnershipsRoute: typeof ServicesProviderPartnershipsRoute
   ServicesTherapyRoute: typeof ServicesTherapyRoute
+  ServicesVirtualBehavioralHealthRoute: typeof ServicesVirtualBehavioralHealthRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -184,11 +305,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProvidersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/provider-apply': {
+      id: '/provider-apply'
+      path: '/provider-apply'
+      fullPath: '/provider-apply'
+      preLoaderRoute: typeof ProviderApplyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partnerships': {
       id: '/partnerships'
       path: '/partnerships'
       fullPath: '/partnerships'
       preLoaderRoute: typeof PartnershipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/intake': {
+      id: '/intake'
+      path: '/intake'
+      fullPath: '/intake'
+      preLoaderRoute: typeof IntakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/community': {
@@ -212,11 +354,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services_/virtual-behavioral-health': {
+      id: '/services_/virtual-behavioral-health'
+      path: '/services/virtual-behavioral-health'
+      fullPath: '/services/virtual-behavioral-health'
+      preLoaderRoute: typeof ServicesVirtualBehavioralHealthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services_/therapy': {
       id: '/services_/therapy'
       path: '/services/therapy'
       fullPath: '/services/therapy'
       preLoaderRoute: typeof ServicesTherapyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/provider-partnerships': {
+      id: '/services_/provider-partnerships'
+      path: '/services/provider-partnerships'
+      fullPath: '/services/provider-partnerships'
+      preLoaderRoute: typeof ServicesProviderPartnershipsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/peptide-wellness': {
+      id: '/services_/peptide-wellness'
+      path: '/services/peptide-wellness'
+      fullPath: '/services/peptide-wellness'
+      preLoaderRoute: typeof ServicesPeptideWellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/mental-health': {
+      id: '/services_/mental-health'
+      path: '/services/mental-health'
+      fullPath: '/services/mental-health'
+      preLoaderRoute: typeof ServicesMentalHealthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services_/medication-management': {
@@ -233,6 +403,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIopRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services_/healthcare-consulting': {
+      id: '/services_/healthcare-consulting'
+      path: '/services/healthcare-consulting'
+      fullPath: '/services/healthcare-consulting'
+      preLoaderRoute: typeof ServicesHealthcareConsultingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services_/coaching-development': {
+      id: '/services_/coaching-development'
+      path: '/services/coaching-development'
+      fullPath: '/services/coaching-development'
+      preLoaderRoute: typeof ServicesCoachingDevelopmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -240,13 +424,22 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BookingRoute: BookingRoute,
   CommunityRoute: CommunityRoute,
+  ContactRoute: ContactRoute,
+  IntakeRoute: IntakeRoute,
   PartnershipsRoute: PartnershipsRoute,
+  ProviderApplyRoute: ProviderApplyRoute,
   ProvidersRoute: ProvidersRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ServicesCoachingDevelopmentRoute: ServicesCoachingDevelopmentRoute,
+  ServicesHealthcareConsultingRoute: ServicesHealthcareConsultingRoute,
   ServicesIopRoute: ServicesIopRoute,
   ServicesMedicationManagementRoute: ServicesMedicationManagementRoute,
+  ServicesMentalHealthRoute: ServicesMentalHealthRoute,
+  ServicesPeptideWellnessRoute: ServicesPeptideWellnessRoute,
+  ServicesProviderPartnershipsRoute: ServicesProviderPartnershipsRoute,
   ServicesTherapyRoute: ServicesTherapyRoute,
+  ServicesVirtualBehavioralHealthRoute: ServicesVirtualBehavioralHealthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

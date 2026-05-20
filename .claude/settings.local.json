@@ -3,7 +3,8 @@
     "allow": [
       "Bash(xargs -I {} basename {})",
       "Bash(npm run *)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(node --input-type=module)"
     ]
   }
 }

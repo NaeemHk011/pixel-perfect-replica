@@ -1,26 +1,34 @@
-import { ShieldCheck, CreditCard, DollarSign, Clock, Lock } from "lucide-react";
+import { ShieldCheck, Lock, Clock, Globe, BadgeCheck, Award } from "lucide-react";
 
 const items = [
-  { label: "HIPAA Compliant", icon: ShieldCheck },
-  { label: "Insurance Accepted", icon: CreditCard },
-  { label: "Cash-Pay Available", icon: DollarSign },
-  { label: "Same-Week Appointments", icon: Clock },
-  { label: "Secure Telehealth", icon: Lock },
+  { label: "HIPAA Compliant", icon: ShieldCheck, color: "text-emerald-400" },
+  { label: "Board-Certified Providers", icon: BadgeCheck, color: "text-blue-400" },
+  { label: "256-bit Encrypted Sessions", icon: Lock, color: "text-gold3" },
+  { label: "All 50 States", icon: Globe, color: "text-violet-400" },
+  { label: "Joint Commission Standards", icon: Award, color: "text-rose-400" },
+  { label: "Same-Week Availability", icon: Clock, color: "text-orange-400" },
 ];
 
 export function TrustStrip() {
   return (
-    <div className="relative bg-dark2 border-b border-white/5 py-4 z-10 overflow-hidden">
-      {/* Subtle gold gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gold2/[0.04] to-transparent pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-5 md:px-8 flex flex-wrap justify-center gap-x-8 gap-y-2">
-        {items.map(({ label, icon: Icon }) => (
-          <span key={label} className="inline-flex items-center gap-2 text-xs tracking-[0.16em] uppercase text-cream/60 hover:text-gold3 transition-colors duration-200 cursor-default">
-            <Icon className="w-3.5 h-3.5 text-gold2 flex-shrink-0" />
+    <div className="relative bg-dark2 border-b border-white/5 z-10 overflow-hidden">
+      {/* Gold shimmer line at top */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold2/30 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-5 md:px-8 py-5 flex flex-wrap justify-center gap-x-8 gap-y-3">
+        {items.map(({ label, icon: Icon, color }) => (
+          <span
+            key={label}
+            className="inline-flex items-center gap-2 text-[11px] tracking-[0.18em] uppercase text-cream/55 hover:text-cream/90 transition-colors duration-200 cursor-default"
+          >
+            <Icon className={`w-3.5 h-3.5 flex-shrink-0 ${color}`} />
             {label}
           </span>
         ))}
       </div>
+
+      {/* Gold shimmer line at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold2/10 to-transparent" />
     </div>
   );
 }
