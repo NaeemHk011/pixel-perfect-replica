@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -92,6 +92,29 @@ function BookingPage() {
       {/* ── Calendar ── */}
       <main className="py-20 md:py-28 bg-cream">
         <div className="max-w-4xl mx-auto px-5 md:px-8">
+
+          {/* Patient Intake Banner */}
+          <div className="mb-8 reveal">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white border border-gold2/30 rounded-2xl px-6 py-4 shadow-[0_4px_20px_-8px_rgba(184,144,64,0.15)]">
+              <div className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-xl bg-gold2/10 border border-gold2/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-base">📋</span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-dark">Already have an appointment?</p>
+                  <p className="text-xs text-muted mt-0.5 leading-relaxed">
+                    Please complete your Patient Intake Form before your first session — it only takes 5 minutes.
+                  </p>
+                </div>
+              </div>
+              <Link
+                to="/intake"
+                className="flex-shrink-0 inline-flex items-center gap-1.5 bg-gold2 hover:bg-gold3 text-dark font-medium px-5 py-2.5 rounded-full text-xs transition-all duration-200 hover:-translate-y-0.5 shadow-[0_6px_18px_-8px_rgba(207,168,78,0.55)] whitespace-nowrap"
+              >
+                Fill Intake Form →
+              </Link>
+            </div>
+          </div>
 
           {/* Section title */}
           <div className="text-center mb-10 reveal">
