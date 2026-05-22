@@ -4,10 +4,11 @@ import { Menu, X, ChevronDown, Brain, Zap, Video, Target, Users, Building2 } fro
 import logoFull from "@/assets/mindova-logo-full.png";
 
 const links = [
-  { to: "/community",    label: "About"        },
-  { to: "/providers",    label: "Our Doctors"   },
-  { to: "/partnerships", label: "Partnerships"  },
-  { to: "/contact",      label: "Contact"       },
+  { to: "/community",      label: "About"              },
+  { to: "/providers",      label: "Our Doctors"         },
+  { to: "/partnerships",   label: "Partnerships"        },
+  { to: "/provider-apply", label: "Become a Provider"  },
+  { to: "/contact",        label: "Contact"             },
 ] as const;
 
 const serviceCategories = [

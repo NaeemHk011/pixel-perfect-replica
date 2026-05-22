@@ -1,18 +1,15 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { services } from "@/data/services";
-import { providers } from "@/data/providers";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ShieldCheck, Wallet, CalendarCheck, Check } from "lucide-react";
 
 export const Route = createFileRoute("/booking")({
   component: BookingPage,
   head: () => ({
     meta: [
-      { title: "Book Your Appointment   Mindova Holdings" },
+      { title: "Book a Consultation | Mindova Holdings" },
       { name: "description", content: "Book a telehealth appointment with a licensed Mindova provider." },
     ],
   }),
@@ -20,156 +17,135 @@ export const Route = createFileRoute("/booking")({
 
 function BookingPage() {
   useScrollAnimation();
-  const [step, setStep] = useState(1);
-  const [service, setService] = useState<string | null>(null);
-  const [provider, setProvider] = useState<string | null>(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [calLoaded, setCalLoaded] = useState(false);
+  const minDelayDone = useRef(false);
+  const iframeLoaded = useRef(false);
+
+  const tryHideLoader = () => {
+    if (minDelayDone.current && iframeLoaded.current) setCalLoaded(true);
+  };
+
+  useEffect(() => {
+    const t = setTimeout(() => { minDelayDone.current = true; tryHideLoader(); }, 1800);
+    return () => clearTimeout(t);
+  }, []);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://link.webtechs.dev/js/form_embed.js";
+    script.type = "text/javascript";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream">
       <Navbar />
-      <main className="pt-32 pb-24">
-        <div className="max-w-5xl mx-auto px-5 md:px-8">
-          <div className="text-center reveal">
-            <div className="flex justify-center"><SectionLabel>Booking</SectionLabel></div>
-            <h1 className="font-serif text-5xl md:text-6xl mt-5 tracking-tight">Book Your <em className="text-gold italic">Consultation</em></h1>
-            <p className="mt-4 text-muted text-sm max-w-md mx-auto">Three steps. Five minutes. Care that starts this week.</p>
-            <p className="mt-3 text-muted text-xs">
-              Already have an appointment?{" "}
-              <Link to="/intake" className="text-gold underline underline-offset-2 hover:text-gold3 transition-colors">
-                Complete your Patient Intake Form →
-              </Link>
+
+      {/* ── Hero ── */}
+      <section className="relative bg-dark text-cream overflow-hidden pt-40 pb-28">
+        <div className="absolute inset-0 bg-grid-dark opacity-50" />
+        <div className="absolute inset-0 gold-glow" />
+        <div className="absolute -top-20 right-1/3 w-72 h-72 rounded-full bg-blue-500/[0.06] blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/3 left-1/4 w-56 h-56 rounded-full bg-violet-500/[0.05] blur-3xl pointer-events-none" />
+
+        <div className="relative max-w-7xl mx-auto px-5 md:px-8 text-center">
+          <SectionLabel light>Schedule a Session</SectionLabel>
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl mt-5 tracking-tight">
+            Book a{" "}
+            <em className="text-gold3 italic">Consultation.</em>
+          </h1>
+          <p className="mt-5 text-cream/60 max-w-md mx-auto text-sm leading-relaxed">
+            Choose a time that works for you. A licensed Mindova provider will meet you where you are.
+          </p>
+        </div>
+
+        {/* Gold wave transition */}
+        <svg
+          className="absolute bottom-0 left-0 w-full"
+          viewBox="0 0 1440 56"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <defs>
+            <linearGradient id="bookingWave" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#B89040" />
+              <stop offset="50%" stopColor="#E4C06A" />
+              <stop offset="100%" stopColor="#B89040" />
+            </linearGradient>
+          </defs>
+          <path d="M0,28 C360,56 720,0 1440,28 L1440,56 L0,56 Z" fill="url(#bookingWave)" />
+        </svg>
+      </section>
+
+      {/* Gold divider strip */}
+      <div
+        className="h-2 w-full"
+        style={{
+          background: "linear-gradient(90deg, #B89040 0%, #E4C06A 40%, #CFA84E 70%, #B89040 100%)",
+        }}
+      />
+
+      {/* ── Calendar ── */}
+      <main className="py-20 md:py-28 bg-cream">
+        <div className="max-w-4xl mx-auto px-5 md:px-8">
+
+          {/* Section title */}
+          <div className="text-center mb-10 reveal">
+            <SectionLabel>Appointment Booking</SectionLabel>
+            <h2 className="font-serif font-bold text-3xl md:text-4xl mt-3 tracking-tight">
+              Pick Your{" "}
+              <em className="text-gold italic">Date & Time.</em>
+            </h2>
+            <p className="mt-2 text-sm text-muted leading-relaxed max-w-md mx-auto">
+              Select an available slot below and we'll confirm your consultation within 24 hours.
             </p>
           </div>
 
-          <div className="mt-12 flex items-center justify-center gap-3 md:gap-6 flex-wrap">
-            {["Choose Service", "Select Provider", "Your Details"].map((label, i) => {
-              const n = i + 1;
-              const active = step === n;
-              const done = step > n;
-              return (
-                <div key={label} className="flex items-center gap-3">
-                  <div className={`w-9 h-9 rounded-full grid place-items-center text-sm font-medium border transition-all ${
-                    active ? "bg-gold2 text-dark border-gold2" :
-                    done ? "bg-dark text-gold3 border-dark" :
-                    "bg-white text-muted border-black/10"
-                  }`}>{done ? <Check className="w-4 h-4" /> : n}</div>
-                  <span className={`text-sm ${active ? "text-dark font-medium" : "text-muted"}`}>{label}</span>
-                  {n < 3 && <div className="hidden md:block w-12 h-px bg-black/10" />}
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-12">
-            {step === 1 && (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {services.map((s) => {
-                  const Icon = s.icon;
-                  const selected = service === s.id;
-                  return (
-                    <button
-                      key={s.id}
-                      onClick={() => { setService(s.id); setStep(2); }}
-                      className={`text-left bg-white rounded-[20px] p-6 border-2 transition-all hover:-translate-y-1 ${selected ? "border-gold2" : "border-transparent"}`}
-                    >
-                      <Icon className="w-6 h-6 text-gold2" />
-                      <h3 className="font-serif text-xl mt-4">{s.title}</h3>
-                      <p className="text-sm text-muted mt-2 leading-relaxed">{s.shortDesc}</p>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-
-            {step === 2 && (
-              <div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {providers.map((p) => {
-                    const selected = provider === p.id;
-                    return (
-                      <button
-                        key={p.id}
-                        onClick={() => { setProvider(p.id); setStep(3); }}
-                        className={`text-left bg-white rounded-[20px] p-6 border-2 transition-all hover:-translate-y-1 ${selected ? "border-gold2" : "border-transparent"}`}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-12 h-12 rounded-full bg-cream2 grid place-items-center font-serif text-gold">{p.initials}</div>
-                          <div>
-                            <p className="font-serif text-lg">{p.name}</p>
-                            <p className="text-xs text-muted">{p.credentials}</p>
-                          </div>
-                        </div>
-                        <p className="text-sm text-muted mt-3">{p.specialty}</p>
-                        <p className="text-xs mt-3 inline-flex items-center gap-1.5 text-emerald-700"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500" /> Available this week</p>
-                      </button>
-                    );
-                  })}
-                </div>
-                <div className="mt-6 text-center">
-                  <button onClick={() => setStep(1)} className="text-sm text-muted underline">← Back</button>
-                </div>
-              </div>
-            )}
-
-            {step === 3 && (
-              <form
-                onSubmit={(e) => { e.preventDefault(); setSubmitted(true); }}
-                className="bg-white rounded-[24px] p-8 border border-black/5 grid grid-cols-1 md:grid-cols-2 gap-5"
+          {/* Calendar embed */}
+          <div
+            className="relative reveal"
+            data-reveal-delay="120"
+            style={{ minHeight: "600px" }}
+          >
+            {/* Loader */}
+            {!calLoaded && (
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white z-10"
+                style={{ borderRadius: "28px", border: "1px solid rgba(0,0,0,0.05)", boxShadow: "0 4px 24px -8px rgba(12,11,9,0.06)" }}
               >
-                <Field label="Full Name" required />
-                <Field label="Email" type="email" required />
-                <Field label="Phone" type="tel" />
-                <Field label="Date of Birth" type="date" />
-                <Field label="Insurance Provider" />
-                <Field label="Insurance ID" />
-                <Field label="Specialty" defaultValue={services.find(s => s.id === service)?.title || ""} />
-                <Field label="Preferred Date" type="date" required />
-                <div className="md:col-span-2">
-                  <Label>Your concern / message</Label>
-                  <textarea rows={4} className="mt-1 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2" />
+                <div className="relative w-12 h-12">
+                  <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
+                  <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
                 </div>
-                <label className="md:col-span-2 flex items-start gap-3 text-xs text-muted">
-                  <input type="checkbox" required className="mt-1 accent-gold2" />
-                  By submitting, you agree to our terms and privacy policy.
-                </label>
-                <div className="md:col-span-2 flex justify-between items-center">
-                  <button type="button" onClick={() => setStep(2)} className="text-sm text-muted underline">← Back</button>
-                  <button type="submit" className="bg-gold2 hover:bg-gold3 text-dark font-medium px-8 py-3.5 rounded-full text-sm transition-colors shadow-[0_12px_30px_-12px_rgba(207,168,78,0.6)]">
-                    {submitted ? "Submitted ✓   We'll be in touch" : "Book a Consultation"}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-            {[
-              [ShieldCheck, "HIPAA Secure"],
-              [Wallet, "No Hidden Fees"],
-              [CalendarCheck, "Same-Week Availability"],
-            ].map(([Icon, t]) => (
-              <div key={t as string} className="flex items-center gap-3 justify-center bg-white border border-black/5 rounded-full py-3 px-5">
-                <Icon className="w-4 h-4 text-gold2" />
-                <span className="text-muted">{t as string}</span>
+                <p className="text-sm text-muted tracking-wide">Loading calendar…</p>
               </div>
-            ))}
+            )}
+
+            <iframe
+              src="https://link.webtechs.dev/widget/booking/QJYvx2gGjWYeShaOWt0j"
+              style={{
+                width: "100%",
+                border: "none",
+                display: "block",
+                minHeight: "600px",
+                borderRadius: "28px",
+                boxShadow: "0 4px 24px -8px rgba(12,11,9,0.06)",
+                opacity: calLoaded ? 1 : 0,
+                transition: "opacity 0.4s ease",
+              }}
+              id="QJYvx2gGjWYeShaOWt0j_1779466187336"
+              title="Book a Consultation"
+              onLoad={() => { iframeLoaded.current = true; tryHideLoader(); }}
+            />
           </div>
         </div>
       </main>
-      <Footer />
-    </div>
-  );
-}
 
-function Label({ children }: { children: React.ReactNode }) {
-  return <label className="text-xs tracking-[0.2em] uppercase text-muted">{children}</label>;
-}
-function Field({ label, type = "text", required, defaultValue }: { label: string; type?: string; required?: boolean; defaultValue?: string }) {
-  return (
-    <div>
-      <Label>{label}{required && <span className="text-gold ml-1">*</span>}</Label>
-      <input type={type} required={required} defaultValue={defaultValue} className="mt-1 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2" />
+      <Footer />
     </div>
   );
 }

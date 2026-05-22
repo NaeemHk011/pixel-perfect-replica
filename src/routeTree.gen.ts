@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProvidersRouteImport } from './routes/providers'
@@ -29,6 +30,11 @@ import { Route as ServicesIopRouteImport } from './routes/services_.iop'
 import { Route as ServicesHealthcareConsultingRouteImport } from './routes/services_.healthcare-consulting'
 import { Route as ServicesCoachingDevelopmentRouteImport } from './routes/services_.coaching-development'
 
+const WaitlistRoute = WaitlistRouteImport.update({
+  id: '/waitlist',
+  path: '/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/waitlist': typeof WaitlistRoute
   '/services/coaching-development': typeof ServicesCoachingDevelopmentRoute
   '/services/healthcare-consulting': typeof ServicesHealthcareConsultingRoute
   '/services/iop': typeof ServicesIopRoute
@@ -162,6 +169,7 @@ export interface FileRoutesByTo {
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/waitlist': typeof WaitlistRoute
   '/services/coaching-development': typeof ServicesCoachingDevelopmentRoute
   '/services/healthcare-consulting': typeof ServicesHealthcareConsultingRoute
   '/services/iop': typeof ServicesIopRoute
@@ -184,6 +192,7 @@ export interface FileRoutesById {
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/waitlist': typeof WaitlistRoute
   '/services_/coaching-development': typeof ServicesCoachingDevelopmentRoute
   '/services_/healthcare-consulting': typeof ServicesHealthcareConsultingRoute
   '/services_/iop': typeof ServicesIopRoute
@@ -207,6 +216,7 @@ export interface FileRouteTypes {
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/waitlist'
     | '/services/coaching-development'
     | '/services/healthcare-consulting'
     | '/services/iop'
@@ -228,6 +238,7 @@ export interface FileRouteTypes {
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/waitlist'
     | '/services/coaching-development'
     | '/services/healthcare-consulting'
     | '/services/iop'
@@ -249,6 +260,7 @@ export interface FileRouteTypes {
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/waitlist'
     | '/services_/coaching-development'
     | '/services_/healthcare-consulting'
     | '/services_/iop'
@@ -271,6 +283,7 @@ export interface RootRouteChildren {
   ProvidersRoute: typeof ProvidersRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  WaitlistRoute: typeof WaitlistRoute
   ServicesCoachingDevelopmentRoute: typeof ServicesCoachingDevelopmentRoute
   ServicesHealthcareConsultingRoute: typeof ServicesHealthcareConsultingRoute
   ServicesIopRoute: typeof ServicesIopRoute
@@ -284,6 +297,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/waitlist': {
+      id: '/waitlist'
+      path: '/waitlist'
+      fullPath: '/waitlist'
+      preLoaderRoute: typeof WaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -431,6 +451,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProvidersRoute: ProvidersRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  WaitlistRoute: WaitlistRoute,
   ServicesCoachingDevelopmentRoute: ServicesCoachingDevelopmentRoute,
   ServicesHealthcareConsultingRoute: ServicesHealthcareConsultingRoute,
   ServicesIopRoute: ServicesIopRoute,

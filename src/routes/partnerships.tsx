@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
@@ -19,7 +19,15 @@ export const Route = createFileRoute("/partnerships")({
 
 function PartnershipsPage() {
   useScrollAnimation();
-  const [sent, setSent] = useState(false);
+  const [formLoaded, setFormLoaded] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://link.webtechs.dev/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -77,35 +85,53 @@ function PartnershipsPage() {
           <div className="max-w-3xl mx-auto px-5 md:px-8">
             <div className="text-center mb-10 reveal">
               <div className="flex justify-center"><SectionLabel>Request a Meeting</SectionLabel></div>
-              <h2 className="font-serif text-4xl md:text-5xl mt-5">Let's <em className="text-gold italic">talk.</em></h2>
+              <h2 className="font-serif font-bold text-4xl md:text-5xl mt-5">Let's <em className="text-gold italic">talk.</em></h2>
+              <p className="mt-3 text-sm text-muted max-w-sm mx-auto leading-relaxed">
+                Fill out the form and our partnerships team will follow up within 2 business days.
+              </p>
             </div>
-            <form
-              onSubmit={(e) => { e.preventDefault(); setSent(true); }}
-              className="bg-white border border-black/5 rounded-[24px] p-8 grid grid-cols-1 md:grid-cols-2 gap-5 reveal"
+
+            <div
+              className="relative bg-white rounded-[28px] border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)] overflow-hidden reveal"
+              style={{ minHeight: "677px" }}
             >
-              <Field label="Organization Name" required />
-              <Field label="Contact Name" required />
-              <Field label="Email" type="email" required />
-              <Field label="Phone" type="tel" />
-              <div className="md:col-span-2">
-                <Label>Partnership Type</Label>
-                <select className="mt-1 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2">
-                  <option>Nonprofit Collaboration</option>
-                  <option>Referral Partnership</option>
-                  <option>Corporate Wellness</option>
-                </select>
-              </div>
-              <div className="md:col-span-2">
-                <Label>Message</Label>
-                <textarea rows={4} className="mt-1 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2" />
-              </div>
-              <div className="md:col-span-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                <p className="text-xs text-muted">We typically respond within 2 business days.</p>
-                <button type="submit" className="bg-gold2 hover:bg-gold3 text-dark font-medium px-7 py-3 rounded-full text-sm transition-colors">
-                  {sent ? "Sent ✓" : "Submit Request"}
-                </button>
-              </div>
-            </form>
+              {!formLoaded && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white rounded-[28px] z-10">
+                  <div className="relative w-12 h-12">
+                    <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
+                  </div>
+                  <p className="text-sm text-muted tracking-wide">Loading form…</p>
+                </div>
+              )}
+
+              <iframe
+                src="https://link.webtechs.dev/widget/form/kBYaXiYcxo8iwCmUcrgP"
+                style={{
+                  width: "100%",
+                  height: "677px",
+                  border: "none",
+                  borderRadius: "28px",
+                  display: "block",
+                  opacity: formLoaded ? 1 : 0,
+                  transition: "opacity 0.4s ease",
+                }}
+                id="inline-kBYaXiYcxo8iwCmUcrgP"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Partnership form"
+                data-height="677"
+                data-layout-iframe-id="inline-kBYaXiYcxo8iwCmUcrgP"
+                data-form-id="kBYaXiYcxo8iwCmUcrgP"
+                title="Partnership form"
+                onLoad={() => setFormLoaded(true)}
+              />
+            </div>
           </div>
         </section>
       </main>
@@ -114,14 +140,3 @@ function PartnershipsPage() {
   );
 }
 
-function Label({ children }: { children: React.ReactNode }) {
-  return <label className="text-xs tracking-[0.2em] uppercase text-muted">{children}</label>;
-}
-function Field({ label, type = "text", required }: { label: string; type?: string; required?: boolean }) {
-  return (
-    <div>
-      <Label>{label}{required && <span className="text-gold ml-1">*</span>}</Label>
-      <input type={type} required={required} className="mt-1 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2" />
-    </div>
-  );
-}

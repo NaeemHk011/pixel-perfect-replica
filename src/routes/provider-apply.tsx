@@ -1,16 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ArrowRight, CheckCircle, UserCheck, Calendar, ClipboardList, Users } from "lucide-react";
+import { ArrowRight, Calendar, ClipboardList, Users } from "lucide-react";
 
 export const Route = createFileRoute("/provider-apply")({
   component: ProviderApplyPage,
   head: () => ({
     meta: [
-      { title: "Apply as a Provider       Mindova Holdings" },
+      { title: "Apply as a Provider | Mindova Holdings" },
       {
         name: "description",
         content:
@@ -19,40 +19,6 @@ export const Route = createFileRoute("/provider-apply")({
     ],
   }),
 });
-
-const US_STATES = [
-  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-  "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
-  "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
-  "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-  "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
-  "New Hampshire", "New Jersey", "New Mexico", "New York",
-  "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
-  "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
-  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
-  "West Virginia", "Wisconsin", "Wyoming",
-];
-
-const LICENSE_TYPES = ["MD", "DO", "PhD", "PsyD", "LCSW", "LPC", "LMFT", "NP/PMHNP", "Other"];
-const EXPERIENCE_LEVELS = ["< 1 year", "1–3 years", "3–7 years", "7–15 years", "15+ years"];
-const SPECIALTIES = [
-  "Mental Health Therapy",
-  "Psychiatry & Medication Management",
-  "Substance Use Counseling",
-  "Trauma & PTSD",
-  "Anxiety & Depression",
-  "ADHD & Behavioral Health",
-  "Eating Disorders",
-  "Relationship & Family Counseling",
-  "Wellness Coaching",
-  "Other",
-];
-const AVAILABILITY_OPTIONS = [
-  "Weekday Mornings",
-  "Weekday Afternoons",
-  "Weekday Evenings",
-  "Weekends",
-];
 
 const BENEFITS = [
   {
@@ -74,47 +40,17 @@ const BENEFITS = [
 
 function ProviderApplyPage() {
   useScrollAnimation();
+  const [formLoaded, setFormLoaded] = useState(false);
 
-  const [submitted, setSubmitted] = useState(false);
-  const [availability, setAvailability] = useState<string[]>([]);
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    licenseNumber: "",
-    licenseType: "",
-    experience: "",
-    primaryState: "",
-    additionalStates: "",
-    specialty: "",
-    bio: "",
-    terms: false,
-  });
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value, type } = e.target;
-    if (type === "checkbox") {
-      setForm((prev) => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
-      }));
-    } else {
-      setForm((prev) => ({ ...prev, [name]: value }));
-    }
-  };
-
-  const toggleAvailability = (option: string) => {
-    setAvailability((prev) =>
-      prev.includes(option) ? prev.filter((o) => o !== option) : [...prev, option]
-    );
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://link.webtechs.dev/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -167,10 +103,10 @@ function ProviderApplyPage() {
 
       {/* ── Main Content ── */}
       <main className="py-20 md:py-28 bg-cream">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-14">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-14 items-start">
 
           {/* ── Left: Info Sidebar ── */}
-          <div className="reveal space-y-6">
+          <div className="reveal space-y-6 lg:sticky lg:top-32">
             <div>
               <SectionLabel>Provider Network</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl mt-5 tracking-tight">
@@ -220,271 +156,68 @@ function ProviderApplyPage() {
             </div>
           </div>
 
-          {/* ── Right: Form ── */}
+          {/* ── Right: GHL Embedded Form ── */}
           <div className="reveal" data-reveal-delay="120">
-            {submitted ? (
-              <div className="min-h-[500px] flex flex-col items-center justify-center text-center py-20 bg-white rounded-[28px] border border-black/5 px-8 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)]">
-                <div className="w-16 h-16 rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center mb-6">
-                  <CheckCircle className="w-8 h-8 text-emerald-500" />
+            {/* Form Header */}
+            <div className="mb-6 px-1 text-center">
+              <SectionLabel>Provider Application</SectionLabel>
+              <h2 className="font-serif font-bold text-3xl md:text-4xl mt-3 tracking-tight">
+                Start Your{" "}
+                <em className="text-gold italic">Application.</em>
+              </h2>
+              <p className="mt-2 text-sm text-muted leading-relaxed max-w-md mx-auto">
+                Fill out the form below and our team will review your application within 3 business days.
+              </p>
+            </div>
+
+            <div
+              className="relative bg-white rounded-[28px] border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)] overflow-hidden"
+              style={{ minHeight: "1412px" }}
+            >
+              {/* Loader — shown until iframe fires onLoad */}
+              {!formLoaded && (
+                <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white rounded-[28px] z-10">
+                  <div className="relative w-12 h-12">
+                    <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
+                    <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
+                  </div>
+                  <p className="text-sm text-muted tracking-wide">Loading form…</p>
                 </div>
-                <h3 className="font-serif text-3xl">Application Received</h3>
-                <p className="mt-3 text-muted text-sm max-w-xs leading-relaxed">
-                  Thank you for applying to join the Mindova provider network. Our team will review your application and follow up within 3 business days.
-                </p>
-                <Link
-                  to="/booking"
-                  className="mt-8 inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-7 py-3 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_12px_30px_-12px_rgba(207,168,78,0.55)]"
-                >
-                  Schedule a Discovery Call <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-            ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="bg-white rounded-[28px] p-8 md:p-10 border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)]"
-              >
-                <div className="mb-7">
-                  <h3 className="font-serif text-2xl md:text-3xl">Provider Application</h3>
-                  <p className="text-muted text-sm mt-1.5">All fields marked * are required.</p>
-                </div>
+              )}
 
-                {/* Two-column grid fields */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <FormField
-                    label="Full Name"
-                    name="fullName"
-                    value={form.fullName}
-                    onChange={handleChange}
-                    required
-                  />
-                  <FormField
-                    label="Email Address"
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={handleChange}
-                    required
-                  />
-                  <FormField
-                    label="Phone Number"
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                  />
-                  <FormField
-                    label="License Number"
-                    name="licenseNumber"
-                    value={form.licenseNumber}
-                    onChange={handleChange}
-                    required
-                  />
-
-                  {/* License Type */}
-                  <div>
-                    <FormLabel required>License Type</FormLabel>
-                    <select
-                      name="licenseType"
-                      value={form.licenseType}
-                      onChange={handleChange}
-                      required
-                      className="mt-1.5 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2 text-dark"
-                    >
-                      <option value="">Select license type...</option>
-                      {LICENSE_TYPES.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Years of Experience */}
-                  <div>
-                    <FormLabel>Years of Experience</FormLabel>
-                    <select
-                      name="experience"
-                      value={form.experience}
-                      onChange={handleChange}
-                      className="mt-1.5 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2 text-dark"
-                    >
-                      <option value="">Select experience level...</option>
-                      {EXPERIENCE_LEVELS.map((e) => (
-                        <option key={e} value={e}>{e}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Primary State */}
-                  <div>
-                    <FormLabel required>Primary State of Licensure</FormLabel>
-                    <select
-                      name="primaryState"
-                      value={form.primaryState}
-                      onChange={handleChange}
-                      required
-                      className="mt-1.5 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2 text-dark"
-                    >
-                      <option value="">Select a state...</option>
-                      {US_STATES.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Additional States */}
-                  <FormField
-                    label="Additional Licensed States"
-                    name="additionalStates"
-                    value={form.additionalStates}
-                    onChange={handleChange}
-                    placeholder="e.g. NY, CA, TX"
-                  />
-                </div>
-
-                {/* Full-width fields */}
-                <div className="mt-5 space-y-5">
-                  {/* Primary Specialty */}
-                  <div>
-                    <FormLabel required>Primary Specialty</FormLabel>
-                    <select
-                      name="specialty"
-                      value={form.specialty}
-                      onChange={handleChange}
-                      required
-                      className="mt-1.5 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2 text-dark"
-                    >
-                      <option value="">Select a specialty...</option>
-                      {SPECIALTIES.map((s) => (
-                        <option key={s} value={s}>{s}</option>
-                      ))}
-                    </select>
-                  </div>
-
-                  {/* Availability Checkboxes */}
-                  <div>
-                    <FormLabel>Availability</FormLabel>
-                    <div className="mt-2 flex flex-wrap gap-3">
-                      {AVAILABILITY_OPTIONS.map((option) => (
-                        <label
-                          key={option}
-                          className="flex items-center gap-2 cursor-pointer group"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={availability.includes(option)}
-                            onChange={() => toggleAvailability(option)}
-                            className="accent-gold2"
-                          />
-                          <span className="text-sm text-dark group-hover:text-gold transition-colors duration-150">
-                            {option}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Bio Textarea */}
-                  <div>
-                    <FormLabel required>About Yourself / Bio</FormLabel>
-                    <textarea
-                      name="bio"
-                      value={form.bio}
-                      onChange={handleChange}
-                      required
-                      rows={5}
-                      placeholder="Tell us about your background, approach to care, and why you want to join Mindova."
-                      className="mt-1.5 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2 resize-none placeholder:text-muted/50"
-                    />
-                  </div>
-
-                  {/* Resume Upload */}
-                  <div>
-                    <FormLabel>Upload Resume / CV</FormLabel>
-                    <div className="mt-1.5 w-full bg-cream2 border border-dashed border-gold2/40 rounded-xl px-4 py-6 text-center text-sm text-muted hover:border-gold2/70 hover:bg-cream transition-colors duration-200 cursor-pointer">
-                      <p className="font-medium text-dark/60">Click to upload or drag and drop</p>
-                      <p className="text-xs mt-1 text-muted/70">PDF, DOC, DOCX       max 5MB</p>
-                      <input type="file" accept=".pdf,.doc,.docx" className="hidden" />
-                    </div>
-                  </div>
-
-                  {/* Terms */}
-                  <label className="flex items-start gap-3 text-xs text-muted cursor-pointer">
-                    <input
-                      type="checkbox"
-                      name="terms"
-                      checked={form.terms}
-                      onChange={handleChange}
-                      required
-                      className="mt-0.5 accent-gold2 flex-shrink-0"
-                    />
-                    I confirm that all information provided is accurate and I agree to Mindova Holdings'
-                    privacy policy and provider terms of service.
-                    <span className="text-gold ml-0.5">*</span>
-                  </label>
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    className="w-full flex items-center justify-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium py-3.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_12px_30px_-12px_rgba(207,168,78,0.55)]"
-                  >
-                    <UserCheck className="w-4 h-4" /> Submit Application
-                  </button>
-                </div>
-              </form>
-            )}
+              <iframe
+                src="https://link.webtechs.dev/widget/form/WT3XkPNlAW0ZBstxkbAi"
+                style={{
+                  width: "100%",
+                  height: "1412px",
+                  border: "none",
+                  borderRadius: "28px",
+                  display: "block",
+                  opacity: formLoaded ? 1 : 0,
+                  transition: "opacity 0.4s ease",
+                }}
+                id="inline-WT3XkPNlAW0ZBstxkbAi"
+                data-layout="{'id':'INLINE'}"
+                data-trigger-type="alwaysShow"
+                data-trigger-value=""
+                data-activation-type="alwaysActivated"
+                data-activation-value=""
+                data-deactivation-type="neverDeactivate"
+                data-deactivation-value=""
+                data-form-name="Provider Application Form"
+                data-height="1412"
+                data-layout-iframe-id="inline-WT3XkPNlAW0ZBstxkbAi"
+                data-form-id="WT3XkPNlAW0ZBstxkbAi"
+                title="Provider Application Form"
+                onLoad={() => setFormLoaded(true)}
+              />
+            </div>
           </div>
+
         </div>
       </main>
 
       <Footer />
-    </div>
-  );
-}
-
-/* ── Helpers ── */
-function FormLabel({
-  children,
-  required,
-}: {
-  children: React.ReactNode;
-  required?: boolean;
-}) {
-  return (
-    <label className="text-xs tracking-[0.2em] uppercase text-muted">
-      {children}
-      {required && <span className="text-gold ml-0.5">*</span>}
-    </label>
-  );
-}
-
-function FormField({
-  label,
-  name,
-  type = "text",
-  value,
-  onChange,
-  required,
-  placeholder,
-}: {
-  label: string;
-  name: string;
-  type?: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  required?: boolean;
-  placeholder?: string;
-}) {
-  return (
-    <div>
-      <FormLabel required={required}>{label}</FormLabel>
-      <input
-        type={type}
-        name={name}
-        value={value}
-        onChange={onChange}
-        required={required}
-        placeholder={placeholder}
-        className="mt-1.5 w-full bg-cream2 border-0 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold2 placeholder:text-muted/50"
-      />
     </div>
   );
 }
