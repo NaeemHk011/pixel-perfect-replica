@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { IntakeForm } from "@/components/sections/IntakeForm";
 
 export const Route = createFileRoute("/intake")({
   component: IntakePage,
@@ -21,6 +21,15 @@ export const Route = createFileRoute("/intake")({
 
 function IntakePage() {
   useScrollAnimation();
+  const [formLoaded, setFormLoaded] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://link.webtechs.dev/js/form_embed.js";
+    script.async = true;
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream">
@@ -93,8 +102,46 @@ function IntakePage() {
             </p>
           </div>
 
-          <div className="reveal" data-reveal-delay="100">
-            <IntakeForm />
+          <div
+            className="relative bg-white rounded-[28px] border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)] overflow-hidden reveal"
+            data-reveal-delay="100"
+            style={{ minHeight: "2382px" }}
+          >
+            {!formLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white rounded-[28px] z-10">
+                <div className="relative w-12 h-12">
+                  <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
+                  <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
+                </div>
+                <p className="text-sm text-muted tracking-wide">Loading form…</p>
+              </div>
+            )}
+            <iframe
+              src="https://link.webtechs.dev/widget/form/uXUpsYy6M7ZqEMUGYWJl"
+              style={{
+                width: "100%",
+                height: "2382px",
+                border: "none",
+                borderRadius: "28px",
+                display: "block",
+                opacity: formLoaded ? 1 : 0,
+                transition: "opacity 0.4s ease",
+              }}
+              id="inline-uXUpsYy6M7ZqEMUGYWJl"
+              data-layout="{'id':'INLINE'}"
+              data-trigger-type="alwaysShow"
+              data-trigger-value=""
+              data-activation-type="alwaysActivated"
+              data-activation-value=""
+              data-deactivation-type="neverDeactivate"
+              data-deactivation-value=""
+              data-form-name="Patient Intake Form"
+              data-height="2382"
+              data-layout-iframe-id="inline-uXUpsYy6M7ZqEMUGYWJl"
+              data-form-id="uXUpsYy6M7ZqEMUGYWJl"
+              title="Patient Intake Form"
+              onLoad={() => setFormLoaded(true)}
+            />
           </div>
 
         </div>

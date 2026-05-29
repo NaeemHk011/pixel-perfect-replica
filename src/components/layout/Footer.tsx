@@ -111,7 +111,7 @@ export function Footer() {
           <FooterCol
             title="Company"
             links={[
-              ["/community",         "About Us"],
+              ["/about",             "About Us"],
               ["/providers",         "Our Providers"],
               ["/partnerships",      "Partnerships"],
               ["/contact",           "Contact Us"],

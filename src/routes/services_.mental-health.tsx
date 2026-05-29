@@ -54,6 +54,7 @@ const providers = [
   { title: "LCSW",          desc: "Licensed Clinical Social Worker"           },
   { title: "Psychologist",  desc: "Doctoral-level assessment & therapy"       },
   { title: "Psychiatrist",  desc: "Psychiatric evaluation & medication"       },
+  { title: "PMHNP",         desc: "Psychiatric Mental Health Nurse Practitioner" },
 ] as const;
 
 const whoIsItFor = [
