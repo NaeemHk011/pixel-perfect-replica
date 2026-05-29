@@ -9,6 +9,7 @@ import { BookingCTA } from "@/components/sections/BookingCTA";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GoldButton, GhostButton } from "@/components/ui/Fancy";
 import { HowItWorks } from "@/components/sections/HowItWorks";
+import { HealingIsAMovement } from "@/components/sections/HealingIsAMovement";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { providers } from "@/data/providers";
 import { testimonials } from "@/data/testimonials";
@@ -32,6 +33,7 @@ function HomePage() {
         <CommunitySection />
         <TestimonialSection />
         <FAQSection />
+        <HealingIsAMovement />
         <BookingCTA />
       </main>
       <Footer />
@@ -57,34 +59,87 @@ function StatBox({ value, label, variant }: { value: string; label: string; vari
   );
 }
 
-/* ─── Intro Section ─────────────────────────────────────────── */
+/* ─── Who We Are Section ─────────────────────────────────────── */
+const whoWeAreCards = [
+  {
+    q: "Who is Mindova?",
+    a: "A virtual behavioral health platform dedicated to connecting individuals with licensed therapists, psychiatrists, and wellness professionals  - with compassion at every step.",
+    icon: Heart,
+    iconColor: "text-rose-500",
+    iconBg: "bg-rose-50",
+    accent: "bg-rose-400",
+  },
+  {
+    q: "Who do we help?",
+    a: "Individuals seeking therapy, coaching, psychiatric care, or personal wellness support  - from all walks of life, across all 50 states, wherever they are on their healing journey.",
+    icon: Users,
+    iconColor: "text-blue-500",
+    iconBg: "bg-blue-50",
+    accent: "bg-blue-400",
+  },
+  {
+    q: "What do we offer?",
+    a: "Therapy, Medication Management, Wellness Coaching, Psychological Assessments, and Accountability Coaching  - all delivered virtually, guided by licensed professionals.",
+    icon: TrendingUp,
+    iconColor: "text-emerald-600",
+    iconBg: "bg-emerald-50",
+    accent: "bg-emerald-500",
+  },
+] as const;
+
 function IntroSection() {
   return (
     <section className="py-24 md:py-32 bg-cream relative z-10">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div className="reveal">
-          <SectionLabel>About Us</SectionLabel>
-          <h2 className="font-serif text-4xl md:text-5xl mt-5 tracking-tight">
-            At Mindova, we believe{" "}
-            <em className="text-gold italic">healing is a movement.</em>
-          </h2>
-          <p className="mt-6 text-muted text-sm leading-relaxed max-w-lg">
-            We listen first. Every care plan is co-created with the patient       combining clinical excellence with genuine human connection.
-          </p>
-          <p className="mt-4 text-muted text-sm leading-relaxed max-w-lg">
-            By treating people, not symptoms, we deliver care that's accessible, dignified, and built around your life       not the other way around.
-          </p>
-          <div className="mt-8">
-            <GoldButton to="/booking">Book a Consultation</GoldButton>
+      <div className="max-w-7xl mx-auto px-5 md:px-8">
+
+        {/* Top two-column row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center mb-10 md:mb-16">
+          <div className="reveal">
+            <SectionLabel>Who We Are</SectionLabel>
+            <h2 className="font-serif text-4xl md:text-5xl mt-5 tracking-tight">
+              Real support.{" "}
+              <em className="text-gold italic">Real healing.</em>
+            </h2>
+            <p className="mt-6 text-muted text-sm leading-relaxed max-w-lg">
+              Your healing journey starts here. Mindova is a virtual behavioral health platform built to connect you with the right licensed professional  - offering genuine guidance, total wellness, and connected care wherever you are.
+            </p>
+            <p className="mt-4 text-muted text-sm leading-relaxed max-w-lg">
+              Grow beyond your challenges. We treat people, not just symptoms  - delivering care that is accessible, dignified, and built around your life.
+            </p>
+            <div className="mt-8">
+              <GoldButton to="/get-matched">Get Matched</GoldButton>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4 reveal" data-reveal-delay="120">
+            <StatBox value="98%" label="Satisfaction Rate" variant="blue" />
+            <StatBox value="24h" label="Response Time"    variant="dark" />
+            <StatBox value="500+" label="Monthly Sessions" variant="gold" />
+            <StatBox value="4.9★" label="Patient Rating"  variant="emerald" />
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 reveal" data-reveal-delay="120">
-          <StatBox value="98%" label="Satisfaction Rate" variant="blue" />
-          <StatBox value="24h" label="Response Access" variant="dark" />
-          <StatBox value="500+" label="Monthly Sessions" variant="gold" />
-          <StatBox value="4.9★" label="Patient Rating" variant="emerald" />
+        {/* Who We Are  - 3 answer cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {whoWeAreCards.map(({ q, a, icon: Icon, iconColor, iconBg, accent }, i) => (
+            <div
+              key={q}
+              className="reveal bg-white rounded-2xl border border-dark/[0.07] shadow-[0_4px_24px_-8px_rgba(12,11,9,0.1)] overflow-hidden"
+              data-reveal-delay={String(i * 80)}
+            >
+              {/* Colored top accent bar */}
+              <div className={`h-1 w-full ${accent}`} />
+              <div className="p-7">
+                <div className={`w-10 h-10 rounded-xl ${iconBg} flex items-center justify-center mb-5`}>
+                  <Icon className={`w-5 h-5 ${iconColor}`} />
+                </div>
+                <p className="text-[10px] tracking-[0.22em] uppercase text-dark/40 mb-2">{q}</p>
+                <p className="text-dark/75 text-sm leading-relaxed">{a}</p>
+              </div>
+            </div>
+          ))}
         </div>
+
       </div>
     </section>
   );
@@ -145,7 +200,7 @@ function ProvidersSnippet() {
             <em className="text-gold3 italic">board-certified specialists</em>
           </h2>
           <p className="mt-6 text-cream/60 text-sm leading-relaxed max-w-md">
-            Every clinician on Mindova is vetted, licensed, and selected for clinical excellence       and genuine care.
+            Guided by licensed professionals. Every clinician on Mindova is vetted, credentialed, and selected for clinical excellence  - and genuine, compassionate care.
           </p>
           <div className="flex flex-wrap gap-2 mt-7">
             {specialties.map((s) => (
@@ -157,8 +212,8 @@ function ProvidersSnippet() {
               </span>
             ))}
           </div>
-          <div className="mt-8">
-            <GhostButton to="/providers" light>Join the Provider Network</GhostButton>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <GhostButton to="/join-the-network" light>Become a Provider</GhostButton>
           </div>
         </div>
 

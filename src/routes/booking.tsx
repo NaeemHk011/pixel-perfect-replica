@@ -103,7 +103,7 @@ function BookingPage() {
                 <div>
                   <p className="text-sm font-medium text-dark">Already have an appointment?</p>
                   <p className="text-xs text-muted mt-0.5 leading-relaxed">
-                    Please complete your Patient Intake Form before your first session — it only takes 5 minutes.
+                    Please complete your Patient Intake Form before your first session  - it only takes 5 minutes.
                   </p>
                 </div>
               </div>

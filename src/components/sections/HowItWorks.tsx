@@ -1,4 +1,5 @@
-import { ClipboardList, Users, CalendarCheck, HeartPulse } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { ClipboardList, Users, CalendarCheck, HeartPulse, ArrowRight } from "lucide-react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 const steps = [
@@ -67,6 +68,18 @@ export function HowItWorks() {
             </div>
           ))}
         </div>
+
+        {/* CTA  - Get Matched */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 reveal">
+          <Link
+            to="/get-matched"
+            className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-semibold px-8 py-3.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_12px_30px_-12px_rgba(207,168,78,0.5)]"
+          >
+            Get Matched <ArrowRight className="w-4 h-4" />
+          </Link>
+          <p className="text-sm text-muted">Connected care, wherever you are.</p>
+        </div>
+
       </div>
     </section>
   );

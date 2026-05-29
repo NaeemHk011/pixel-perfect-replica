@@ -5,14 +5,14 @@ import { BookingCTA } from "@/components/sections/BookingCTA";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GoldButton } from "@/components/ui/Fancy";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { CheckCircle2, Target, Leaf, TrendingUp, Star, Users, AlertCircle } from "lucide-react";
+import { CheckCircle2, Target, Leaf, Users, Star, TrendingUp, AlertCircle } from "lucide-react";
 
-export const Route = createFileRoute("/services_/coaching-development")({
-  component: CoachingDevelopmentPage,
+export const Route = createFileRoute("/services_/coaching")({
+  component: CoachingServicesPage,
   head: () => ({
     meta: [
-      { title: "Coaching & Personal Development | Mindova Holdings" },
-      { name: "description", content: "Life coaching, wellness coaching, accountability coaching, mentorship, and personal development  - delivered by non-clinical wellness professionals." },
+      { title: "Wellness & Coaching Services | Mindova Holdings" },
+      { name: "description", content: "Life coaching, wellness coaching, accountability coaching, and personal development  - delivered by certified non-clinical wellness professionals." },
     ],
   }),
 });
@@ -21,7 +21,7 @@ const services = [
   {
     icon: Target,
     title: "Life Coaching",
-    desc: "Goal-setting and life direction coaching to help you define what you want and create a clear path to get there.",
+    desc: "Goal-setting, life direction, and clarity coaching to help you define what you want and create a path to get there.",
     color: "text-orange-500",
     bg: "bg-orange-50",
   },
@@ -35,7 +35,7 @@ const services = [
   {
     icon: TrendingUp,
     title: "Accountability Coaching",
-    desc: "Structured progress and goal accountability  - stay on course with a dedicated coach by your side.",
+    desc: "Structured progress tracking and goal accountability  - stay on course with a dedicated coach by your side.",
     color: "text-blue-500",
     bg: "bg-blue-50",
   },
@@ -56,11 +56,11 @@ const services = [
 ] as const;
 
 const providers = [
-  { title: "Life Coaches",                     desc: "ICF-certified and trained life coaches"         },
-  { title: "Wellness Coaches",                 desc: "Holistic health & lifestyle specialists"        },
-  { title: "Accountability Coaches",           desc: "Structured goal & progress coaches"             },
-  { title: "Mentors",                          desc: "Experienced professional guides"                },
-  { title: "Personal Development Specialists", desc: "Growth-focused transformation coaches"          },
+  { title: "Life Coaches",                   desc: "ICF-certified and trained life coaches"             },
+  { title: "Wellness Coaches",               desc: "Holistic health & lifestyle specialists"            },
+  { title: "Accountability Coaches",         desc: "Structured goal & progress coaches"                 },
+  { title: "Mentors",                        desc: "Experienced professional guides"                    },
+  { title: "Peer Support Specialists",       desc: "Certified lived-experience supporters"              },
 ] as const;
 
 const whoIsItFor = [
@@ -72,7 +72,7 @@ const whoIsItFor = [
   "Individuals looking for a trusted mentor or guide",
 ] as const;
 
-function CoachingDevelopmentPage() {
+function CoachingServicesPage() {
   useScrollAnimation();
   return (
     <div className="min-h-screen">
@@ -84,16 +84,16 @@ function CoachingDevelopmentPage() {
           <div className="absolute inset-0 bg-grid-dark opacity-40" />
           <div className="absolute inset-0 gold-glow pointer-events-none" />
           <div className="absolute top-1/4 -right-20 w-72 h-72 rounded-full bg-emerald-500/[0.07] blur-3xl pointer-events-none" />
-          <div className="absolute top-1/3 -left-20 w-64 h-64 rounded-full bg-orange-500/[0.06] blur-3xl pointer-events-none" />
 
           <div className="relative max-w-5xl mx-auto px-5 md:px-8 text-center">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 text-xs tracking-[0.18em] uppercase mb-5">
               <Leaf className="w-3.5 h-3.5" />
-              Coaching & Personal Development
+              Wellness & Coaching
             </span>
-            <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-              Coaching &amp;{" "}
-              <em className="text-gold3 italic">Development</em>
+            <h1 className="font-serif text-5xl md:text-7xl leading-[1.05] tracking-tight">
+              Wellness &amp;{" "}
+              <em className="text-gold3 italic">Coaching</em>
+              <br />Services
             </h1>
             <p className="mt-7 mx-auto max-w-2xl text-sm md:text-base text-cream/65 leading-relaxed">
               Grow beyond your challenges. Our non-clinical wellness professionals provide life coaching, accountability, mentorship, and personal development support  - virtually, compassionately, and affordably.
@@ -128,7 +128,7 @@ function CoachingDevelopmentPage() {
               {services.map(({ icon: Icon, title, desc, color, bg }, i) => (
                 <div
                   key={title}
-                  className="reveal bg-white rounded-2xl p-8 border border-dark/[0.07] shadow-[0_4px_24px_-8px_rgba(12,11,9,0.08)]"
+                  className="reveal bg-white rounded-2xl p-8 border border-dark/[0.07] shadow-[0_4px_24px_-8px_rgba(12,11,9,0.08)] overflow-hidden"
                   data-reveal-delay={String(i * 80)}
                 >
                   <div className={`w-11 h-11 rounded-xl ${bg} flex items-center justify-center mb-5`}>
@@ -157,7 +157,7 @@ function CoachingDevelopmentPage() {
                 Trained, certified, and selected for their expertise in holistic wellness and personal growth.
               </p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               {providers.map(({ title, desc }, i) => (
                 <div
                   key={title}

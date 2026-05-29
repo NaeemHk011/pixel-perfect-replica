@@ -75,13 +75,21 @@ export function Footer() {
             ))}
           </div>
 
-          {/* Discovery Call CTA */}
-          <Link
-            to="/booking"
-            className="mt-6 inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-5 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(207,168,78,0.55)]"
-          >
-            Schedule a Discovery Call
-          </Link>
+          {/* CTAs */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            <Link
+              to="/get-matched"
+              className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-5 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(207,168,78,0.55)]"
+            >
+              Get Support
+            </Link>
+            <Link
+              to="/join-the-network"
+              className="inline-flex items-center gap-2 border border-cream/20 text-cream hover:text-gold3 hover:border-gold2/40 font-medium px-5 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5"
+            >
+              Join the Network
+            </Link>
+          </div>
         </div>
 
         {/* ── Nav columns (spans 8 of 12, split into 4×2) ── */}
@@ -103,21 +111,21 @@ export function Footer() {
           <FooterCol
             title="Company"
             links={[
-              ["/community",      "About Us"],
-              ["/providers",      "Our Providers"],
-              ["/partnerships",   "Partnerships"],
-              ["/contact",        "Contact Us"],
-              ["/provider-apply", "Join as Provider"],
+              ["/community",         "About Us"],
+              ["/providers",         "Our Providers"],
+              ["/partnerships",      "Partnerships"],
+              ["/contact",           "Contact Us"],
+              ["/join-the-network",  "Join the Network"],
             ]}
           />
           <FooterCol
             title="Patients"
             links={[
-              ["/booking",  "Book Consultation"],
-              ["/intake",   "Patient Intake Form"],
-              ["/contact",  "Schedule Discovery Call"],
-              ["/services", "View All Services"],
-              ["/providers","Find a Provider"],
+              ["/get-matched", "Get Support"],
+              ["/get-matched", "Get Matched"],
+              ["/intake",      "Patient Intake Form"],
+              ["/services",    "View All Services"],
+              ["/providers",   "Find a Provider"],
             ]}
           />
           <FooterCol

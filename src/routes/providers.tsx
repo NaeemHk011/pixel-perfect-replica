@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GoldButton } from "@/components/ui/Fancy";
+import { ProviderTypes } from "@/components/sections/ProviderTypes";
 import { providers, type ProviderType } from "@/data/providers";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -151,6 +152,8 @@ function ProvidersPage() {
             </div>
           </div>
         </section>
+
+        <ProviderTypes />
 
         <section id="join" className="py-24 md:py-32 bg-dark text-cream relative z-10 overflow-hidden">
           <div className="absolute inset-0 gold-glow" />

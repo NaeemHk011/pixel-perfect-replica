@@ -24,7 +24,7 @@ const PERKS = [
   {
     icon: Bell,
     title: "First to Know",
-    description: "You'll be notified instantly when a slot opens — before it's listed publicly.",
+    description: "You'll be notified instantly when a slot opens  - before it's listed publicly.",
   },
   {
     icon: Clock,

@@ -5,6 +5,7 @@ import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/sections/PageHero";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { HealingIsAMovement } from "@/components/sections/HealingIsAMovement";
 import { Network, Handshake, Building2, ShieldCheck, Users, HeartHandshake, Stethoscope, LifeBuoy } from "lucide-react";
 
 export const Route = createFileRoute("/partnerships")({
@@ -80,6 +81,8 @@ function PartnershipsPage() {
             </div>
           </div>
         </section>
+
+        <HealingIsAMovement />
 
         <section className="py-24 md:py-32 bg-cream relative z-10">
           <div className="max-w-3xl mx-auto px-5 md:px-8">
