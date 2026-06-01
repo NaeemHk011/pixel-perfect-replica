@@ -169,7 +169,7 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
           {/* ── CTA Buttons  - xl and above only ── */}
           <div className="hidden xl:flex items-center gap-2 shrink-0">
             <Link
-              to="/get-matched"
+              to="/contact"
               className="inline-flex items-center gap-1.5 bg-gold2 hover:bg-gold3 text-dark font-semibold px-5 py-2 rounded-full text-xs transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-12px_rgba(207,168,78,0.55)] whitespace-nowrap uppercase tracking-wide"
             >
               Get Support
@@ -267,7 +267,7 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
           {/* Mobile CTA Buttons */}
           <div className="mt-4 flex flex-col gap-3">
             <Link
-              to="/get-matched"
+              to="/contact"
               onClick={() => setOpen(false)}
               className="bg-gold2 text-dark px-6 py-3.5 rounded-full text-center font-semibold text-sm hover:bg-gold3 transition-colors uppercase tracking-wide"
             >
