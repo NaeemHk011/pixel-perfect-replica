@@ -186,10 +186,10 @@ function GetMatchedPage() {
           <div className="max-w-3xl mx-auto px-5 md:px-8">
 
             <div className="text-center mb-10 reveal">
-              <SectionLabel>Patient Intake</SectionLabel>
+              <SectionLabel>Get Matched</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl mt-4 tracking-tight">
-                Tell us about{" "}
-                <em className="text-gold italic">your needs</em>
+                Find Your{" "}
+                <em className="text-gold italic">Perfect Match</em>
               </h2>
               <p className="mt-3 text-sm text-muted leading-relaxed max-w-lg mx-auto">
                 Fill out the form below and our care coordinators will review your preferences and connect you with the best-fit provider within 24–48 hours.
@@ -199,7 +199,7 @@ function GetMatchedPage() {
             <div
               className="relative bg-white rounded-[28px] border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)] overflow-hidden reveal"
               data-reveal-delay="100"
-              style={{ minHeight: "2382px" }}
+              style={{ minHeight: "913px" }}
             >
               {!formLoaded && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white rounded-[28px] z-10">
@@ -211,17 +211,17 @@ function GetMatchedPage() {
                 </div>
               )}
               <iframe
-                src="https://link.webtechs.dev/widget/form/uXUpsYy6M7ZqEMUGYWJl"
+                src="https://link.webtechs.dev/widget/form/yTBSXykkdjpcbw7RkgDq"
                 style={{
                   width: "100%",
-                  height: "2382px",
+                  height: "913px",
                   border: "none",
                   borderRadius: "28px",
                   display: "block",
                   opacity: formLoaded ? 1 : 0,
                   transition: "opacity 0.4s ease",
                 }}
-                id="inline-uXUpsYy6M7ZqEMUGYWJl"
+                id="inline-yTBSXykkdjpcbw7RkgDq"
                 data-layout="{'id':'INLINE'}"
                 data-trigger-type="alwaysShow"
                 data-trigger-value=""
@@ -229,11 +229,11 @@ function GetMatchedPage() {
                 data-activation-value=""
                 data-deactivation-type="neverDeactivate"
                 data-deactivation-value=""
-                data-form-name="Patient Intake Form"
-                data-height="2382"
-                data-layout-iframe-id="inline-uXUpsYy6M7ZqEMUGYWJl"
-                data-form-id="uXUpsYy6M7ZqEMUGYWJl"
-                title="Patient Intake Form"
+                data-form-name="Get Matched Form"
+                data-height="913"
+                data-layout-iframe-id="inline-yTBSXykkdjpcbw7RkgDq"
+                data-form-id="yTBSXykkdjpcbw7RkgDq"
+                title="Get Matched Form"
                 onLoad={() => setFormLoaded(true)}
               />
             </div>

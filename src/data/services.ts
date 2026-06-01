@@ -449,7 +449,7 @@ export const services: Service[] = [
     shortDesc: "Behavioral health assessments, screenings, and lifestyle baselines     quickly.",
     fullDesc: "Comprehensive diagnostic intake covering mood, anxiety, ADHD, sleep, and lifestyle baselines     delivered with clinical precision.",
     bullets: ["Validated screening tools", "Same-week turnaround", "Plain-language reports", "Care plan handoff"],
-    link: "/services/therapy",
+    link: "/services/virtual-behavioral-health",
   },
   {
     id: "psychiatry",
@@ -469,7 +469,7 @@ export const services: Service[] = [
     shortDesc: "Nutrition, breathwork, and lifestyle plans crafted for everyday wellbeing.",
     fullDesc: "Integrative wellness plans covering nutrition, sleep, breathwork, and somatic practices     built alongside your clinical care.",
     bullets: ["Personalized nutrition plans", "Breathwork & somatic tools", "Sleep optimization", "Monthly check-ins"],
-    link: "/services/therapy",
+    link: "/services/peptide-wellness",
   },
   {
     id: "community",

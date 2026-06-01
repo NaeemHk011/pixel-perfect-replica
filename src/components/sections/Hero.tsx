@@ -6,6 +6,7 @@ const pillars = [
   "Virtual Care",
   "Coaching",
   "Provider Infrastructure",
+  "integrated support systems"
 ] as const;
 
 const stats = [
@@ -55,7 +56,7 @@ export function Hero() {
         {/* CTAs */}
         <div className="mt-9 flex flex-wrap justify-center gap-3">
           <GoldButton to="/get-matched">Get Support</GoldButton>
-          <GhostButton to="/get-matched" light>Start Your Wellness Journey</GhostButton>
+          <GhostButton to="/virtual-wellness" light>Start Your Wellness Journey</GhostButton>
         </div>
 
         {/* Stat cards */}

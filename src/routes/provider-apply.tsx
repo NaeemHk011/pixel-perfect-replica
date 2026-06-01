@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, FormEvent } from "react";
+import { useState, useEffect } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatMindovaProvides } from "@/components/sections/WhatMindovaProvides";
@@ -10,17 +10,9 @@ import {
   Calendar,
   ClipboardList,
   Users,
-  CheckCircle2,
-  Loader2,
   Brain,
   Leaf,
-  Upload,
-  ShieldCheck,
 } from "lucide-react";
-
-// Configure in .env.local
-const GHL_CLINICAL_WEBHOOK = (import.meta.env.VITE_GHL_PROVIDER_CLINICAL_WEBHOOK ?? "") as string;
-const GHL_WELLNESS_WEBHOOK = (import.meta.env.VITE_GHL_PROVIDER_WELLNESS_WEBHOOK ?? "") as string;
 
 export const Route = createFileRoute("/provider-apply")({
   component: ProviderApplyPage,
@@ -36,7 +28,6 @@ export const Route = createFileRoute("/provider-apply")({
   }),
 });
 
-type Status = "idle" | "submitting" | "success" | "error";
 type Tab = "clinical" | "wellness";
 
 const BENEFITS = [
@@ -45,434 +36,52 @@ const BENEFITS = [
   { icon: Users,         title: "Vetted Community",       desc: "Join a curated network of licensed, high-caliber clinicians and wellness pros."      },
 ];
 
-const US_STATES = [
-  "Alabama","Alaska","Arizona","Arkansas","California","Colorado",
-  "Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho",
-  "Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana",
-  "Maine","Maryland","Massachusetts","Michigan","Minnesota",
-  "Mississippi","Missouri","Montana","Nebraska","Nevada",
-  "New Hampshire","New Jersey","New Mexico","New York",
-  "North Carolina","North Dakota","Ohio","Oklahoma","Oregon",
-  "Pennsylvania","Rhode Island","South Carolina","South Dakota",
-  "Tennessee","Texas","Utah","Vermont","Virginia","Washington",
-  "West Virginia","Wisconsin","Wyoming","District of Columbia",
-];
-
-const FOCUS_AREAS = [
-  "Mental Wellness",
-  "Physical Wellness",
-  "Mindset & Confidence",
-  "Relationships",
-  "Career & Purpose",
-  "Nutrition & Lifestyle",
-  "Stress Management",
-  "Spiritual Growth",
-];
-
-const inputCls =
-  "w-full px-4 py-3 rounded-xl border border-dark/[0.1] bg-[#FAFAF9] text-sm text-dark placeholder:text-dark/30 focus:outline-none focus:border-gold2 focus:ring-2 focus:ring-gold2/15 transition-all duration-150";
-
 // ── Clinical Form ─────────────────────────────────────────────────────────────
 function ClinicalForm() {
-  const [status, setStatus]         = useState<Status>("idle");
-  const [fullName, setFullName]     = useState("");
-  const [email, setEmail]           = useState("");
-  const [phone, setPhone]           = useState("");
-  const [licenseType, setLicenseType] = useState("");
-  const [licenseNum, setLicenseNum] = useState("");
-  const [states, setStates]         = useState<string[]>([]);
-  const [specialty, setSpecialty]   = useState("");
-  const [experience, setExperience] = useState("");
-  const [resumeFile, setResumeFile] = useState<File | null>(null);
-  const [bio, setBio]               = useState("");
-
-  function toggleState(s: string) {
-    setStates((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
-  }
-
-  async function fileToBase64(file: File): Promise<string> {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload  = () => resolve(reader.result as string);
-      reader.onerror = reject;
-    });
-  }
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("submitting");
-
-    let resumeData: string | null = null;
-    if (resumeFile) {
-      try { resumeData = await fileToBase64(resumeFile); } catch { /* skip */ }
-    }
-
-    const payload = {
-      form_type: "Provider Application (Clinical)",
-      full_name: fullName,
-      email,
-      phone,
-      license_type: licenseType,
-      license_number: licenseNum,
-      states_licensed: states.join(", "),
-      specialty_focus_area: specialty,
-      years_of_experience: experience,
-      resume_filename: resumeFile?.name ?? "",
-      resume_data: resumeData,
-      brief_bio: bio,
-      tags: ["provider-application", "clinical"],
-    };
-
-    try {
-      if (!GHL_CLINICAL_WEBHOOK) {
-        console.info("[ProviderApply:Clinical] Webhook not set. Payload:", payload);
-        await new Promise((r) => setTimeout(r, 800));
-        setStatus("success");
-        return;
-      }
-      const res = await fetch(GHL_CLINICAL_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setStatus("success");
-    } catch (err) {
-      console.error("[ProviderApply:Clinical]", err);
-      setStatus("error");
-    }
-  }
-
-  if (status === "success") return <SuccessCard track="clinical" />;
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-0">
-      <div className="px-5 sm:px-8 pt-6 pb-6 border-b border-dark/[0.06]">
-        <Divider label="Personal Information" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="sm:col-span-2">
-            <Label text="Full Name" required />
-            <input required type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Dr. Jane Smith" className={inputCls} />
-          </div>
-          <div>
-            <Label text="Email Address" required />
-            <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="jane@example.com" className={inputCls} />
-          </div>
-          <div>
-            <Label text="Phone Number" required />
-            <input required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 000-0000" className={inputCls} />
-          </div>
-        </div>
-      </div>
-
-      <div className="px-5 sm:px-8 py-6 border-b border-dark/[0.06]">
-        <Divider label="License & Credentials" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <Label text="License Type" required />
-            <select required value={licenseType} onChange={(e) => setLicenseType(e.target.value)} className={inputCls}>
-              <option value="">Select type…</option>
-              {["LPC","LMFT","LCSW","Psychologist","Psychiatrist","PMHNP","Other"].map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <Label text="License Number" required />
-            <input required type="text" value={licenseNum} onChange={(e) => setLicenseNum(e.target.value)} placeholder="e.g. TX-LPC-12345" className={inputCls} />
-          </div>
-          <div>
-            <Label text="Years of Experience" required />
-            <select required value={experience} onChange={(e) => setExperience(e.target.value)} className={inputCls}>
-              <option value="">Select range…</option>
-              {["0–2 years","3–5 years","6–10 years","10+ years"].map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <Label text="Specialty / Focus Area" required />
-            <input required type="text" value={specialty} onChange={(e) => setSpecialty(e.target.value)} placeholder="e.g. Anxiety, Trauma, ADHD" className={inputCls} />
-          </div>
-        </div>
-
-        {/* States Licensed In */}
-        <div className="mt-4">
-          <Label text="States Licensed In" required />
-          <p className="text-[11px] text-dark/40 mb-2">Select all states where you hold an active license</p>
-          <div className="border border-dark/[0.1] rounded-xl bg-[#FAFAF9] p-3 max-h-44 overflow-y-auto">
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-0.5">
-              {US_STATES.map((s) => {
-                const checked = states.includes(s);
-                return (
-                  <label key={s} className={`flex items-center gap-2 py-1.5 px-2.5 rounded-lg cursor-pointer transition-colors ${checked ? "bg-amber-50" : "hover:bg-gray-50"}`}>
-                    <span className={`w-3.5 h-3.5 rounded border flex items-center justify-center flex-shrink-0 transition-all ${checked ? "bg-gold2 border-gold2" : "border-dark/25 bg-white"}`}>
-                      {checked && (
-                        <svg viewBox="0 0 10 8" className="w-2 h-2 fill-none stroke-dark stroke-[2.5]">
-                          <path d="M1 4l3 3 5-6" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      )}
-                    </span>
-                    <input type="checkbox" className="sr-only" checked={checked} onChange={() => toggleState(s)} />
-                    <span className="text-xs text-dark/75">{s}</span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-          {states.length > 0 && (
-            <p className="text-[11px] text-gold2 mt-1.5 font-medium">{states.length} state{states.length > 1 ? "s" : ""} selected</p>
-          )}
-        </div>
-      </div>
-
-      <div className="px-5 sm:px-8 py-6">
-        <Divider label="Application Materials" />
-        <div className="space-y-4">
-          {/* Resume Upload */}
-          <div>
-            <Label text="Resume / CV" />
-            <label className={`flex items-center gap-3 cursor-pointer ${inputCls} justify-between`}>
-              <span className={resumeFile ? "text-dark" : "text-dark/30"}>
-                {resumeFile ? resumeFile.name : "Upload PDF or DOC…"}
-              </span>
-              <Upload className="w-4 h-4 text-dark/40 flex-shrink-0" />
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                className="sr-only"
-                onChange={(e) => setResumeFile(e.target.files?.[0] ?? null)}
-              />
-            </label>
-            <p className="text-[11px] text-dark/40 mt-1">PDF or DOC/DOCX  - max 10 MB</p>
-          </div>
-
-          {/* Brief Bio */}
-          <div>
-            <Label text="Brief Bio" required />
-            <textarea
-              required
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              rows={4}
-              placeholder="Tell us about your background, clinical approach, and what motivates you…"
-              className={`${inputCls} resize-none`}
-            />
-          </div>
-        </div>
-
-        <SubmitFooter status={status} label="Submit Clinical Application" />
-      </div>
-    </form>
+    <div className="w-full" style={{ minHeight: "1352px" }}>
+      <iframe
+        src="https://link.webtechs.dev/widget/form/iNyDerMjT7eYXuZbW1kd"
+        style={{ width: "100%", height: "1352px", border: "none", borderRadius: "8px" }}
+        id="inline-iNyDerMjT7eYXuZbW1kd"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Clinical Provider Application form"
+        data-height="1352"
+        data-layout-iframe-id="inline-iNyDerMjT7eYXuZbW1kd"
+        data-form-id="iNyDerMjT7eYXuZbW1kd"
+        title="Clinical Provider Application form"
+      />
+    </div>
   );
 }
 
 // ── Wellness Form ─────────────────────────────────────────────────────────────
 function WellnessForm() {
-  const [status, setStatus]             = useState<Status>("idle");
-  const [fullName, setFullName]         = useState("");
-  const [email, setEmail]               = useState("");
-  const [phone, setPhone]               = useState("");
-  const [coachingSpecialty, setCoachingSpecialty] = useState("");
-  const [certifications, setCertifications] = useState("");
-  const [focusAreas, setFocusAreas]     = useState<string[]>([]);
-  const [experience, setExperience]     = useState("");
-  const [bio, setBio]                   = useState("");
-
-  function toggleFocus(s: string) {
-    setFocusAreas((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
-  }
-
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setStatus("submitting");
-
-    const payload = {
-      form_type: "Provider Application (Coaching)",
-      full_name: fullName,
-      email,
-      phone,
-      coaching_specialty: coachingSpecialty,
-      certifications,
-      focus_areas: focusAreas.join(", "),
-      years_of_experience: experience,
-      brief_bio: bio,
-      tags: ["provider-application", "wellness-coaching"],
-    };
-
-    try {
-      if (!GHL_WELLNESS_WEBHOOK) {
-        console.info("[ProviderApply:Wellness] Webhook not set. Payload:", payload);
-        await new Promise((r) => setTimeout(r, 800));
-        setStatus("success");
-        return;
-      }
-      const res = await fetch(GHL_WELLNESS_WEBHOOK, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      setStatus("success");
-    } catch (err) {
-      console.error("[ProviderApply:Wellness]", err);
-      setStatus("error");
-    }
-  }
-
-  if (status === "success") return <SuccessCard track="wellness" />;
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-0">
-      <div className="px-5 sm:px-8 pt-6 pb-6 border-b border-dark/[0.06]">
-        <Divider label="Personal Information" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="sm:col-span-2">
-            <Label text="Full Name" required />
-            <input required type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} placeholder="Jane Smith" className={inputCls} />
-          </div>
-          <div>
-            <Label text="Email Address" required />
-            <input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="jane@example.com" className={inputCls} />
-          </div>
-          <div>
-            <Label text="Phone Number" required />
-            <input required type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="(555) 000-0000" className={inputCls} />
-          </div>
-        </div>
-      </div>
-
-      <div className="px-5 sm:px-8 py-6 border-b border-dark/[0.06]">
-        <Divider label="Coaching Background" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <Label text="Coaching Specialty" required />
-            <select required value={coachingSpecialty} onChange={(e) => setCoachingSpecialty(e.target.value)} className={inputCls}>
-              <option value="">Select specialty…</option>
-              {["Life Coaching","Wellness Coaching","Accountability","Mentorship","Personal Development","Other"].map((t) => (
-                <option key={t} value={t}>{t}</option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <Label text="Years of Experience" required />
-            <select required value={experience} onChange={(e) => setExperience(e.target.value)} className={inputCls}>
-              <option value="">Select range…</option>
-              {["0–2 years","3–5 years","6–10 years","10+ years"].map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-          </div>
-          <div className="sm:col-span-2">
-            <Label text="Certifications" />
-            <input type="text" value={certifications} onChange={(e) => setCertifications(e.target.value)} placeholder="e.g. ICF-ACC, ACE, NASM, etc." className={inputCls} />
-          </div>
-        </div>
-
-        {/* Focus Areas */}
-        <div className="mt-4">
-          <Label text="Focus Areas" />
-          <p className="text-[11px] text-dark/40 mb-3">Select all that apply</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-            {FOCUS_AREAS.map((s) => {
-              const checked = focusAreas.includes(s);
-              return (
-                <label key={s} className={`flex items-center gap-3 p-3 rounded-xl border cursor-pointer transition-all duration-150 ${checked ? "border-gold2 bg-amber-50/60" : "border-dark/[0.1] bg-[#FAFAF9] hover:border-gold2/40"}`}>
-                  <span className={`w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-all ${checked ? "bg-gold2 border-gold2" : "border-dark/25 bg-white"}`}>
-                    {checked && (
-                      <svg viewBox="0 0 10 8" className="w-2.5 h-2.5 fill-none stroke-dark stroke-[2.5]">
-                        <path d="M1 4l3 3 5-6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </span>
-                  <input type="checkbox" className="sr-only" checked={checked} onChange={() => toggleFocus(s)} />
-                  <span className="text-sm text-dark/80">{s}</span>
-                </label>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      <div className="px-5 sm:px-8 py-6">
-        <Divider label="About You" />
-        <div>
-          <Label text="Brief Bio" required />
-          <textarea
-            required
-            value={bio}
-            onChange={(e) => setBio(e.target.value)}
-            rows={4}
-            placeholder="Tell us about your coaching philosophy, background, and what drives you to help others grow…"
-            className={`${inputCls} resize-none`}
-          />
-        </div>
-        <SubmitFooter status={status} label="Submit Wellness Application" />
-      </div>
-    </form>
-  );
-}
-
-// ── Shared sub-components ─────────────────────────────────────────────────────
-function Label({ text, required }: { text: string; required?: boolean }) {
-  return (
-    <label className="block text-xs font-medium text-dark/70 mb-1.5">
-      {text} {required && <span className="text-rose-400">*</span>}
-    </label>
-  );
-}
-
-function Divider({ label }: { label: string }) {
-  return (
-    <div className="flex items-center gap-3 mb-5">
-      <div className="h-px flex-1 bg-dark/[0.07]" />
-      <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-dark/35">{label}</span>
-      <div className="h-px flex-1 bg-dark/[0.07]" />
-    </div>
-  );
-}
-
-function SubmitFooter({ status, label }: { status: Status; label: string }) {
-  return (
-    <div className="mt-6">
-      {status === "error" && (
-        <p className="text-sm text-rose-500 text-center mb-4">Something went wrong. Please try again or contact us directly.</p>
-      )}
-      <button
-        type="submit"
-        disabled={status === "submitting"}
-        className="w-full py-4 bg-gold2 hover:bg-gold3 text-dark font-semibold text-sm rounded-2xl tracking-wide uppercase transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-8px_rgba(207,168,78,0.45)] disabled:opacity-60 disabled:cursor-not-allowed disabled:translate-y-0 flex items-center justify-center gap-2"
-      >
-        {status === "submitting" ? (
-          <><Loader2 className="w-4 h-4 animate-spin" />Submitting…</>
-        ) : label}
-      </button>
-      <div className="mt-4 flex items-center justify-center gap-2 text-xs text-dark/40">
-        <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-        Applications reviewed within 3 business days
-      </div>
-    </div>
-  );
-}
-
-function SuccessCard({ track }: { track: "clinical" | "wellness" }) {
-  return (
-    <div className="px-5 sm:px-8 py-16 text-center">
-      <div className="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center mx-auto mb-5">
-        <CheckCircle2 className="w-8 h-8 text-emerald-500" />
-      </div>
-      <h3 className="font-serif text-2xl text-dark mb-3">Application Received!</h3>
-      <p className="text-sm text-dark/60 leading-relaxed max-w-sm mx-auto">
-        Thank you for applying as a{" "}
-        <strong className="text-dark/80">{track === "clinical" ? "Licensed Clinical Professional" : "Wellness & Coaching Professional"}</strong>.
-        Our provider relations team will review your application and reach out within{" "}
-        <strong className="text-dark/80">3 business days</strong>.
-      </p>
-      <div className="mt-6 inline-flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-5 py-2 text-xs text-emerald-700">
-        <ShieldCheck className="w-3.5 h-3.5" />
-        Your information is secure and confidential
-      </div>
+    <div className="w-full" style={{ minHeight: "1061px" }}>
+      <iframe
+        src="https://link.webtechs.dev/widget/form/MfcwPYX0TmfOluT7LSR2"
+        style={{ width: "100%", height: "1061px", border: "none", borderRadius: "8px" }}
+        id="inline-MfcwPYX0TmfOluT7LSR2"
+        data-layout="{'id':'INLINE'}"
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Wellness Provider Application form"
+        data-height="1061"
+        data-layout-iframe-id="inline-MfcwPYX0TmfOluT7LSR2"
+        data-form-id="MfcwPYX0TmfOluT7LSR2"
+        title="Wellness Provider Application form"
+      />
     </div>
   );
 }
@@ -481,6 +90,14 @@ function SuccessCard({ track }: { track: "clinical" | "wellness" }) {
 function ProviderApplyPage() {
   useScrollAnimation();
   const [activeTab, setActiveTab] = useState<Tab>("clinical");
+
+  useEffect(() => {
+    if (document.querySelector('script[src="https://link.webtechs.dev/js/form_embed.js"]')) return;
+    const script = document.createElement("script");
+    script.src = "https://link.webtechs.dev/js/form_embed.js";
+    document.body.appendChild(script);
+    return () => { document.body.removeChild(script); };
+  }, []);
 
   return (
     <div className="min-h-screen bg-cream">
