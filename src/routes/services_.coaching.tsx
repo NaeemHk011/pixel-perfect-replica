@@ -80,7 +80,7 @@ function CoachingServicesPage() {
       <main>
 
         {/* Hero */}
-        <section className="relative bg-dark text-cream overflow-hidden pt-40 pb-24 md:pt-48 md:pb-28">
+        <section className="relative bg-dark text-cream overflow-hidden pt-48 pb-32 md:pt-60 md:pb-36">
           <div className="absolute inset-0 bg-grid-dark opacity-40" />
           <div className="absolute inset-0 gold-glow pointer-events-none" />
           <div className="absolute top-1/4 -right-20 w-72 h-72 rounded-full bg-emerald-500/[0.07] blur-3xl pointer-events-none" />

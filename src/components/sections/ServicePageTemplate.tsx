@@ -48,7 +48,7 @@ export function ServicePageTemplate({
   return (
     <>
       {/* A. Hero Banner */}
-      <section className="relative bg-dark text-cream overflow-hidden pt-36 pb-24 md:pt-44 md:pb-32">
+      <section className="relative bg-dark text-cream overflow-hidden pt-44 pb-32 md:pt-56 md:pb-40">
         <div className="absolute inset-0 bg-grid-dark opacity-30" />
         <div className="absolute inset-0 gold-glow pointer-events-none" />
         <div className="absolute -top-16 right-1/4 w-72 h-72 rounded-full bg-gold2/[0.08] blur-3xl pointer-events-none" />

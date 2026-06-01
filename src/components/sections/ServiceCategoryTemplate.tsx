@@ -43,15 +43,15 @@ export function ServiceCategoryPage({
       <Navbar onDark />
       <main>
         {/* Hero */}
-        <section className="relative bg-dark text-cream overflow-hidden pt-36 pb-0 md:pt-44">
+        <section className="relative bg-dark text-cream overflow-hidden pt-48 pb-12 md:pt-64 md:pb-20">
           <div className="absolute inset-0 bg-grid-dark opacity-30" />
           <div className="absolute inset-0 gold-glow pointer-events-none" />
           <div className="absolute -top-16 right-1/4 w-72 h-72 rounded-full bg-gold2/[0.08] blur-3xl pointer-events-none" />
 
           <div className="relative max-w-7xl mx-auto px-5 md:px-8">
-            <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 items-end">
+            <div className="grid md:grid-cols-[1fr_1.1fr] gap-10 items-center">
               {/* Text */}
-              <div className="reveal pb-16 md:pb-24">
+              <div className="reveal py-12 md:py-20">
                 <div
                   className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium tracking-[0.15em] uppercase mb-5 ${theme.iconBg} ${theme.labelColor}`}
                 >
@@ -80,12 +80,12 @@ export function ServiceCategoryPage({
                 </div>
               </div>
 
-              {/* Hero image     bleeds into page */}
-              <div className="reveal self-end" data-reveal-delay="150">
+              {/* Hero image */}
+              <div className="reveal" data-reveal-delay="150">
                 <img
                   src={heroImage}
                   alt={title}
-                  className="w-full h-64 md:h-[400px] object-cover rounded-t-2xl shadow-xl"
+                  className="w-full h-[400px] md:h-[650px] object-cover rounded-2xl shadow-2xl border border-white/10"
                   loading="eager"
                 />
               </div>

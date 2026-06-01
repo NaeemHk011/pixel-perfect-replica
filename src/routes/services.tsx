@@ -146,7 +146,7 @@ function ServicesPage() {
                     <img
                       src={image}
                       alt={cat.title}
-                      className="w-full h-72 md:h-[420px] object-cover"
+                      className="w-full h-80 md:h-[500px] object-cover"
                       loading="lazy"
                     />
                     {/* Color overlay tint */}

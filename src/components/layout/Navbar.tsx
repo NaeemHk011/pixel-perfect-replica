@@ -4,12 +4,11 @@ import { Menu, X, ChevronDown, Brain, Zap, Video, Target, Users, Building2 } fro
 import logoFull from "@/assets/mindova-logo-full.png";
 
 const links = [
-  { to: "/",                   label: "Home",             exact: true  },
   { to: "/about",              label: "About",            exact: false },
   { to: "/get-matched",        label: "Get Matched",      exact: false },
   { to: "/virtual-wellness",   label: "Virtual Wellness", exact: false },
   { to: "/services/coaching",  label: "Coaching",         exact: false },
-  { to: "/join-the-network",   label: "Join the Network", exact: false },
+  // { to: "/join-the-network",   label: "Join the Network", exact: false },
   { to: "/contact",            label: "Contact",          exact: false },
 ] as const;
 
@@ -78,6 +77,17 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
           {/* ── Desktop nav pill  - xl and above only ── */}
           <nav className="hidden xl:flex flex-1 justify-center">
             <div className="flex items-center bg-dark text-cream rounded-full px-1.5 py-1.5 border border-white/5 shadow-[0_4px_16px_-8px_rgba(12,11,9,0.4)]">
+
+              <Link
+                to="/"
+                className={`px-3 py-1.5 rounded-full text-xs transition-all duration-200 whitespace-nowrap ${
+                  path === "/"
+                    ? "bg-gold2/20 text-gold3 font-medium"
+                    : "text-cream/65 hover:text-cream hover:bg-white/5"
+                }`}
+              >
+                Home
+              </Link>
 
               {/* Services mega-dropdown */}
               <div
@@ -205,6 +215,14 @@ export function Navbar({ onDark = false }: { onDark?: boolean }) {
       {open && (
         <div className="xl:hidden fixed inset-x-0 top-20 lg:top-24 bottom-0 bg-dark text-cream flex flex-col p-8 gap-5 z-[60] overflow-y-auto">
           <div className="absolute inset-0 gold-glow opacity-50 pointer-events-none" />
+
+          <Link
+            to="/"
+            onClick={() => setOpen(false)}
+            className={`text-2xl font-serif transition-colors ${path === "/" ? "text-gold3" : "text-cream"}`}
+          >
+            Home
+          </Link>
 
           {/* Services group */}
           <div className="relative">
