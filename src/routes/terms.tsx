@@ -9,7 +9,7 @@ export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
       { title: "Terms of Service | Mindova Holdings" },
-      { name: "description", content: "Mindova Holdings Terms of Service — the terms and conditions governing your use of our platform and services." },
+      { name: "description", content: "Mindova Holdings Terms of Service - the terms and conditions governing your use of our platform and services." },
     ],
   }),
 });

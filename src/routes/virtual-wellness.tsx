@@ -31,7 +31,7 @@ export const Route = createFileRoute("/virtual-wellness")({
       {
         name: "description",
         content:
-          "HIPAA-secure virtual sessions with licensed therapists, psychiatrists, and wellness coaches — from your home.",
+          "HIPAA-secure virtual sessions with licensed therapists, psychiatrists, and wellness coaches - from your home.",
       },
     ],
   }),
@@ -42,7 +42,7 @@ const howItWorksSteps = [
     number: "01",
     icon: CalendarCheck,
     title: "Book",
-    desc: "Select your service and schedule a session — same-week availability, no waitlists.",
+    desc: "Select your service and schedule a session - same-week availability, no waitlists.",
     color: "text-blue-500",
     bg: "bg-blue-50",
     border: "border-blue-100",
@@ -51,7 +51,7 @@ const howItWorksSteps = [
     number: "02",
     icon: Laptop,
     title: "Connect",
-    desc: "Join your HIPAA-secure video session from any device — no downloads or special software needed.",
+    desc: "Join your HIPAA-secure video session from any device - no downloads or special software needed.",
     color: "text-gold2",
     bg: "bg-amber-50",
     border: "border-amber-100",
@@ -71,7 +71,7 @@ const services = [
   {
     icon: Brain,
     title: "Individual Therapy",
-    desc: "Individual, couples, and group therapy delivered by licensed clinicians — from the comfort of your home.",
+    desc: "Individual, couples, and group therapy delivered by licensed clinicians - from the comfort of your home.",
     color: "text-blue-500",
     bg: "bg-blue-50",
     border: "border-blue-100",
@@ -87,7 +87,7 @@ const services = [
   {
     icon: Video,
     title: "Psychiatric Evaluations",
-    desc: "Comprehensive psychiatric assessments and evaluations via secure video — no in-office visit required.",
+    desc: "Comprehensive psychiatric assessments and evaluations via secure video - no in-office visit required.",
     color: "text-rose-500",
     bg: "bg-rose-50",
     border: "border-rose-100",
@@ -95,7 +95,7 @@ const services = [
   {
     icon: Leaf,
     title: "Wellness Coaching",
-    desc: "Life coaching, accountability coaching, and personal development support — virtual, flexible, and effective.",
+    desc: "Life coaching, accountability coaching, and personal development support - virtual, flexible, and effective.",
     color: "text-emerald-600",
     bg: "bg-emerald-50",
     border: "border-emerald-100",
@@ -103,7 +103,7 @@ const services = [
   {
     icon: HeartHandshake,
     title: "Crisis Support",
-    desc: "Immediate virtual support for individuals in crisis — available, compassionate, and clinically backed.",
+    desc: "Immediate virtual support for individuals in crisis - available, compassionate, and clinically backed.",
     color: "text-amber-600",
     bg: "bg-amber-50",
     border: "border-amber-100",
@@ -113,13 +113,13 @@ const services = [
 const benefits = [
   { icon: Globe,       text: "Available in all 50 states"                 },
   { icon: ShieldCheck, text: "HIPAA-secure video platform"                },
-  { icon: Clock,       text: "Flexible scheduling — evenings & weekends"  },
+  { icon: Clock,       text: "Flexible scheduling - evenings & weekends"  },
   { icon: Video,       text: "No commute, no waiting room"                },
 ] as const;
 
 const testimonials = [
   {
-    quote: "Being able to see my therapist from home changed everything. No commute, no anxiety about the waiting room — just real support.",
+    quote: "Being able to see my therapist from home changed everything. No commute, no anxiety about the waiting room - just real support.",
     name: "M. Johnson",
     role: "Virtual Therapy Client",
     rating: 5,
@@ -165,7 +165,7 @@ function VirtualWellnessPage() {
             </h1>
 
             <p className="mt-7 mx-auto max-w-2xl text-sm md:text-base text-cream/65 leading-relaxed">
-              HIPAA-secure virtual sessions with licensed therapists, psychiatrists, and wellness coaches — from your home.
+              HIPAA-secure virtual sessions with licensed therapists, psychiatrists, and wellness coaches - from your home.
             </p>
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
@@ -216,7 +216,7 @@ function VirtualWellnessPage() {
                 <em className="text-gold italic">Works</em>
               </h2>
               <p className="mt-3 text-sm text-muted max-w-lg mx-auto leading-relaxed">
-                Getting started is simple — three steps between you and the support you deserve.
+                Getting started is simple - three steps between you and the support you deserve.
               </p>
             </div>
 
@@ -259,7 +259,7 @@ function VirtualWellnessPage() {
                 <em className="text-gold italic">virtually</em>
               </h2>
               <p className="mt-4 text-sm text-muted max-w-lg mx-auto leading-relaxed">
-                From clinical therapy to wellness coaching — all delivered through a HIPAA-secure platform with no travel required.
+                From clinical therapy to wellness coaching - all delivered through a HIPAA-secure platform with no travel required.
               </p>
             </div>
 
@@ -299,11 +299,11 @@ function VirtualWellnessPage() {
                 <div>
                   <p className="text-[10px] tracking-[0.24em] uppercase text-gold2 mb-3">Technology</p>
                   <h3 className="font-serif text-2xl md:text-3xl text-cream">
-                    No special software —{" "}
+                    No special software -{" "}
                     <em className="text-gold3 italic">any device with camera/mic</em>
                   </h3>
                   <p className="mt-4 text-sm text-cream/65 leading-relaxed">
-                    Join your session from a laptop, tablet, or smartphone. No downloads, no installs — just click and connect in seconds.
+                    Join your session from a laptop, tablet, or smartphone. No downloads, no installs - just click and connect in seconds.
                   </p>
                 </div>
                 <div className="flex flex-col gap-3">
@@ -400,7 +400,7 @@ function VirtualWellnessPage() {
               <em className="text-gold italic">virtual care journey?</em>
             </h3>
             <p className="mt-3 text-sm text-muted max-w-md mx-auto leading-relaxed">
-              Get matched with a licensed provider in 24–48 hours — completely virtual, HIPAA-secure.
+              Get matched with a licensed provider in 24–48 hours - completely virtual, HIPAA-secure.
             </p>
             <div className="mt-6">
               <GoldButton to="/get-matched">Get Matched</GoldButton>

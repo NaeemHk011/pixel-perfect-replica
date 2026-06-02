@@ -9,7 +9,7 @@ export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy | Mindova Holdings" },
-      { name: "description", content: "Mindova Holdings privacy policy — how we collect, use, and protect your personal health information." },
+      { name: "description", content: "Mindova Holdings privacy policy - how we collect, use, and protect your personal health information." },
     ],
   }),
 });

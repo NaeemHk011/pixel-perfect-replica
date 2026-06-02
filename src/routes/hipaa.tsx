@@ -9,7 +9,7 @@ export const Route = createFileRoute("/hipaa")({
   head: () => ({
     meta: [
       { title: "HIPAA Notice of Privacy Practices | Mindova Holdings" },
-      { name: "description", content: "Mindova Holdings HIPAA Notice of Privacy Practices — your rights regarding protected health information." },
+      { name: "description", content: "Mindova Holdings HIPAA Notice of Privacy Practices - your rights regarding protected health information." },
     ],
   }),
 });
@@ -40,7 +40,7 @@ const rights = [
 const sections = [
   {
     title: "How We Use Your Health Information",
-    content: "Mindova Holdings uses your protected health information (PHI) for three primary purposes: (1) Treatment — to provide, coordinate, and manage your healthcare and related services; (2) Payment — to obtain payment for services rendered, including billing your insurance company; (3) Healthcare Operations — to conduct quality improvement activities, train staff, and manage our practice.",
+    content: "Mindova Holdings uses your protected health information (PHI) for three primary purposes: (1) Treatment - to provide, coordinate, and manage your healthcare and related services; (2) Payment - to obtain payment for services rendered, including billing your insurance company; (3) Healthcare Operations - to conduct quality improvement activities, train staff, and manage our practice.",
   },
   {
     title: "Disclosures We May Make Without Your Authorization",
@@ -48,7 +48,7 @@ const sections = [
   },
   {
     title: "Uses Requiring Your Written Authorization",
-    content: "Most other uses and disclosures of your PHI — including for marketing purposes, the sale of your PHI, or uses not described in this notice — require your written authorization. You may revoke any authorization at any time by notifying us in writing.",
+    content: "Most other uses and disclosures of your PHI - including for marketing purposes, the sale of your PHI, or uses not described in this notice - require your written authorization. You may revoke any authorization at any time by notifying us in writing.",
   },
   {
     title: "How We Protect Your Information",
@@ -56,7 +56,7 @@ const sections = [
   },
   {
     title: "Breach Notification",
-    content: "In the event of a breach of your unsecured PHI, we will notify you as required by the HITECH Act — typically within 60 days of discovering the breach. Notification will be provided via the contact information you have on file.",
+    content: "In the event of a breach of your unsecured PHI, we will notify you as required by the HITECH Act - typically within 60 days of discovering the breach. Notification will be provided via the contact information you have on file.",
   },
   {
     title: "Changes to This Notice",
