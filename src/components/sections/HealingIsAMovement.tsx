@@ -77,6 +77,13 @@ export function HealingIsAMovement() {
           <p className="mt-5 text-sm text-cream/55 leading-relaxed max-w-2xl mx-auto">
             As a preferred partner, you receive complimentary access to Mindova's platform while helping us bring healing, support, and resources to the communities we serve.
           </p>
+
+          {/* Fee Waiver Detail */}
+          <div className="mt-5 inline-flex items-center gap-3 px-6 py-3 rounded-full border border-gold2/30 bg-gold2/10">
+            <span className="text-xs tracking-[0.2em] uppercase text-gold2 font-semibold">
+              After 3–6 Months: Monthly Management Fee Waived
+            </span>
+          </div>
         </div>
 
         {/* ── Three Benefit Cards ── */}

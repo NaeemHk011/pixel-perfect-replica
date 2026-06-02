@@ -213,7 +213,7 @@ function JoinTheNetworkPage() {
                     </div>
                   </div>
 
-                  <ul className="space-y-2.5 mb-8">
+                  <ul className="space-y-2.5 mb-6">
                     {wellnessProviders.map((p) => (
                       <li key={p} className="flex items-center gap-2.5 text-sm text-dark/75">
                         <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />

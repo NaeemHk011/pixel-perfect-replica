@@ -10,6 +10,8 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { GoldButton, GhostButton } from "@/components/ui/Fancy";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { HealingIsAMovement } from "@/components/sections/HealingIsAMovement";
+import { WellnessMission } from "@/components/sections/WellnessMission";
+import { ProviderHighlights } from "@/components/sections/ProviderHighlights";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { providers } from "@/data/providers";
 import { testimonials } from "@/data/testimonials";
@@ -30,8 +32,10 @@ function HomePage() {
         <ServicesGrid />
         <HowItWorks />
         <ProvidersSnippet />
+        <ProviderHighlights />
         <CommunitySection />
         <TestimonialSection />
+        <WellnessMission />
         <FAQSection />
         <HealingIsAMovement />
         <BookingCTA />

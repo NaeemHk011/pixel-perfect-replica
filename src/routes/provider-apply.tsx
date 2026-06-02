@@ -12,6 +12,7 @@ import {
   Users,
   Brain,
   Leaf,
+  AlertCircle,
 } from "lucide-react";
 
 export const Route = createFileRoute("/provider-apply")({
@@ -38,11 +39,21 @@ const BENEFITS = [
 
 // ── Clinical Form ─────────────────────────────────────────────────────────────
 function ClinicalForm() {
+  const [loaded, setLoaded] = useState(false);
   return (
-    <div className="w-full" style={{ minHeight: "1352px" }}>
+    <div className="relative w-full" style={{ minHeight: "1352px" }}>
+      {!loaded && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-white z-10">
+          <div className="relative w-12 h-12">
+            <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
+            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
+          </div>
+          <p className="text-sm text-muted tracking-wide">Loading form…</p>
+        </div>
+      )}
       <iframe
         src="https://link.webtechs.dev/widget/form/iNyDerMjT7eYXuZbW1kd"
-        style={{ width: "100%", height: "1352px", border: "none", borderRadius: "8px" }}
+        style={{ width: "100%", height: "1352px", border: "none", borderRadius: "8px", display: "block", opacity: loaded ? 1 : 0, transition: "opacity 0.4s ease" }}
         id="inline-iNyDerMjT7eYXuZbW1kd"
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
@@ -56,6 +67,7 @@ function ClinicalForm() {
         data-layout-iframe-id="inline-iNyDerMjT7eYXuZbW1kd"
         data-form-id="iNyDerMjT7eYXuZbW1kd"
         title="Clinical Provider Application form"
+        onLoad={() => setLoaded(true)}
       />
     </div>
   );
@@ -63,11 +75,28 @@ function ClinicalForm() {
 
 // ── Wellness Form ─────────────────────────────────────────────────────────────
 function WellnessForm() {
+  const [loaded, setLoaded] = useState(false);
   return (
-    <div className="w-full" style={{ minHeight: "1061px" }}>
+    <div className="relative w-full" style={{ minHeight: "1061px" }}>
+      {/* Coaching Disclaimer */}
+      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 flex items-start gap-3">
+        <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+        <p className="text-xs text-amber-800 leading-relaxed">
+          <strong>Disclaimer:</strong> Coaching services provided through Mindova are non-clinical in nature and are not intended to diagnose, treat, or replace licensed mental health care. For clinical mental health concerns, please consult with a licensed professional.
+        </p>
+      </div>
+      {!loaded && (
+        <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-center gap-4 bg-white z-10" style={{ top: "68px" }}>
+          <div className="relative w-12 h-12">
+            <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
+            <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
+          </div>
+          <p className="text-sm text-muted tracking-wide">Loading form…</p>
+        </div>
+      )}
       <iframe
         src="https://link.webtechs.dev/widget/form/MfcwPYX0TmfOluT7LSR2"
-        style={{ width: "100%", height: "1061px", border: "none", borderRadius: "8px" }}
+        style={{ width: "100%", height: "1061px", border: "none", borderRadius: "8px", display: "block", opacity: loaded ? 1 : 0, transition: "opacity 0.4s ease" }}
         id="inline-MfcwPYX0TmfOluT7LSR2"
         data-layout="{'id':'INLINE'}"
         data-trigger-type="alwaysShow"
@@ -81,6 +110,7 @@ function WellnessForm() {
         data-layout-iframe-id="inline-MfcwPYX0TmfOluT7LSR2"
         data-form-id="MfcwPYX0TmfOluT7LSR2"
         title="Wellness Provider Application form"
+        onLoad={() => setLoaded(true)}
       />
     </div>
   );

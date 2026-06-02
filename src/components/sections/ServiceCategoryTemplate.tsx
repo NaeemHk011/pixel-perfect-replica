@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Check, ArrowRight, Plus, Minus } from "lucide-react";
+import { Check, ArrowRight, Plus, Minus, AlertCircle } from "lucide-react";
 import { useState } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
@@ -92,6 +92,16 @@ export function ServiceCategoryPage({
             </div>
           </div>
         </section>
+
+        {/* Legal Disclaimer */}
+        <div className="bg-amber-50 border-y border-amber-200 py-4 relative z-10">
+          <div className="max-w-7xl mx-auto px-5 md:px-8 flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+            <p className="text-xs text-amber-800 leading-relaxed">
+              <strong>Disclaimer:</strong> Coaching services provided through Mindova are non-clinical in nature and are not intended to diagnose, treat, or replace licensed mental health care. For clinical mental health concerns, please consult with a licensed professional.
+            </p>
+          </div>
+        </div>
 
         {/* Sub-service cards */}
         <section className="py-20 md:py-28 bg-cream relative z-10">

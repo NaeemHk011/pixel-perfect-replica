@@ -11,13 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as VirtualWellnessRouteImport } from './routes/virtual-wellness'
+import { Route as TermsRouteImport } from './routes/terms'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ProvidersRouteImport } from './routes/providers'
 import { Route as ProviderApplyRouteImport } from './routes/provider-apply'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PartnershipsRouteImport } from './routes/partnerships'
 import { Route as JoinTheNetworkRouteImport } from './routes/join-the-network'
 import { Route as IntakeRouteImport } from './routes/intake'
+import { Route as HipaaRouteImport } from './routes/hipaa'
 import { Route as GetMatchedRouteImport } from './routes/get-matched'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CommunityRouteImport } from './routes/community'
@@ -46,6 +49,11 @@ const VirtualWellnessRoute = VirtualWellnessRouteImport.update({
   path: '/virtual-wellness',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -66,6 +74,11 @@ const ProviderApplyRoute = ProviderApplyRouteImport.update({
   path: '/provider-apply',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnershipsRoute = PartnershipsRouteImport.update({
   id: '/partnerships',
   path: '/partnerships',
@@ -79,6 +92,11 @@ const JoinTheNetworkRoute = JoinTheNetworkRouteImport.update({
 const IntakeRoute = IntakeRouteImport.update({
   id: '/intake',
   path: '/intake',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HipaaRoute = HipaaRouteImport.update({
+  id: '/hipaa',
+  path: '/hipaa',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GetMatchedRoute = GetMatchedRouteImport.update({
@@ -179,13 +197,16 @@ export interface FileRoutesByFullPath {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/get-matched': typeof GetMatchedRoute
+  '/hipaa': typeof HipaaRoute
   '/intake': typeof IntakeRoute
   '/join-the-network': typeof JoinTheNetworkRoute
   '/partnerships': typeof PartnershipsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/provider-apply': typeof ProviderApplyRoute
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/virtual-wellness': typeof VirtualWellnessRoute
   '/waitlist': typeof WaitlistRoute
   '/services/clinical': typeof ServicesClinicalRoute
@@ -207,13 +228,16 @@ export interface FileRoutesByTo {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/get-matched': typeof GetMatchedRoute
+  '/hipaa': typeof HipaaRoute
   '/intake': typeof IntakeRoute
   '/join-the-network': typeof JoinTheNetworkRoute
   '/partnerships': typeof PartnershipsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/provider-apply': typeof ProviderApplyRoute
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/virtual-wellness': typeof VirtualWellnessRoute
   '/waitlist': typeof WaitlistRoute
   '/services/clinical': typeof ServicesClinicalRoute
@@ -236,13 +260,16 @@ export interface FileRoutesById {
   '/community': typeof CommunityRoute
   '/contact': typeof ContactRoute
   '/get-matched': typeof GetMatchedRoute
+  '/hipaa': typeof HipaaRoute
   '/intake': typeof IntakeRoute
   '/join-the-network': typeof JoinTheNetworkRoute
   '/partnerships': typeof PartnershipsRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/provider-apply': typeof ProviderApplyRoute
   '/providers': typeof ProvidersRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/terms': typeof TermsRoute
   '/virtual-wellness': typeof VirtualWellnessRoute
   '/waitlist': typeof WaitlistRoute
   '/services_/clinical': typeof ServicesClinicalRoute
@@ -266,13 +293,16 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/get-matched'
+    | '/hipaa'
     | '/intake'
     | '/join-the-network'
     | '/partnerships'
+    | '/privacy-policy'
     | '/provider-apply'
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/virtual-wellness'
     | '/waitlist'
     | '/services/clinical'
@@ -294,13 +324,16 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/get-matched'
+    | '/hipaa'
     | '/intake'
     | '/join-the-network'
     | '/partnerships'
+    | '/privacy-policy'
     | '/provider-apply'
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/virtual-wellness'
     | '/waitlist'
     | '/services/clinical'
@@ -322,13 +355,16 @@ export interface FileRouteTypes {
     | '/community'
     | '/contact'
     | '/get-matched'
+    | '/hipaa'
     | '/intake'
     | '/join-the-network'
     | '/partnerships'
+    | '/privacy-policy'
     | '/provider-apply'
     | '/providers'
     | '/services'
     | '/sitemap.xml'
+    | '/terms'
     | '/virtual-wellness'
     | '/waitlist'
     | '/services_/clinical'
@@ -351,13 +387,16 @@ export interface RootRouteChildren {
   CommunityRoute: typeof CommunityRoute
   ContactRoute: typeof ContactRoute
   GetMatchedRoute: typeof GetMatchedRoute
+  HipaaRoute: typeof HipaaRoute
   IntakeRoute: typeof IntakeRoute
   JoinTheNetworkRoute: typeof JoinTheNetworkRoute
   PartnershipsRoute: typeof PartnershipsRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProviderApplyRoute: typeof ProviderApplyRoute
   ProvidersRoute: typeof ProvidersRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  TermsRoute: typeof TermsRoute
   VirtualWellnessRoute: typeof VirtualWellnessRoute
   WaitlistRoute: typeof WaitlistRoute
   ServicesClinicalRoute: typeof ServicesClinicalRoute
@@ -389,6 +428,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VirtualWellnessRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -417,6 +463,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProviderApplyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partnerships': {
       id: '/partnerships'
       path: '/partnerships'
@@ -436,6 +489,13 @@ declare module '@tanstack/react-router' {
       path: '/intake'
       fullPath: '/intake'
       preLoaderRoute: typeof IntakeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hipaa': {
+      id: '/hipaa'
+      path: '/hipaa'
+      fullPath: '/hipaa'
+      preLoaderRoute: typeof HipaaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/get-matched': {
@@ -567,13 +627,16 @@ const rootRouteChildren: RootRouteChildren = {
   CommunityRoute: CommunityRoute,
   ContactRoute: ContactRoute,
   GetMatchedRoute: GetMatchedRoute,
+  HipaaRoute: HipaaRoute,
   IntakeRoute: IntakeRoute,
   JoinTheNetworkRoute: JoinTheNetworkRoute,
   PartnershipsRoute: PartnershipsRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProviderApplyRoute: ProviderApplyRoute,
   ProvidersRoute: ProvidersRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  TermsRoute: TermsRoute,
   VirtualWellnessRoute: VirtualWellnessRoute,
   WaitlistRoute: WaitlistRoute,
   ServicesClinicalRoute: ServicesClinicalRoute,

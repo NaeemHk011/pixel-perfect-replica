@@ -95,6 +95,16 @@ export function Footer() {
         {/* ── Nav columns (spans 8 of 12, split into 4×2) ── */}
         <div className="md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
           <FooterCol
+            title="Company"
+            links={[
+              ["/about",             "About Us"],
+              ["/providers",         "Our Providers"],
+              ["/partnerships",      "Partnerships"],
+              ["/contact",           "Contact Us"],
+              ["/join-the-network",  "Join the Network"],
+            ]}
+          />
+          <FooterCol
             title="Services"
             links={[
               ["/services/mental-health",            "Mental Health"],
@@ -106,16 +116,6 @@ export function Footer() {
               ["/services/therapy",                   "Telehealth Therapy"],
               ["/services/medication-management",     "Medication Mgmt"],
               ["/services/iop",                       "Intensive Outpatient"],
-            ]}
-          />
-          <FooterCol
-            title="Company"
-            links={[
-              ["/about",             "About Us"],
-              ["/providers",         "Our Providers"],
-              ["/partnerships",      "Partnerships"],
-              ["/contact",           "Contact Us"],
-              ["/join-the-network",  "Join the Network"],
             ]}
           />
           <FooterCol
@@ -131,12 +131,9 @@ export function Footer() {
           <FooterCol
             title="Legal"
             links={[
-              ["#privacy",       "Privacy Policy"],
-              ["#terms",         "Terms of Service"],
-              ["#hipaa",         "HIPAA Notice"],
-              ["#accessibility", "Accessibility"],
-              ["#cookies",       "Cookie Policy"],
-              ["#sitemap",       "Sitemap"],
+              ["/privacy-policy", "Privacy Policy"],
+              ["/terms",          "Terms of Service"],
+              ["/hipaa",          "HIPAA Notice"],
             ]}
           />
         </div>
@@ -155,9 +152,9 @@ export function Footer() {
           <p>Licensed in all 50 states. Telehealth services provided by licensed clinicians.</p>
         </div>
         <div className="flex items-center gap-5 flex-wrap justify-center">
-          <a href="#privacy" className="hover:text-gold2 transition-colors duration-200">Privacy</a>
-          <a href="#terms"   className="hover:text-gold2 transition-colors duration-200">Terms</a>
-          <a href="#hipaa"   className="hover:text-gold2 transition-colors duration-200">HIPAA</a>
+          <Link to="/privacy-policy" className="hover:text-gold2 transition-colors duration-200">Privacy</Link>
+          <Link to="/terms"          className="hover:text-gold2 transition-colors duration-200">Terms</Link>
+          <Link to="/hipaa"            className="hover:text-gold2 transition-colors duration-200">HIPAA</Link>
           <span className="text-cream/15">·</span>
           <a
             href="https://axistechgroup.com/"

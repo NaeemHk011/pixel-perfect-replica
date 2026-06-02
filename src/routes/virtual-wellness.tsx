@@ -14,8 +14,13 @@ import {
   Brain,
   Pill,
   Leaf,
-  ArrowRight,
   Star,
+  CalendarCheck,
+  Laptop,
+  HeartHandshake,
+  Lock,
+  Smartphone,
+  AlertCircle,
 } from "lucide-react";
 
 export const Route = createFileRoute("/virtual-wellness")({
@@ -26,16 +31,46 @@ export const Route = createFileRoute("/virtual-wellness")({
       {
         name: "description",
         content:
-          "Access therapy, medication management, psychiatric care, and wellness coaching — completely virtual, HIPAA-secure, and available in all 50 states.",
+          "HIPAA-secure virtual sessions with licensed therapists, psychiatrists, and wellness coaches — from your home.",
       },
     ],
   }),
 });
 
+const howItWorksSteps = [
+  {
+    number: "01",
+    icon: CalendarCheck,
+    title: "Book",
+    desc: "Select your service and schedule a session — same-week availability, no waitlists.",
+    color: "text-blue-500",
+    bg: "bg-blue-50",
+    border: "border-blue-100",
+  },
+  {
+    number: "02",
+    icon: Laptop,
+    title: "Connect",
+    desc: "Join your HIPAA-secure video session from any device — no downloads or special software needed.",
+    color: "text-gold2",
+    bg: "bg-amber-50",
+    border: "border-amber-100",
+  },
+  {
+    number: "03",
+    icon: HeartHandshake,
+    title: "Heal",
+    desc: "Begin your care journey with a licensed professional guiding you every step of the way.",
+    color: "text-emerald-600",
+    bg: "bg-emerald-50",
+    border: "border-emerald-100",
+  },
+] as const;
+
 const services = [
   {
     icon: Brain,
-    title: "Virtual Therapy",
+    title: "Individual Therapy",
     desc: "Individual, couples, and group therapy delivered by licensed clinicians — from the comfort of your home.",
     color: "text-blue-500",
     bg: "bg-blue-50",
@@ -50,6 +85,14 @@ const services = [
     border: "border-violet-100",
   },
   {
+    icon: Video,
+    title: "Psychiatric Evaluations",
+    desc: "Comprehensive psychiatric assessments and evaluations via secure video — no in-office visit required.",
+    color: "text-rose-500",
+    bg: "bg-rose-50",
+    border: "border-rose-100",
+  },
+  {
     icon: Leaf,
     title: "Wellness Coaching",
     desc: "Life coaching, accountability coaching, and personal development support — virtual, flexible, and effective.",
@@ -58,29 +101,20 @@ const services = [
     border: "border-emerald-100",
   },
   {
-    icon: Video,
-    title: "Psychiatric Evaluations",
-    desc: "Comprehensive psychiatric assessments and evaluations via secure video — no in-office visit required.",
-    color: "text-rose-500",
-    bg: "bg-rose-50",
-    border: "border-rose-100",
+    icon: HeartHandshake,
+    title: "Crisis Support",
+    desc: "Immediate virtual support for individuals in crisis — available, compassionate, and clinically backed.",
+    color: "text-amber-600",
+    bg: "bg-amber-50",
+    border: "border-amber-100",
   },
 ] as const;
 
 const benefits = [
-  { icon: Globe,      text: "Available in all 50 states"              },
-  { icon: ShieldCheck, text: "HIPAA-secure video platform"            },
-  { icon: Clock,       text: "Flexible scheduling — evenings & weekends" },
-  { icon: Video,       text: "No commute, no waiting room"            },
-] as const;
-
-const whoIsItFor = [
-  "Individuals with busy schedules who can't attend in-person sessions",
-  "People in rural or underserved areas with limited local options",
-  "Those seeking therapy, psychiatry, or coaching from home",
-  "Anyone who prefers the privacy and comfort of virtual care",
-  "Patients stepping down from higher levels of care",
-  "People across all 50 states, regardless of location",
+  { icon: Globe,       text: "Available in all 50 states"                 },
+  { icon: ShieldCheck, text: "HIPAA-secure video platform"                },
+  { icon: Clock,       text: "Flexible scheduling — evenings & weekends"  },
+  { icon: Video,       text: "No commute, no waiting room"                },
 ] as const;
 
 const testimonials = [
@@ -126,12 +160,12 @@ function VirtualWellnessPage() {
             </span>
 
             <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight">
-              Wellness,{" "}
-              <em className="text-gold3 italic">Wherever You Are</em>
+              Care From{" "}
+              <em className="text-gold3 italic">Anywhere</em>
             </h1>
 
             <p className="mt-7 mx-auto max-w-2xl text-sm md:text-base text-cream/65 leading-relaxed">
-              Access therapy, medication management, psychiatric care, and wellness coaching — completely virtual, compassionate, and available across all 50 states.
+              HIPAA-secure virtual sessions with licensed therapists, psychiatrists, and wellness coaches — from your home.
             </p>
 
             <div className="mt-9 flex flex-wrap justify-center gap-3">
@@ -171,26 +205,69 @@ function VirtualWellnessPage() {
         {/* Gold divider */}
         <div className="h-1.5 w-full" style={{ background: "linear-gradient(90deg, #B89040 0%, #E4C06A 40%, #CFA84E 70%, #B89040 100%)" }} />
 
-        {/* ── Services ── */}
-        <section className="py-24 md:py-32 bg-cream relative z-10">
+        {/* ── How Virtual Care Works ── */}
+        <section className="py-20 md:py-28 bg-cream relative z-10">
+          <div className="max-w-7xl mx-auto px-5 md:px-8">
+
+            <div className="text-center mb-14 reveal">
+              <SectionLabel>How It Works</SectionLabel>
+              <h2 className="font-serif text-3xl md:text-4xl mt-4 tracking-tight">
+                How Virtual Care{" "}
+                <em className="text-gold italic">Works</em>
+              </h2>
+              <p className="mt-3 text-sm text-muted max-w-lg mx-auto leading-relaxed">
+                Getting started is simple — three steps between you and the support you deserve.
+              </p>
+            </div>
+
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Connector line - desktop only */}
+              <div
+                className="absolute top-[52px] left-[calc(16.66%+1.5rem)] right-[calc(16.66%+1.5rem)] hidden md:block pointer-events-none"
+                style={{ borderTop: "2px dashed rgba(207,168,78,0.35)" }}
+              />
+
+              {howItWorksSteps.map(({ number, icon: Icon, title, desc, color, bg, border }, i) => (
+                <div
+                  key={number}
+                  className="reveal relative bg-white rounded-2xl p-7 border border-dark/[0.07] shadow-[0_4px_20px_-8px_rgba(12,11,9,0.08)] text-center"
+                  data-reveal-delay={String(i * 100)}
+                >
+                  <div className={`mx-auto w-14 h-14 rounded-2xl ${bg} border ${border} flex items-center justify-center mb-5 relative`}>
+                    <Icon className={`w-6 h-6 ${color}`} />
+                    <span className="absolute -top-2 -right-2 w-5 h-5 rounded-full bg-dark text-cream text-[10px] font-bold flex items-center justify-center">
+                      {number.replace("0", "")}
+                    </span>
+                  </div>
+                  <h3 className="font-serif text-xl text-dark mb-2">{title}</h3>
+                  <p className="text-sm text-dark/60 leading-relaxed">{desc}</p>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+
+        {/* ── Services Available Virtually ── */}
+        <section className="py-24 md:py-32 bg-white relative z-10">
           <div className="max-w-7xl mx-auto px-5 md:px-8">
 
             <div className="text-center mb-14 reveal">
               <SectionLabel>Virtual Services</SectionLabel>
               <h2 className="font-serif text-4xl md:text-5xl mt-5 tracking-tight">
-                Everything you need,{" "}
-                <em className="text-gold italic">online</em>
+                Services available{" "}
+                <em className="text-gold italic">virtually</em>
               </h2>
               <p className="mt-4 text-sm text-muted max-w-lg mx-auto leading-relaxed">
                 From clinical therapy to wellness coaching — all delivered through a HIPAA-secure platform with no travel required.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map(({ icon: Icon, title, desc, color, bg, border }, i) => (
                 <div
                   key={title}
-                  className="reveal bg-white rounded-2xl p-8 border border-dark/[0.07] shadow-[0_4px_24px_-8px_rgba(12,11,9,0.08)]"
+                  className="reveal bg-[#F9F6F1] rounded-2xl p-8 border border-dark/[0.07] shadow-[0_4px_24px_-8px_rgba(12,11,9,0.08)]"
                   data-reveal-delay={String(i * 80)}
                 >
                   <div className={`w-11 h-11 rounded-xl ${bg} border ${border} flex items-center justify-center mb-5`}>
@@ -202,36 +279,79 @@ function VirtualWellnessPage() {
               ))}
             </div>
 
+            {/* Coaching disclaimer */}
+            <div className="mt-8 bg-amber-50 border border-amber-200 rounded-xl px-5 py-4 flex items-start gap-3 max-w-3xl mx-auto reveal">
+              <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+              <p className="text-xs text-amber-800 leading-relaxed">
+                <strong>Disclaimer:</strong> Coaching services provided through Mindova are non-clinical in nature and are not intended to diagnose, treat, or replace licensed mental health care. For clinical mental health concerns, please consult with a licensed professional.
+              </p>
+            </div>
+
           </div>
         </section>
 
-        {/* ── Who Is It For ── */}
-        <section className="py-24 md:py-32 bg-white relative z-10">
-          <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-14 items-center">
-
-            <div className="reveal">
-              <SectionLabel>Who It's For</SectionLabel>
-              <h2 className="font-serif text-4xl md:text-5xl mt-5 tracking-tight">
-                Real care,{" "}
-                <em className="text-gold italic">no barriers</em>
-              </h2>
-              <p className="mt-5 text-muted text-sm leading-relaxed max-w-lg">
-                Virtual care removes the obstacles that keep people from getting support — distance, scheduling, stigma, and cost. If you have a device and an internet connection, you can access Mindova.
-              </p>
-              <div className="mt-8">
-                <GoldButton to="/get-matched">Start Your Journey</GoldButton>
+        {/* ── Technology Section ── */}
+        <section className="py-16 md:py-20 bg-cream relative z-10">
+          <div className="max-w-4xl mx-auto px-5 md:px-8">
+            <div className="reveal bg-dark rounded-2xl p-8 md:p-10 text-cream relative overflow-hidden">
+              <div className="absolute inset-0 gold-glow opacity-50 pointer-events-none" />
+              <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <p className="text-[10px] tracking-[0.24em] uppercase text-gold2 mb-3">Technology</p>
+                  <h3 className="font-serif text-2xl md:text-3xl text-cream">
+                    No special software —{" "}
+                    <em className="text-gold3 italic">any device with camera/mic</em>
+                  </h3>
+                  <p className="mt-4 text-sm text-cream/65 leading-relaxed">
+                    Join your session from a laptop, tablet, or smartphone. No downloads, no installs — just click and connect in seconds.
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3">
+                  {[
+                    { icon: Laptop,      text: "Laptop or Desktop" },
+                    { icon: Smartphone,  text: "Phone or Tablet"   },
+                    { icon: Video,       text: "Any camera-enabled device" },
+                  ].map(({ icon: Icon, text }) => (
+                    <div key={text} className="flex items-center gap-3 bg-white/[0.07] border border-white/10 rounded-xl px-4 py-3">
+                      <Icon className="w-4 h-4 text-gold2 flex-shrink-0" />
+                      <span className="text-sm text-cream/75">{text}</span>
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400 ml-auto flex-shrink-0" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+          </div>
+        </section>
 
-            <ul className="space-y-4 reveal" data-reveal-delay="120">
-              {whoIsItFor.map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm text-dark/75">
-                  <CheckCircle2 className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-
+        {/* ── Privacy & Security ── */}
+        <section className="py-16 bg-white relative z-10">
+          <div className="max-w-4xl mx-auto px-5 md:px-8">
+            <div className="reveal bg-[#F9F6F1] rounded-2xl p-8 border border-dark/[0.07] shadow-[0_4px_20px_-8px_rgba(12,11,9,0.06)]">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
+                <div className="w-16 h-16 rounded-2xl bg-emerald-50 border border-emerald-100 flex items-center justify-center flex-shrink-0">
+                  <Lock className="w-7 h-7 text-emerald-600" />
+                </div>
+                <div className="flex-1">
+                  <p className="text-[10px] tracking-[0.24em] uppercase text-emerald-600 mb-1">Privacy &amp; Security</p>
+                  <h3 className="font-serif text-xl md:text-2xl text-dark">HIPAA-compliant, end-to-end encrypted</h3>
+                  <p className="mt-2 text-sm text-muted leading-relaxed">
+                    Every session is conducted on a fully HIPAA-compliant, end-to-end encrypted platform. Your information, conversations, and health data are always protected and never shared.
+                  </p>
+                  <div className="mt-4 flex flex-wrap gap-5">
+                    {[
+                      { icon: ShieldCheck, text: "HIPAA Compliant"       },
+                      { icon: Lock,        text: "End-to-End Encrypted"  },
+                      { icon: Globe,       text: "SOC 2 Certified Platform" },
+                    ].map(({ icon: Icon, text }) => (
+                      <span key={text} className="flex items-center gap-1.5 text-xs text-emerald-600 font-medium">
+                        <Icon className="w-3.5 h-3.5" />{text}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -269,30 +389,21 @@ function VirtualWellnessPage() {
                 </div>
               ))}
             </div>
-
           </div>
         </section>
 
-        {/* ── Bottom CTA Banner ── */}
-        <section className="py-14 bg-[#F9F6F1] border-b border-dark/[0.06] relative z-10">
-          <div className="max-w-3xl mx-auto px-5 md:px-8">
-            <div className="reveal bg-white rounded-2xl p-6 md:p-8 border border-dark/[0.07] shadow-[0_4px_20px_-8px_rgba(12,11,9,0.06)] flex flex-col sm:flex-row items-start sm:items-center gap-5">
-              <div className="w-14 h-14 rounded-full bg-gold2/15 border border-gold2/25 flex items-center justify-center flex-shrink-0">
-                <ShieldCheck className="w-6 h-6 text-gold2" />
-              </div>
-              <div className="flex-1">
-                <p className="text-[10px] tracking-[0.2em] uppercase text-gold2 mb-1">HIPAA Secure</p>
-                <h3 className="font-serif text-xl text-dark">Your privacy is our priority</h3>
-                <p className="mt-1 text-sm text-muted leading-relaxed">
-                  All virtual sessions are conducted on a fully HIPAA-compliant, encrypted platform. Your information is always protected.
-                </p>
-              </div>
-              <Link
-                to="/get-matched"
-                className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-semibold px-6 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 whitespace-nowrap"
-              >
-                Get Started <ArrowRight className="w-4 h-4" />
-              </Link>
+        {/* ── Bottom CTA ── */}
+        <section className="py-14 bg-[#F9F6F1] relative z-10">
+          <div className="max-w-3xl mx-auto px-5 md:px-8 text-center reveal">
+            <h3 className="font-serif text-2xl md:text-3xl text-dark tracking-tight">
+              Ready to start your{" "}
+              <em className="text-gold italic">virtual care journey?</em>
+            </h3>
+            <p className="mt-3 text-sm text-muted max-w-md mx-auto leading-relaxed">
+              Get matched with a licensed provider in 24–48 hours — completely virtual, HIPAA-secure.
+            </p>
+            <div className="mt-6">
+              <GoldButton to="/get-matched">Get Matched</GoldButton>
             </div>
           </div>
         </section>
