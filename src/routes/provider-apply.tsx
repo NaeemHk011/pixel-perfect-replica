@@ -73,43 +73,33 @@ function ClinicalForm() {
   );
 }
 
-// ── Wellness Form ─────────────────────────────────────────────────────────────
+// ── Wellness Calendar ─────────────────────────────────────────────────────────
 function WellnessForm() {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className="relative w-full" style={{ minHeight: "1061px" }}>
+    <div className="relative w-full">
       {/* Coaching Disclaimer */}
-      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 flex items-start gap-3">
+      <div className="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-4 flex items-start gap-3 mx-4 mt-4">
         <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
         <p className="text-xs text-amber-800 leading-relaxed">
           <strong>Disclaimer:</strong> Coaching services provided through Mindova are non-clinical in nature and are not intended to diagnose, treat, or replace licensed mental health care. For clinical mental health concerns, please consult with a licensed professional.
         </p>
       </div>
       {!loaded && (
-        <div className="absolute inset-x-0 bottom-0 flex flex-col items-center justify-center gap-4 bg-white z-10" style={{ top: "68px" }}>
+        <div className="flex flex-col items-center justify-center gap-4 py-16 bg-white">
           <div className="relative w-12 h-12">
             <div className="absolute inset-0 rounded-full border-4 border-gold2/20" />
             <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-gold2 animate-spin" />
           </div>
-          <p className="text-sm text-muted tracking-wide">Loading form…</p>
+          <p className="text-sm text-muted tracking-wide">Loading calendar…</p>
         </div>
       )}
       <iframe
-        src="https://link.webtechs.dev/widget/form/MfcwPYX0TmfOluT7LSR2"
-        style={{ width: "100%", height: "1061px", border: "none", borderRadius: "8px", display: "block", opacity: loaded ? 1 : 0, transition: "opacity 0.4s ease" }}
-        id="inline-MfcwPYX0TmfOluT7LSR2"
-        data-layout="{'id':'INLINE'}"
-        data-trigger-type="alwaysShow"
-        data-trigger-value=""
-        data-activation-type="alwaysActivated"
-        data-activation-value=""
-        data-deactivation-type="neverDeactivate"
-        data-deactivation-value=""
-        data-form-name="Wellness Provider Application form"
-        data-height="1061"
-        data-layout-iframe-id="inline-MfcwPYX0TmfOluT7LSR2"
-        data-form-id="MfcwPYX0TmfOluT7LSR2"
-        title="Wellness Provider Application form"
+        src="https://link.webtechs.dev/widget/booking/vvRz4Amof88obeUsiTRo"
+        style={{ width: "100%", height: "900px", border: "none", overflow: "hidden", display: loaded ? "block" : "none" }}
+        scrolling="yes"
+        id="vvRz4Amof88obeUsiTRo_1781120026271"
+        title="Wellness Provider Booking Calendar"
         onLoad={() => setLoaded(true)}
       />
     </div>
@@ -168,11 +158,11 @@ function ProviderApplyPage() {
 
       {/* ── Main Content ── */}
       <main className="py-20 md:py-28 bg-cream">
-        <div className="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 lg:grid-cols-[1fr_1.7fr] gap-14 items-start">
+        <div className="max-w-7xl mx-auto px-5 md:px-8 flex flex-col gap-16">
 
-          {/* ── Left Sidebar ── */}
-          <div className="reveal space-y-6 lg:sticky lg:top-32">
-            <div>
+          {/* ── Provider Network (Top) ── */}
+          <div className="bg-white rounded-[28px] border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)] p-8 md:p-12 space-y-8">
+            <div className="text-center">
               <SectionLabel>Provider Network</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl mt-5 tracking-tight">
                 Build your practice.{" "}
@@ -180,9 +170,9 @@ function ProviderApplyPage() {
               </h2>
             </div>
 
-            <div className="space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {BENEFITS.map(({ icon: Icon, title, desc }) => (
-                <div key={title} className="flex items-start gap-4 p-4 bg-white border border-black/5 rounded-2xl hover:border-gold/20 hover:shadow-[0_8px_24px_-8px_rgba(184,144,64,0.12)] transition-all duration-300">
+                <div key={title} className="flex items-start gap-4 p-4 bg-cream border border-black/5 rounded-2xl hover:border-gold/20 hover:shadow-[0_8px_24px_-8px_rgba(184,144,64,0.12)] transition-all duration-300">
                   <div className="w-10 h-10 rounded-xl bg-gold2/10 border border-gold2/20 flex items-center justify-center flex-shrink-0 mt-0.5">
                     <Icon className="w-4 h-4 text-gold2" />
                   </div>
@@ -195,25 +185,27 @@ function ProviderApplyPage() {
             </div>
 
             {/* Dark CTA card */}
-            <div className="relative overflow-hidden bg-dark text-cream rounded-[20px] p-6">
+            <div className="relative overflow-hidden bg-dark text-cream rounded-[20px] p-6 max-w-xl mx-auto w-full">
               <div className="absolute inset-0 gold-glow opacity-60 pointer-events-none" />
               <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-gold2/40 to-transparent" />
-              <div className="relative">
+              <div className="relative text-center">
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full badge-gradient text-gold3 text-[10px] tracking-[0.22em] uppercase mb-4">
                   <span className="w-1.5 h-1.5 rounded-full bg-gold3 animate-pulse" />
                   Now Accepting Applications
                 </span>
                 <h3 className="font-serif text-xl">Have questions before applying?</h3>
                 <p className="text-cream/60 text-sm mt-2 leading-relaxed">Our provider relations team is happy to answer any questions before you apply.</p>
-                <Link to="/contact" className="mt-5 inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-6 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-8px_rgba(207,168,78,0.5)]">
-                  Contact Our Team <ArrowRight className="w-4 h-4" />
-                </Link>
+                <div className="flex justify-center mt-5">
+                  <Link to="/contact" className="inline-flex items-center gap-2 bg-gold2 hover:bg-gold3 text-dark font-medium px-6 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-8px_rgba(207,168,78,0.5)]">
+                    Contact Our Team <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* ── Right: Tabbed Form ── */}
-          <div className="reveal" data-reveal-delay="120">
+          {/* ── Provider Application (Bottom, Centered) ── */}
+          <div className="reveal max-w-5xl mx-auto w-full" data-reveal-delay="120">
 
             {/* Tab header */}
             <div className="mb-6 text-center">
