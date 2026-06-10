@@ -45,7 +45,7 @@ const sections = [
   },
   {
     title: "Contact Us",
-    content: "If you have questions about this Privacy Policy or our data practices, please contact our Privacy Officer at care@mindovaholdings.com or call (888) 000-0000.",
+    content: "If you have questions about this Privacy Policy or our data practices, please contact our Privacy Officer at care@mindovaholdings.com or call 336-291-6603.",
   },
 ] as const;
 

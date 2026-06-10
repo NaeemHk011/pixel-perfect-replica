@@ -57,7 +57,7 @@ const sections = [
   },
   {
     title: "Contact",
-    content: "Questions about these Terms of Service may be directed to: care@mindovaholdings.com or (888) 000-0000.",
+    content: "Questions about these Terms of Service may be directed to: care@mindovaholdings.com or 336-291-6603.",
   },
 ] as const;
 

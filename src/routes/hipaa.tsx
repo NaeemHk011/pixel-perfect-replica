@@ -172,7 +172,7 @@ function HipaaPage() {
                     className="flex items-center gap-2 border border-white/25 text-white hover:border-gold2 hover:text-gold3 font-semibold px-5 py-2.5 rounded-full text-sm transition-all duration-200 hover:-translate-y-0.5"
                   >
                     <Phone className="w-4 h-4" />
-                    (888) 000-0000
+                    336-291-6603
                   </a>
                 </div>
                 <p className="mt-5 text-xs text-cream/40 leading-relaxed">

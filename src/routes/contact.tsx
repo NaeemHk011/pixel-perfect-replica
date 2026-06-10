@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contact")({
 
 const contactInfo = [
   { icon: Mail,  label: "Email",    value: "care@mindovaholdings.com", href: "mailto:care@mindovaholdings.com" },
-  { icon: Phone, label: "Phone",    value: "(888) 000-0000",           href: "tel:+18880000000"                },
+  { icon: Phone, label: "Phone",    value: "336-291-6603",             href: "tel:+13362916603"               },
   { icon: Clock, label: "Hours",    value: "Mon–Fri, 8am–8pm EST",     href: null                             },
   { icon: Globe, label: "Coverage", value: "All 50 States       Virtual",  href: null                             },
 ];

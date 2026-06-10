@@ -46,7 +46,7 @@ export function Footer() {
           <ul className="mt-6 space-y-2.5">
             {[
               { icon: Mail,    text: "care@mindovaholdings.com", href: "mailto:care@mindovaholdings.com" },
-              { icon: Phone,   text: "(888) 000-0000",           href: "tel:+18880000000"                },
+              { icon: Phone,   text: "336-291-6603",             href: "tel:+13362916603"               },
               { icon: Clock,   text: "Mon–Fri, 8am–8pm EST",     href: null                             },
               { icon: MapPin,  text: "All 50 States       Virtual",  href: null                             },
             ].map(({ icon: Icon, text, href }) => (
