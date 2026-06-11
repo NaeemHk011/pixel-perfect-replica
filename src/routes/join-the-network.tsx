@@ -189,6 +189,7 @@ function JoinTheNetworkPage() {
                     </div>
                     <Link
                       to="/provider-apply"
+                      search={{ type: "clinical" }}
                       className="flex items-center justify-center gap-2 w-full py-3.5 bg-blue-500 hover:bg-blue-600 text-white font-semibold text-sm rounded-xl tracking-wide uppercase transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-8px_rgba(59,130,246,0.4)]"
                     >
                       Apply as Clinical Provider
@@ -229,6 +230,7 @@ function JoinTheNetworkPage() {
                     </div>
                     <Link
                       to="/provider-apply"
+                      search={{ type: "wellness" }}
                       className="flex items-center justify-center gap-2 w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm rounded-xl tracking-wide uppercase transition-all duration-200 hover:-translate-y-0.5 shadow-[0_8px_24px_-8px_rgba(16,185,129,0.4)]"
                     >
                       Apply as Wellness Professional

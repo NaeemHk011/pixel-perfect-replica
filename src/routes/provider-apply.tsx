@@ -16,6 +16,9 @@ import {
 } from "lucide-react";
 
 export const Route = createFileRoute("/provider-apply")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    type: search.type === "wellness" ? ("wellness" as const) : ("clinical" as const),
+  }),
   component: ProviderApplyPage,
   head: () => ({
     meta: [
@@ -28,8 +31,6 @@ export const Route = createFileRoute("/provider-apply")({
     ],
   }),
 });
-
-type Tab = "clinical" | "wellness";
 
 const BENEFITS = [
   { icon: Calendar,      title: "Flexible Schedule",     desc: "Set your own hours and take on as many or as few clients as you choose."           },
@@ -109,7 +110,7 @@ function WellnessForm() {
 // ── Page ─────────────────────────────────────────────────────────────────────
 function ProviderApplyPage() {
   useScrollAnimation();
-  const [activeTab, setActiveTab] = useState<Tab>("clinical");
+  const { type } = Route.useSearch();
 
   useEffect(() => {
     if (document.querySelector('script[src="https://link.webtechs.dev/js/form_embed.js"]')) return;
@@ -207,7 +208,6 @@ function ProviderApplyPage() {
           {/* ── Provider Application (Bottom, Centered) ── */}
           <div className="reveal max-w-5xl mx-auto w-full" data-reveal-delay="120">
 
-            {/* Tab header */}
             <div className="mb-6 text-center">
               <SectionLabel>Provider Application</SectionLabel>
               <h2 className="font-serif text-3xl md:text-4xl mt-3 tracking-tight">
@@ -215,45 +215,15 @@ function ProviderApplyPage() {
                 <em className="text-gold italic">Application.</em>
               </h2>
               <p className="mt-2 text-sm text-muted leading-relaxed max-w-md mx-auto">
-                Choose your track below and fill out the form. Our team reviews all applications within 3 business days.
+                Fill out the form below. Our team reviews all applications within 3 business days.
               </p>
-            </div>
-
-            {/* Tab switcher */}
-            <div className="flex rounded-2xl bg-dark p-1.5 mb-6 gap-1.5">
-              <button
-                type="button"
-                onClick={() => setActiveTab("clinical")}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  activeTab === "clinical"
-                    ? "bg-gold2 text-dark shadow-[0_4px_12px_-4px_rgba(207,168,78,0.5)]"
-                    : "text-cream/60 hover:text-cream"
-                }`}
-              >
-                <Brain className="w-4 h-4 flex-shrink-0" />
-                <span className="hidden sm:inline">Licensed Clinical Professional</span>
-                <span className="sm:hidden">Clinical</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("wellness")}
-                className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  activeTab === "wellness"
-                    ? "bg-gold2 text-dark shadow-[0_4px_12px_-4px_rgba(207,168,78,0.5)]"
-                    : "text-cream/60 hover:text-cream"
-                }`}
-              >
-                <Leaf className="w-4 h-4 flex-shrink-0" />
-                <span className="hidden sm:inline">Wellness & Coaching Professional</span>
-                <span className="sm:hidden">Wellness</span>
-              </button>
             </div>
 
             {/* Form card */}
             <div className="bg-white rounded-[28px] border border-black/5 shadow-[0_4px_24px_-8px_rgba(12,11,9,0.06)] overflow-hidden">
               {/* Track badge */}
-              <div className={`px-8 py-4 border-b border-dark/[0.06] flex items-center gap-2.5 ${activeTab === "clinical" ? "bg-blue-50/50" : "bg-emerald-50/50"}`}>
-                {activeTab === "clinical" ? (
+              <div className={`px-8 py-4 border-b border-dark/[0.06] flex items-center gap-2.5 ${type === "clinical" ? "bg-blue-50/50" : "bg-emerald-50/50"}`}>
+                {type === "clinical" ? (
                   <>
                     <Brain className="w-4 h-4 text-blue-500" />
                     <span className="text-xs font-semibold tracking-[0.15em] uppercase text-blue-600">Licensed Clinical Professional Track</span>
@@ -266,7 +236,7 @@ function ProviderApplyPage() {
                 )}
               </div>
 
-              {activeTab === "clinical" ? <ClinicalForm /> : <WellnessForm />}
+              {type === "clinical" ? <ClinicalForm /> : <WellnessForm />}
             </div>
 
           </div>
